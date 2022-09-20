@@ -15,6 +15,7 @@
 .DS_Store
 .env
 *.local
+.yarn
 
 # logs
 npm-debug.log*
