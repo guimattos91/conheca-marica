@@ -4,7 +4,7 @@ import { Ratio } from 'react-bootstrap'
 
 import { CollectionType } from 'types/CollectionTypes'
 
-import { BackDiv, StyledText, StyledTitle } from './style'
+import { BackDiv, ListStyle, StyledText, StyledTitle } from './style'
 
 interface ICollectionTypeProps {
   collection: CollectionType
@@ -24,9 +24,14 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({ collection }) => (
     </Ratio>
     <div className="p-3">
       <StyledTitle className="pb-2">{collection.nome}</StyledTitle>
+      <ListStyle className="d-flex">
+        {collection?.categorias.slice(0, 4).map((categoria) => (
+          <li key={categoria.id}>{categoria.label}</li>
+        ))}
+      </ListStyle>
       <div>
         {collection.enderecos.map((endereco) => (
-          <p key={endereco.id}>{endereco.label}</p>
+          <StyledText key={endereco.id}>{endereco.label}</StyledText>
         ))}
       </div>
     </div>

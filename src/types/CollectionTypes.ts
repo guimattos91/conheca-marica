@@ -17,4 +17,5 @@ export type CollectionType = {
   lat: number | null
   lng: number | null
   enderecos: AddressType[]
+  categorias: CategoryType[]
 }

@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react'
 
-import { Carousel, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 // eslint-disable-next-line import-helpers/order-imports
 import { useTranslation } from 'react-i18next'
 
@@ -8,8 +8,6 @@ import { FaUmbrellaBeach, FaBed, FaStoreAlt } from 'react-icons/fa'
 import { GiMicrophone } from 'react-icons/gi'
 import { MdRestaurant, MdDateRange } from 'react-icons/md'
 import { MainStyled } from 'style/style'
-
-import { useBanner } from 'context/BannersContext'
 
 import AppsSmartphone from 'components/AppsSmartphone'
 import CarouselBanner from 'components/CarouselComponent'
@@ -49,7 +47,7 @@ const Home: React.FC = () => {
           <Row className="row-cols-1 row-cols-md-3 g-3 p-5">
             <Col>
               <CategoryCard
-                page="pontos-turisticos"
+                page="/pontos-turisticos"
                 title="Pontos Turísticos"
                 icon={<FaUmbrellaBeach size={70} />}
                 description="Conheça nossas praias, lagoas, grutas e outros pontos turísticos"
@@ -91,6 +89,14 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="eventos"
                 title="Eventos"
+                icon={<MdDateRange size={70} />}
+                description="Confira o calendário de eventos da cidade"
+              />
+            </Col>
+            <Col>
+              <CategoryCard
+                page="https://www.feirartemarica.com.br/"
+                title="Feira Arte Maricá"
                 icon={<MdDateRange size={70} />}
                 description="Confira o calendário de eventos da cidade"
               />

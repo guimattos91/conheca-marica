@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
-import { BiMenu } from 'react-icons/bi'
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
 import LogoMobile from 'assets/logo-marica-mobile.png'
 import Logo from 'assets/logo-marica.png'
+
+import MenuComponent from 'components/MenuComponent'
 
 import { StyledA, StyleHeader } from './style'
 
@@ -15,8 +16,7 @@ const Header: React.FC = () => (
     <Container>
       <Row className="d-flex align-items-center justify-content-md-between py-3">
         <Col className="d-flex align-items-center ">
-          <BiMenu className="d-flex align-items-center" />
-          <p className="d-none d-md-flex align-items-center m-0">Menu</p>
+          <MenuComponent />
         </Col>
         <Col>
           <Link to="/">

@@ -41,7 +41,13 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
     // }
 
     try {
-      const response = await Api.get('/eventos')
+      const response = await Api.get('/eventos', {
+        params: {
+          fields: 'datahora_inicio',
+          orderby: 'datahora_inicio',
+          order: 'asc',
+        },
+      })
       setEvents(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Event ou Pousada')

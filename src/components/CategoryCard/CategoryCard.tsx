@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { IconType } from 'react-icons'
 
-import { BackDiv, LinkStyled, TextStyled } from './style'
+import { BackDiv, H2Styled, LinkStyled, TextStyled } from './style'
 
 interface ICategoryCardsProps {
   title: string
@@ -18,13 +18,14 @@ const CategoryCard: React.FC<ICategoryCardsProps> = ({
 }) => (
   <BackDiv className="w-100 h-100">
     <div className="d-flex flex-column text-center align-itens-center">
-      <LinkStyled to={`/${page}`}>
+      <LinkStyled to={page}>
         <div className="pt-5">{icon}</div>
       </LinkStyled>
-      <LinkStyled to={`/${page}`}>
-        <h2 className="pt-3">{title}</h2>
-      </LinkStyled>
-      <TextStyled className="p-3">{description}</TextStyled>
+      <H2Styled className="m-0 pt-2">
+        <LinkStyled to={page}>{title}</LinkStyled>
+      </H2Styled>
+
+      <TextStyled className="ps-2 pe-2 pb-2">{description}</TextStyled>
     </div>
   </BackDiv>
 )
