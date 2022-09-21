@@ -1,37 +1,49 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Container, Row } from 'react-bootstrap'
 
 // import Config from 'Config'
 
-import { MainStyled } from 'style/style'
+import { useTranslation } from 'react-i18next'
 
+import AboutCard from 'components/AboutCard'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 
-import { CollectionType } from 'types/CollectionTypes'
+import useTitle from 'hooks/useTitle'
+
+import { AboutType } from 'types/AboutType'
 
 import { BannerContainer } from './styles'
 
-interface IPointsProviderProps {
-  collection: CollectionType
+interface IAboutsProviderProps {
+  about: AboutType
 }
 
-const PontosTuristicos: React.FC<IPointsProviderProps> = () => {
+const PontosTuristicos: React.FC<IAboutsProviderProps> = ({ about }) => {
+  const { t, i18n } = useTranslation()
+  const setTitle = useTitle()
+
+  useEffect(() => {
+    setTitle(t('Sobre a cidade'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.resolvedLanguage])
   return (
     <>
       <Header />
-      <MainStyled>
+      <main>
         <BannerContainer />
-        <Container>
-          <Row>
-            <Col>
-              <p> ''</p>
-            </Col>
-          </Row>
-        </Container>
-      </MainStyled>
+        <div>
+          <Container>
+            <Row>
+              <Col>
+                <AboutCard about={about} />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </main>
       <Footer />
     </>
   )

@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 
 import ReactDOM from 'react-dom/client'
 
+import { AboutProvider } from 'context/AboutContext'
 import { BannerProvider } from 'context/BannersContext'
 import { CollectionProvider } from 'context/CollectionContext'
 import { EventProvider } from 'context/EventsContext'
@@ -26,7 +27,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               <StoresProvider>
                 <EventProvider>
                   <BannerProvider>
-                    <App />
+                    <AboutProvider>
+                      <App />
+                    </AboutProvider>
                   </BannerProvider>
                 </EventProvider>
               </StoresProvider>

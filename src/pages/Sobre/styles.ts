@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import BannerImage from 'assets/marica-about.jpg'
 
 export const BannerContainer = styled.div`
+  position: relative;
   background-image: url(${BannerImage});
   background-size: cover;
-  height: 20vh;
+  height: 80vh;
   background-attachment: fixed;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   ::after {
-    content: '';
+    content: ' ';
+    position: absolute;
     width: 100%;
     height: 100px;
     bottom: 0px;

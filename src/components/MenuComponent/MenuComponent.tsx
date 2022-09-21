@@ -20,7 +20,11 @@ const MenuComponent: React.FC = () => {
 
   return (
     <>
-      <ButtonStyled className="d-flex align-items-center" onClick={handleShow}>
+      <ButtonStyled
+        variant="outline-light"
+        className="d-flex align-items-center"
+        onClick={handleShow}
+      >
         <BiMenu />
         <p className="d-none d-md-flex ps-2 m-0">Menu</p>
       </ButtonStyled>

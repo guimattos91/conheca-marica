@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 // eslint-disable-next-line import-helpers/order-imports
 import { useTranslation } from 'react-i18next'
 
+import { BsFillHouseFill } from 'react-icons/bs'
 import { FaUmbrellaBeach, FaBed, FaStoreAlt } from 'react-icons/fa'
 import { GiMicrophone } from 'react-icons/gi'
 import { MdRestaurant, MdDateRange } from 'react-icons/md'
@@ -49,7 +50,7 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="/pontos-turisticos"
                 title="Pontos Turísticos"
-                icon={<FaUmbrellaBeach size={70} />}
+                icon={FaUmbrellaBeach}
                 description="Conheça nossas praias, lagoas, grutas e outros pontos turísticos"
               />
             </Col>
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="hoteis-e-pousadas"
                 title="Hotéis e Pousadas"
-                icon={<FaBed size={70} />}
+                icon={FaBed}
                 description="Saiba onde se hospedar em Maricá"
               />
             </Col>
@@ -65,7 +66,7 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="bares-e-Restaurantes"
                 title="Bares e Restaurantes"
-                icon={<MdRestaurant size={70} />}
+                icon={MdRestaurant}
                 description="Aprecie a gastronomia de Maricá"
               />
             </Col>
@@ -73,7 +74,7 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="Comercio"
                 title="Comércio Local"
-                icon={<FaStoreAlt size={70} />}
+                icon={FaStoreAlt}
                 description="Veja onde fazer as suas compras"
               />
             </Col>
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="espacos-para-eventos"
                 title="Espaços para Eventos"
-                icon={<GiMicrophone size={70} />}
+                icon={GiMicrophone}
                 description="Locais para fazer suas festas ou reuniões"
               />
             </Col>
@@ -89,16 +90,16 @@ const Home: React.FC = () => {
               <CategoryCard
                 page="eventos"
                 title="Eventos"
-                icon={<MdDateRange size={70} />}
+                icon={MdDateRange}
                 description="Confira o calendário de eventos da cidade"
               />
             </Col>
             <Col>
               <CategoryCard
-                page="https://www.feirartemarica.com.br/"
-                title="Feira Arte Maricá"
-                icon={<MdDateRange size={70} />}
-                description="Confira o calendário de eventos da cidade"
+                page="/sobre"
+                title="Sobre a cidade"
+                icon={BsFillHouseFill}
+                description="Conheça mais sobre Maricá"
               />
             </Col>
           </Row>

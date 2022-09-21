@@ -3,8 +3,7 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Container, Row, Spinner } from 'react-bootstrap'
 
-// import Config from 'Config'
-
+import { useTranslation } from 'react-i18next'
 import { MainStyled } from 'style/style'
 
 import { useSpace } from 'context/SpacesContext'
@@ -14,7 +13,13 @@ import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import TitleH1 from 'components/TitleH1'
 
-import { CollectionType } from 'types/CollectionTypes'
+import useTitle from 'hooks/useTitle'
+
+import {
+  AddressType,
+  CategoryType,
+  CollectionType,
+} from 'types/CollectionTypes'
 
 interface ISpacesProviderProps {
   collection: CollectionType
@@ -22,7 +27,13 @@ interface ISpacesProviderProps {
 
 const EspacosParaEventos: React.FC<ISpacesProviderProps> = () => {
   const { spaces, isLoading, error, fetchSpaces } = useSpace()
+  const { t, i18n } = useTranslation()
+  const setTitle = useTitle()
 
+  useEffect(() => {
+    setTitle(t('Espaço para Eventos'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.resolvedLanguage])
   useEffect(() => {
     fetchSpaces()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,6 +63,8 @@ const EspacosParaEventos: React.FC<ISpacesProviderProps> = () => {
                   capa: string | undefined
                   lat: number | null
                   lng: number | null
+                  enderecos: AddressType[]
+                  categorias: CategoryType[]
                 }) => (
                   <Col key={collection.id} className="d-flex">
                     <ItemCard collection={collection} />
