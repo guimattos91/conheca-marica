@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const BackDiv = styled.div`
+export const BackDiv = styled.main`
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 5px;

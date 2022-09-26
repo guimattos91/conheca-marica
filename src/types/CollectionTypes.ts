@@ -12,7 +12,7 @@ export type AddressType = {
 
 export type CollectionType = {
   id: number
-  nome: string | null
+  nome: string
   capa: string | undefined
   lat: number | null
   lng: number | null

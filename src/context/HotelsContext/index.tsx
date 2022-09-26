@@ -57,8 +57,8 @@ export const HotelsProvider: React.FC<IHotelsProviderProps> = ({
     setError(null)
 
     try {
-      const response = await Api.get(`/hoteis-e-pousadas/${id}/`)
-      setHotel(response.data.item[0])
+      const response = await Api.get(`hoteis-e-pousadas/${id}`)
+      setHotel(response.data.item)
     } catch {
       setError('Erro: Não achamos Nenhum Hotel ou Pousada')
     } finally {

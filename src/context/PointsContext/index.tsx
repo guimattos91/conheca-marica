@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -13,11 +14,11 @@ import { ItemType } from 'types/ItemTypes'
 
 interface IContextProps {
   points: CollectionType[]
-  point: ItemType | null
+  point: ItemType | undefined
   error: string | null
   isLoading: boolean
-  fetchPoint: (id: number) => Promise<void>
-  fetchPoints: () => Promise<void>
+  fetchPoint: (id: number, name: string) => Promise<void>
+  fetchPoints: (search?: string) => Promise<void>
 }
 
 interface IPointsProviderProps {
@@ -30,20 +31,20 @@ export const PointsProvider: React.FC<IPointsProviderProps> = ({
   children,
 }) => {
   const [points, setPoints] = useState<CollectionType[]>([])
-  const [point, setPoint] = useState<ItemType | null>(null)
+  const [point, setPoint] = useState<ItemType | undefined>()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchPoints = useCallback(async () => {
+  const fetchPoints = useCallback(async (search?: string) => {
     setIsLoading(true)
     setError(null)
 
-    // const params = {
-    //   token: search?.length ? search : undefined,
-    // }
+    const params = {
+      buscar: search?.length ? search : undefined,
+    }
 
     try {
-      const response = await Api.get('/pontos')
+      const response = await Api.get('/pontos', { params })
       setPoints(response.data.collection)
     } catch {
       setError('Erro: Não achamos seus Pontos Turísticos')
@@ -57,23 +58,19 @@ export const PointsProvider: React.FC<IPointsProviderProps> = ({
     setError(null)
 
     try {
-      const response = await Api.get(`/pontos/${id}/`)
-      setPoint(response.data.item[0])
+      const response = await Api.get(`/pontos/${id}`)
+      setPoint(response.data.item)
     } catch {
-      setError('Erro: Personagem não encontrado')
+      setError('Erro: Ponto não encontrado')
     } finally {
       setIsLoading(false)
     }
   }, [])
 
-  //      <Link to={`/characters/${character.id}/${strToSlug(character.name)}`}>
-
-  // UseEffects
-
   // useEffect(() => {
-  //   setPoint(0)
+  //   fetchPoint(1)
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
+  // }, [1])
 
   return (
     <ReactContext.Provider

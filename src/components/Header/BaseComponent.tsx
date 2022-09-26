@@ -30,7 +30,7 @@ const Header: React.FC = () => (
               src={LogoMobile}
               alt="Logo Mobile- Conheça Maricá"
               width="auto"
-              className="d-flex justify-content-center d-md-none img-fluid"
+              className="d-flex text-center justify-content-center d-md-none img-fluid"
             />
           </Link>
         </Col>

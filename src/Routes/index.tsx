@@ -8,7 +8,9 @@ import Espacos from 'pages/Espacos-Para-Eventos'
 import Eventos from 'pages/Eventos'
 import Home from 'pages/Home'
 import Hoteis from 'pages/Hoteis-e-pousadas'
+import Hotel from 'pages/Hotel-e-pousada'
 import NotFound from 'pages/NotFound'
+import Ponto from 'pages/Ponto-turistico'
 import Pontos from 'pages/Pontos-turisticos'
 import Sobre from 'pages/Sobre'
 
@@ -17,6 +19,22 @@ const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<Home />} />
+        <Route
+          path="/pontos-turisticos"
+          element={
+            <Pontos
+              collection={{
+                id: 0,
+                nome: null,
+                capa: undefined,
+                lat: null,
+                lng: null,
+                enderecos: [],
+                categorias: [],
+              }}
+            />
+          }
+        />
         <Route path="/pontos-turisticos" element={<Pontos />} />
         <Route path="/hoteis-e-pousadas" element={<Hoteis />} />
         <Route path="/bares-e-restaurantes" element={<Restaurantes />} />
@@ -25,6 +43,8 @@ const Routes: React.FC = () => {
         <Route path="/comercio" element={<Comercio />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/pontos-turisticos/:id/:name" element={<Ponto />} />
+        <Route path="/hoteis-e-pousadas/:id/:name" element={<Hotel />} />
       </Switch>
     </BrowserRouter>
   )

@@ -25,20 +25,24 @@ const CarouselBanner: React.FC<IBannersProviderProps> = () => {
             id: number
             image_l: string
             image_s: string
-            url: string | null
+            url: string
             status: boolean
           }) => (
             <Carousel.Item>
-              <img
-                className="d-none d-md-block w-100"
-                src={banner.image_l}
-                alt={`Banner-${banner.id}/`}
-              />
-              <img
-                className="d-block d-md-none w-100"
-                src={banner.image_s}
-                alt={`Banner-${banner.id}/`}
-              />
+              <a href={banner.url} target="_blank" rel="noreferrer">
+                <img
+                  className="d-none d-md-block w-100"
+                  src={banner.image_l}
+                  alt={`Banner-${banner.id}/`}
+                />
+              </a>
+              <a href={banner.url} target="_blank" rel="noreferrer">
+                <img
+                  className="d-block d-md-none w-100"
+                  src={banner.image_s}
+                  alt={`Banner-${banner.id}/`}
+                />
+              </a>
             </Carousel.Item>
           ),
         )}

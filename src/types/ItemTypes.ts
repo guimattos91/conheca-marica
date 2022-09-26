@@ -1,25 +1,21 @@
-export type AdressType = {
-  addresses: [
-    {
-      id: number
-      lat: number
-      lng: number
-      label: string
-    },
-  ]
+export type CoverType = {
+  capa: string
+}
+export type AddressType = {
+  id: number
+  lat: number
+  lng: number
+  label: string
 }
 export type ImagesType = {
-  images: [
-    {
-      id: number
-      legenda: {
-        pt_BR: null
-      }
-      ordem: number
-      src: string
-    },
-  ]
+  id: number
+  legenda: {
+    pt_BR: null
+  }
+  ordem: number
+  src: string
 }
+
 export type HourType = {
   horario_funcionamento: [
     {
@@ -52,38 +48,22 @@ export type CategoryType = {
   ]
 }
 export type StructureType = {
-  estruturas: [
-    {
-      icone: string
-      label: string
-    },
-  ]
+  icone: string
+  label: string
 }
 export type NetworkType = {
-  redes: [
-    {
-      nome: string
-      icone: string
-      url: string
-      user: string
-    },
-  ]
+  nome: string
+  icone: string
+  url: string
+  user: string
 }
 export type PaymentType = {
-  formas_pagamento: [
-    {
-      icone: string
-      label: string
-    },
-  ]
+  icone: string
+  label: string
 }
 export type RestrictionType = {
-  restricoes: [
-    {
-      icone: string
-      label: string
-    },
-  ]
+  icone: string
+  label: string
 }
 export type MealType = {
   restricoes: [
@@ -92,13 +72,22 @@ export type MealType = {
     },
   ]
 }
+// export type PanoramicType = {
+//     panoramas: []
+// },
 
 export type ItemType = {
-  id: number
-  nome: string | null
-  capa: string | null
+  id: number | string
+  nome: string
+  capa: string | undefined
+  descricao_t: string | null
   lat: number | null
   lng: number | null
-  category: CategoryType[] | null
-  adress: AdressType[] | null
+  enderecos: AddressType[]
+  categorias: CategoryType[]
+  images: ImagesType[]
+  estruturas: StructureType[]
+  redes: NetworkType[]
+  formas_pagamento: PaymentType[]
+  restricoes: RestrictionType[]
 }

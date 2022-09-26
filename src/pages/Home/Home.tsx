@@ -5,8 +5,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import { BsFillHouseFill } from 'react-icons/bs'
-import { FaUmbrellaBeach, FaBed, FaStoreAlt } from 'react-icons/fa'
-import { GiMicrophone } from 'react-icons/gi'
+import { FaUmbrellaBeach, FaBed, FaStoreAlt, FaRoute } from 'react-icons/fa'
+import { GiMicrophone, GiSewingNeedle } from 'react-icons/gi'
 import { MdRestaurant, MdDateRange } from 'react-icons/md'
 import { MainStyled } from 'style/style'
 
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
                 id: 0,
                 image_l: '',
                 image_s: '',
-                url: null,
+                url: '',
                 status: false,
               }}
             />
@@ -100,6 +100,22 @@ const Home: React.FC = () => {
                 title="Sobre a cidade"
                 icon={BsFillHouseFill}
                 description="Conheça mais sobre Maricá"
+              />
+            </Col>
+            <Col>
+              <CategoryCard
+                page="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
+                title="Roteiros Turísticos"
+                icon={FaRoute}
+                description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
+              />
+            </Col>
+            <Col>
+              <CategoryCard
+                page="https://www.feirartemarica.com.br/"
+                title="Artesanato"
+                icon={GiSewingNeedle}
+                description="Conheça e compre as criações dos artesãos de Maricá/RJ"
               />
             </Col>
           </Row>

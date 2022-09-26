@@ -3,17 +3,19 @@ import styled from 'styled-components'
 export const StyleBackgrounDiv = styled.div`
   background-color: #2d677f;
   color: white;
+  position: relative;
+  overflow: hidden;
 `
 export const StyleDetailDiv = styled.div`
-  background-color: white;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  width: 600px;
+  height: 0px;
+  top: 0px;
+  right: 0px;
   border-style: solid;
-  border-width: 0 200px 200px 0;
-  border-color: transparent #fff transparent transparent;
-  z-index: 40;
-  float: right;
-  clear: both;
+  border-top: 600px solid white;
+  border-left: 300px solid transparent;
+  z-index: 0;
 `
 export const StyleText = styled.p`
   font-size: 22px;

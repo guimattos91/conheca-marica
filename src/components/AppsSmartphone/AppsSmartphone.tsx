@@ -7,14 +7,20 @@ import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
 import MockupFone from 'assets/mockupfone.png'
 
-import { StyleBackgrounDiv, StyleText, StyleTitle } from './style'
+import {
+  StyleBackgrounDiv,
+  StyleDetailDiv,
+  StyleText,
+  StyleTitle,
+} from './style'
 
 const AppsSmartphone: React.FC = () => (
-  <StyleBackgrounDiv>
-    <Container>
-      <Row className="row-cols-1 row-cols-xl-2 d-flex justify-content-between pb-5">
-        <Col className="ps-4 pt-3">
-          <div className="d-flex flex-column justify-content-center pt-3">
+  <StyleBackgrounDiv className="py-5">
+    <StyleDetailDiv className="d-none d-md-flex" />
+    <Container className="d-flex justify-content-between">
+      <Row style={{ zIndex: 1 }} className="row-cols-1 row-cols-md-2">
+        <Col className="col-7">
+          <div className="d-flex flex-column justify-content-center">
             <StyleTitle>Conheça nosso aplicativo</StyleTitle>
             <StyleText>
               Tenha o Guia Oficial de Turismo de Maricá a qualquer momento, na
@@ -40,15 +46,8 @@ const AppsSmartphone: React.FC = () => (
             </Link>
           </div>
         </Col>
-        <Col className="pe-4 pt-3">
-          <div className="d-flex justify-content-end pt-3">
-            <img
-              src={MockupFone}
-              alt="Logo-Turismo"
-              width="auto"
-              className="img-fluid"
-            />
-          </div>
+        <Col className="text-center text-lg-end pt-4">
+          <img src={MockupFone} alt="Logo-Turismo" className="img-fluid" />
         </Col>
       </Row>
     </Container>
