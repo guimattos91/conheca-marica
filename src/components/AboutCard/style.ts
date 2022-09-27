@@ -14,4 +14,7 @@ export const DivStyled = styled.div`
       max-width: 100%;
     }
   }
+  h2 {
+    color: #2d6d7f;
+  }
 `

@@ -8,16 +8,19 @@ import {
 
 import Api from 'services/Api'
 
+import { CategoryType } from 'types/CategoryType'
 import { CollectionType } from 'types/CollectionTypes'
 import { ItemType } from 'types/ItemTypes'
 
 interface IContextProps {
   restaurants: CollectionType[]
   restaurant: ItemType | null
+  categories: CategoryType[]
   error: string | null
   isLoading: boolean
   fetchRestaurant: (id: number) => Promise<void>
   fetchRestaurants: () => Promise<void>
+  searchRestaurants: (search: string) => Promise<void>
 }
 
 interface IRestaurantsProviderProps {
@@ -31,6 +34,8 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
 }) => {
   const [restaurants, setRestaurants] = useState<CollectionType[]>([])
   const [restaurant, setRestaurant] = useState<ItemType | null>(null)
+  const [categories, setCategories] = useState<CategoryType[]>([])
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -38,15 +43,28 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
     setIsLoading(true)
     setError(null)
 
-    // const params = {
-    //   token: search?.length ? search : undefined,
-    // }
-
     try {
       const response = await Api.get('/restaurantes')
       setRestaurants(response.data.collection)
+      setCategories(response.data.categorias)
     } catch {
       setError('Erro: Não achamos Nenhum Bar ou restaurantes')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const searchRestaurants = useCallback(async (search: string) => {
+    setIsLoading(true)
+    setError(null)
+    const params = {
+      busca: search,
+    }
+    try {
+      const response = await Api.get('/restaurantes/busca', { params })
+      setRestaurants(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos seus Pontos Turísticos')
     } finally {
       setIsLoading(false)
     }
@@ -58,7 +76,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
 
     try {
       const response = await Api.get(`/restaurantes/${id}/`)
-      setRestaurant(response.data.item[0])
+      setRestaurant(response.data.item)
     } catch {
       setError('Erro: Não achamos Nenhum Bar ou restaurantes')
     } finally {
@@ -66,33 +84,28 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
     }
   }, [])
 
-  //      <Link to={`/characters/${character.id}/${strToSlug(character.name)}`}>
-
-  // UseEffects
-
-  // useEffect(() => {
-  //   setPoint(0)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
   return (
     <ReactContext.Provider
       value={useMemo(
         () => ({
           restaurants,
           restaurant,
+          categories,
           isLoading,
           error,
           fetchRestaurant,
           fetchRestaurants,
+          searchRestaurants,
         }),
         [
           restaurants,
           restaurant,
+          categories,
           isLoading,
           error,
           fetchRestaurants,
           fetchRestaurant,
+          searchRestaurants,
         ],
       )}
     >

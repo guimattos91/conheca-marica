@@ -8,16 +8,19 @@ import {
 
 import Api from 'services/Api'
 
+import { CategoryType } from 'types/CategoryType'
 import { CollectionType } from 'types/CollectionTypes'
 import { ItemType } from 'types/ItemTypes'
 
 interface IContextProps {
   spaces: CollectionType[]
   space: ItemType | null
+  categories: CategoryType[]
   error: string | null
   isLoading: boolean
   fetchSpace: (id: number) => Promise<void>
   fetchSpaces: () => Promise<void>
+  searchSpaces: (search: string) => Promise<void>
 }
 
 interface ISpacesProviderProps {
@@ -29,22 +32,35 @@ export const ReactContext = createContext<IContextProps>({} as IContextProps)
 export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
   const [spaces, setSpaces] = useState<CollectionType[]>([])
   const [space, setSpace] = useState<ItemType | null>(null)
+  const [categories, setCategories] = useState<CategoryType[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const fetchSpaces = useCallback(async () => {
     setIsLoading(true)
     setError(null)
-
-    // const params = {
-    //   token: search?.length ? search : undefined,
-    // }
-
     try {
       const response = await Api.get('/espacos')
       setSpaces(response.data.collection)
+      setCategories(response.data.categorias)
     } catch {
       setError('Erro: Não achamos Nenhum Space ou Pousada')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const searchSpaces = useCallback(async (search: string) => {
+    setIsLoading(true)
+    setError(null)
+    const params = {
+      busca: search,
+    }
+    try {
+      const response = await Api.get('/espacos/busca', { params })
+      setSpaces(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos seus Pontos Turísticos')
     } finally {
       setIsLoading(false)
     }
@@ -53,10 +69,9 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
   const fetchSpace = useCallback(async (id: number) => {
     setIsLoading(true)
     setError(null)
-
     try {
-      const response = await Api.get(`/espacos/${id}/`)
-      setSpace(response.data.item[0])
+      const response = await Api.get(`/espacos/${id}`)
+      setSpace(response.data.item)
     } catch {
       setError('Erro: Não achamos Nenhum Space ou Pousada')
     } finally {
@@ -64,27 +79,29 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
     }
   }, [])
 
-  //      <Link to={`/characters/${character.id}/${strToSlug(character.name)}`}>
-
-  // UseEffects
-
-  // useEffect(() => {
-  //   setPoint(0)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
   return (
     <ReactContext.Provider
       value={useMemo(
         () => ({
           spaces,
           space,
+          categories,
           isLoading,
           error,
           fetchSpace,
           fetchSpaces,
+          searchSpaces,
         }),
-        [spaces, space, isLoading, error, fetchSpace, fetchSpaces],
+        [
+          spaces,
+          space,
+          categories,
+          isLoading,
+          error,
+          fetchSpace,
+          fetchSpaces,
+          searchSpaces,
+        ],
       )}
     >
       {children}

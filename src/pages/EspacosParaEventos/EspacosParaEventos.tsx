@@ -59,7 +59,7 @@ const EspacosParaEventos: React.FC<ISpacesProviderProps> = () => {
               spaces.map(
                 (collection: {
                   id: number
-                  nome: string | null
+                  nome: string
                   capa: string | undefined
                   lat: number | null
                   lng: number | null

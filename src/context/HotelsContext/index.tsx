@@ -8,16 +8,19 @@ import {
 
 import Api from 'services/Api'
 
+import { CategoryType } from 'types/CategoryType'
 import { CollectionType } from 'types/CollectionTypes'
 import { ItemType } from 'types/ItemTypes'
 
 interface IContextProps {
   hotels: CollectionType[]
   hotel: ItemType | null
+  categories: CategoryType[]
   error: string | null
   isLoading: boolean
   fetchHotel: (id: number) => Promise<void>
   fetchHotels: () => Promise<void>
+  searchHotels: (search: string) => Promise<void>
 }
 
 interface IHotelsProviderProps {
@@ -31,22 +34,35 @@ export const HotelsProvider: React.FC<IHotelsProviderProps> = ({
 }) => {
   const [hotels, setHotels] = useState<CollectionType[]>([])
   const [hotel, setHotel] = useState<ItemType | null>(null)
+  const [categories, setCategories] = useState<CategoryType[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const fetchHotels = useCallback(async () => {
     setIsLoading(true)
     setError(null)
-
-    // const params = {
-    //   token: search?.length ? search : undefined,
-    // }
-
     try {
       const response = await Api.get('/hoteis-e-pousadas')
       setHotels(response.data.collection)
+      setCategories(response.data.categorias)
     } catch {
       setError('Erro: Não achamos Nenhum Hotel ou Pousada')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const searchHotels = useCallback(async (search: string) => {
+    setIsLoading(true)
+    setError(null)
+    const params = {
+      busca: search,
+    }
+    try {
+      const response = await Api.get('/hoteis-e-pousadas/busca', { params })
+      setHotels(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos seus Pontos Turísticos')
     } finally {
       setIsLoading(false)
     }
@@ -55,9 +71,8 @@ export const HotelsProvider: React.FC<IHotelsProviderProps> = ({
   const fetchHotel = useCallback(async (id: number) => {
     setIsLoading(true)
     setError(null)
-
     try {
-      const response = await Api.get(`hoteis-e-pousadas/${id}`)
+      const response = await Api.get(`/hoteis-e-pousadas/${id}`)
       setHotel(response.data.item)
     } catch {
       setError('Erro: Não achamos Nenhum Hotel ou Pousada')
@@ -66,27 +81,29 @@ export const HotelsProvider: React.FC<IHotelsProviderProps> = ({
     }
   }, [])
 
-  //      <Link to={`/characters/${character.id}/${strToSlug(character.name)}`}>
-
-  // UseEffects
-
-  // useEffect(() => {
-  //   setPoint(0)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
   return (
     <ReactContext.Provider
       value={useMemo(
         () => ({
           hotels,
           hotel,
+          categories,
           isLoading,
           error,
           fetchHotel,
           fetchHotels,
+          searchHotels,
         }),
-        [hotels, hotel, isLoading, error, fetchHotels, fetchHotel],
+        [
+          hotels,
+          hotel,
+          categories,
+          isLoading,
+          error,
+          fetchHotels,
+          fetchHotel,
+          searchHotels,
+        ],
       )}
     >
       {children}

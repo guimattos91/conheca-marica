@@ -61,7 +61,7 @@ const Comercio: React.FC<IStoresProviderProps> = () => {
               stores.map(
                 (collection: {
                   id: number
-                  nome: string | null
+                  nome: string
                   capa: string | undefined
                   lat: number | null
                   lng: number | null

@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom/client'
 
 import { AboutProvider } from 'context/AboutContext'
 import { BannerProvider } from 'context/BannersContext'
-import { CollectionProvider } from 'context/CollectionContext'
 import { EventProvider } from 'context/EventsContext'
 import { HotelsProvider } from 'context/HotelsContext'
+import { PointsProvider } from 'context/PointsContext'
 import { RestaurantsProvider } from 'context/RestaurantsContext'
 import { SpaceProvider } from 'context/SpacesContext'
 import { StoresProvider } from 'context/StoresContext'
@@ -20,7 +20,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Suspense>
-      <CollectionProvider>
+      <PointsProvider>
         <HotelsProvider>
           <RestaurantsProvider>
             <SpaceProvider>
@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             </SpaceProvider>
           </RestaurantsProvider>
         </HotelsProvider>
-      </CollectionProvider>
+      </PointsProvider>
     </Suspense>
   </React.StrictMode>,
 )

@@ -2,16 +2,16 @@ import { memo } from 'react'
 
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom'
 
-import Restaurantes from 'pages/Bares-e-Restaurantes'
+import Restaurantes from 'pages/BaresRestaurantes'
 import Comercio from 'pages/Comercio'
-import Espacos from 'pages/Espacos-Para-Eventos'
+import Espacos from 'pages/EspacosParaEventos'
 import Eventos from 'pages/Eventos'
 import Home from 'pages/Home'
-import Hoteis from 'pages/Hoteis-e-pousadas'
-import Hotel from 'pages/Hotel-e-pousada'
+import Hoteis from 'pages/HoteisPousadas'
+import Hotel from 'pages/HotelePousada'
 import NotFound from 'pages/NotFound'
-import Ponto from 'pages/Ponto-turistico'
-import Pontos from 'pages/Pontos-turisticos'
+import Pontos from 'pages/PontosTuristicos'
+import Ponto from 'pages/PontoTuristico'
 import Sobre from 'pages/Sobre'
 
 const Routes: React.FC = () => {
