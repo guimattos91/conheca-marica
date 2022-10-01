@@ -15,7 +15,6 @@ export type ImagesType = {
   ordem: number
   src: string
 }
-
 export type HourType = {
   horario_funcionamento: [
     {
@@ -40,12 +39,8 @@ export type PhoneType = {
   ]
 }
 export type CategoryType = {
-  categorias: [
-    {
-      id: number
-      label: string
-    },
-  ]
+  id: number
+  label: string
 }
 export type StructureType = {
   icone: string
@@ -81,9 +76,17 @@ export type ItemType = {
   nome: string
   capa: string | undefined
   descricao_t: string | null
+  quartos: number
+  leitos: number
+  cafe_manha: boolean
+  cafe_hospedes: boolean
+  almoco: boolean
+  almoco_hospedes: boolean
+  jantar: boolean
+  jantar_hospedes: boolean
   lat: number | null
   lng: number | null
-  enderecos: AddressType[]
+  addresses: AddressType[]
   categorias: CategoryType[]
   images: ImagesType[]
   estruturas: StructureType[]

@@ -17,11 +17,7 @@ import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
-import {
-  AddressType,
-  CategoryType,
-  CollectionType,
-} from 'types/CollectionTypes'
+import { AddressType, CategoryType, CollectionType } from 'types/CollectionType'
 
 interface IStoresProviderProps {
   collection: CollectionType

@@ -9,8 +9,8 @@ import {
 import Api from 'services/Api'
 
 import { CategoryType } from 'types/CategoryType'
-import { CollectionType } from 'types/CollectionTypes'
-import { ItemType } from 'types/ItemTypes'
+import { CollectionType } from 'types/CollectionType'
+import { ItemType } from 'types/ItemType'
 
 interface IContextProps {
   spaces: CollectionType[]

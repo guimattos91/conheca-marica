@@ -1,14 +1,14 @@
 import { render } from '@testing-library/react'
 import { expect, describe, it } from 'vitest'
 
-import ItemMain from './ItemMain'
+import BaseComponent from './GoogleMap'
 
 describe('BaseComponent', () => {
   it('should render a children', () => {
     const { getByText } = render(
-      <ItemMain>
+      <BaseComponent>
         <div>TEST</div>
-      </ItemMain>,
+      </BaseComponent>,
     )
 
     const children = getByText('TEST')
