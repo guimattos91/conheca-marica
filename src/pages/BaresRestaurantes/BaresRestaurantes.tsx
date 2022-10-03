@@ -17,16 +17,15 @@ import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
-import { AddressType, CategoryType, CollectionType } from 'types/CollectionType'
+import { AddressType, CategoryType } from 'types/CollectionType'
 
-interface IhotelsProviderProps {
-  collection: CollectionType
-}
+import { ListStyle } from './style'
 
-const Restaurants: React.FC<IhotelsProviderProps> = () => {
+const Restaurants: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const { restaurants, isLoading, error, fetchRestaurants } = useRestaurants()
+  const { restaurants, categories, isLoading, error, fetchRestaurants } =
+    useRestaurants()
 
   useEffect(() => {
     setTitle(t('Bares e Restaurantes'))
@@ -44,6 +43,30 @@ const Restaurants: React.FC<IhotelsProviderProps> = () => {
           <Row>
             <Col>
               <TitleH1 title="Bares e Restaurantes" />
+            </Col>
+          </Row>
+          <Row className="d-flex">
+            <Col>
+              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
+                {!isLoading &&
+                  !error &&
+                  categories.map(
+                    (category: {
+                      id: number
+                      label: string
+                      count?: number | undefined
+                    }) => (
+                      <li
+                        key={category.id}
+                        className="d-flex align-items-center"
+                      >
+                        <p className="d-inline-flex w-100 p-0 m-0">
+                          {category.label}
+                        </p>
+                      </li>
+                    ),
+                  )}
+              </ListStyle>
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

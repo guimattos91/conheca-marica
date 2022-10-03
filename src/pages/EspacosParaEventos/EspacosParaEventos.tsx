@@ -15,14 +15,12 @@ import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
-import { AddressType, CategoryType, CollectionType } from 'types/CollectionType'
+import { AddressType, CategoryType } from 'types/CollectionType'
 
-interface ISpacesProviderProps {
-  collection: CollectionType
-}
+import { ListStyle } from './style'
 
-const EspacosParaEventos: React.FC<ISpacesProviderProps> = () => {
-  const { spaces, isLoading, error, fetchSpaces } = useSpace()
+const EspacosParaEventos: React.FC = () => {
+  const { spaces, categories, isLoading, error, fetchSpaces } = useSpace()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
@@ -42,6 +40,30 @@ const EspacosParaEventos: React.FC<ISpacesProviderProps> = () => {
           <Row>
             <Col>
               <TitleH1 title="Espaços para eventos" />
+            </Col>
+          </Row>
+          <Row className="d-flex">
+            <Col>
+              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
+                {!isLoading &&
+                  !error &&
+                  categories.map(
+                    (category: {
+                      id: number
+                      label: string
+                      count?: number | undefined
+                    }) => (
+                      <li
+                        key={category.id}
+                        className="d-flex align-items-center"
+                      >
+                        <p className="d-inline-flex w-100 p-0 m-0">
+                          {category.label}
+                        </p>
+                      </li>
+                    ),
+                  )}
+              </ListStyle>
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

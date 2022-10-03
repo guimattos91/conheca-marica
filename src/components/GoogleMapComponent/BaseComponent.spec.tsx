@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { expect, describe, it } from 'vitest'
 
-import BaseComponent from './GoogleMap'
+import BaseComponent from './GoogleMapComponent'
 
 describe('BaseComponent', () => {
   it('should render a children', () => {

@@ -18,7 +18,7 @@ interface IContextProps {
   categories: CategoryType[]
   error: string | null
   isLoading: boolean
-  fetchPoint: (id: number, name: string) => Promise<void>
+  fetchPoint: (id: number) => Promise<void>
   fetchPoints: () => Promise<void>
   searchPoints: (search: string) => Promise<void>
 }

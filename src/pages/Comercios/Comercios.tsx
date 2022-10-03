@@ -8,7 +8,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { MainStyled } from 'style/style'
 
-import { useHotels } from 'context/HotelsContext'
+import { useStores } from 'context/StoresContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
@@ -21,17 +21,17 @@ import { AddressType, CategoryType } from 'types/CollectionType'
 
 import { ListStyle } from './style'
 
-const Hotels: React.FC = () => {
-  const { hotels, categories, isLoading, error, fetchHotels } = useHotels()
+const Comercios: React.FC = () => {
+  const { stores, categories, isLoading, error, fetchStores } = useStores()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
   useEffect(() => {
-    setTitle(t('Hotéis e Pousadas'))
+    setTitle(t('Comércio Local'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
   useEffect(() => {
-    fetchHotels()
+    fetchStores()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
@@ -41,7 +41,7 @@ const Hotels: React.FC = () => {
         <Container>
           <Row>
             <Col>
-              <TitleH1 title="Hotéis e Pousadas" />
+              <TitleH1 title="Comércio" />
             </Col>
           </Row>
           <Row className="d-flex">
@@ -76,7 +76,7 @@ const Hotels: React.FC = () => {
             )}
             {!isLoading &&
               !error &&
-              hotels.map(
+              stores.map(
                 (collection: {
                   id: number
                   nome: string
@@ -91,7 +91,7 @@ const Hotels: React.FC = () => {
                   </Col>
                 ),
               )}
-            {!isLoading && !error && hotels.length === 0 && (
+            {!isLoading && !error && stores.length === 0 && (
               <h2>Nenhum resultado encontrado</h2>
             )}
           </Row>
@@ -102,4 +102,4 @@ const Hotels: React.FC = () => {
   )
 }
 
-export default memo(Hotels)
+export default memo(Comercios)

@@ -84,8 +84,6 @@ export type ItemType = {
   almoco_hospedes: boolean
   jantar: boolean
   jantar_hospedes: boolean
-  lat: number | null
-  lng: number | null
   addresses: AddressType[]
   categorias: CategoryType[]
   images: ImagesType[]

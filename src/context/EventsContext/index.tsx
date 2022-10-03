@@ -76,8 +76,8 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
     setIsLoading(true)
     setError(null)
     try {
-      const response = await Api.get(`/eventos/${id}/`)
-      setEvent(response.data.item[0])
+      const response = await Api.get(`/eventos/${id}`)
+      setEvent(response.data.item)
     } catch {
       setError('Erro: Não achamos Nenhum Event ou Pousada')
     } finally {

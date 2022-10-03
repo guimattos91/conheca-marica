@@ -11,12 +11,6 @@ export const StyledH1 = styled.h1`
   font-size: 28px;
   margin: 0;
 `
-export const StyledH2 = styled.h2`
-  color: #333333;
-  font-weight: 700;
-  font-size: 28px;
-  margin: 0;
-`
 export const StyledSmallText = styled.p`
   color: #333333;
   font-weight: 300;

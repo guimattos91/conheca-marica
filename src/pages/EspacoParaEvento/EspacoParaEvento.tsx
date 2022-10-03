@@ -12,7 +12,7 @@ import { MainStyled } from 'style/style'
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
 
-import { useStores } from 'context/StoresContext'
+import { useSpace } from 'context/SpacesContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
@@ -28,8 +28,8 @@ import {
   StyledSmallText,
 } from './style'
 
-const Comercio: React.FC = () => {
-  const { store, isLoading, error, fetchStore } = useStores()
+const EspacoParaEvento: React.FC = () => {
+  const { space, isLoading, error, fetchSpace } = useSpace()
   const { id } = useParams()
   const settings = {
     dots: true,
@@ -56,12 +56,12 @@ const Comercio: React.FC = () => {
   }
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${store?.nome}`))
+  useEffect(() => setTitle(`${space?.nome}`))
 
   useEffect(() => {
-    if (id) fetchStore(Number(id))
+    if (id) fetchSpace(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchStore, id])
+  }, [fetchSpace, id])
 
   return (
     <>
@@ -72,12 +72,12 @@ const Comercio: React.FC = () => {
             <Spinner animation="grow" variant="success" />
           </div>
         )}
-        {!isLoading && !error && store && (
+        {!isLoading && !error && space && (
           <>
             <Row className="d-flex row-cols-1 pb-5">
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <Slider {...settings}>
-                {store.images.map((imagem) => (
+                {space.images.map((imagem) => (
                   <Col key={imagem.id}>
                     <Ratio
                       aspectRatio="1x1"
@@ -96,21 +96,21 @@ const Comercio: React.FC = () => {
             </Row>
             <StyledContainer>
               <Row>
-                <Col key={store.id}>
+                <Col key={space.id}>
                   <div className="d-flex align-items-center">
-                    <Link to="/hoteis-e-pousadas" className="pe-3">
+                    <Link to="/espacos-para-eventos" className="pe-3">
                       <BsArrowLeft size={20} color="#333" />
                     </Link>
                     <div className="d-flex flex-column">
-                      <StyledSmallText>Bares e storees</StyledSmallText>
-                      <StyledH1>{store.nome}</StyledH1>
+                      <StyledSmallText>Espaços de Eventos</StyledSmallText>
+                      <StyledH1>{space.nome}</StyledH1>
                     </div>
                   </div>
                   <div className="pt-3">
                     <ListStyle className="d-flex">
                       {!isLoading &&
                         !error &&
-                        store.categorias.map(
+                        space.categorias.map(
                           (category: { id: number; label: string }) => (
                             <li
                               key={category.id}
@@ -123,13 +123,13 @@ const Comercio: React.FC = () => {
                           ),
                         )}
                     </ListStyle>
-                    <p>{store.descricao_t}</p>
+                    <p>{space.descricao_t}</p>
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
                     {!isLoading &&
                       !error &&
-                      store.addresses.map(
+                      space.addresses.map(
                         (address: { id: number; label: string }) => (
                           <p key={address.id} className="d-inline-flex w-100">
                             {address.label}
@@ -140,7 +140,7 @@ const Comercio: React.FC = () => {
                   <div>
                     <TitleH2Intern title="Comodidades" />
                     <div className="d-flex flex-wrap">
-                      {store.cafe_manha && <p>Café da manhã Apenas hóspedes</p>}
+                      {space.cafe_manha && <p>Café da manhã Apenas hóspedes</p>}
                     </div>
                   </div>
                   <div>
@@ -148,7 +148,7 @@ const Comercio: React.FC = () => {
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
-                        store.estruturas.map(
+                        space.estruturas.map(
                           (structure: { icone: string; label: string }) => (
                             <div className="d-flex align-items-center pe-4 py-4">
                               <SVG
@@ -175,7 +175,7 @@ const Comercio: React.FC = () => {
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
-                        store.restricoes.map(
+                        space.restricoes.map(
                           (restriction: { icone: string; label: string }) => (
                             <div className="d-flex align-items-center pe-4 py-4">
                               <SVG
@@ -201,7 +201,7 @@ const Comercio: React.FC = () => {
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
-                        store.formas_pagamento.map(
+                        space.formas_pagamento.map(
                           (payment: { icone: string; label: string }) => (
                             <div className="d-flex align-items-center pe-4 py-4">
                               <SVG
@@ -255,4 +255,4 @@ const Comercio: React.FC = () => {
   )
 }
 
-export default memo(Comercio)
+export default memo(EspacoParaEvento)

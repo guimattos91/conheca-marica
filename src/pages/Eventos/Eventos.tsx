@@ -17,14 +17,12 @@ import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
-import { AddressType, CategoryType, CollectionType } from 'types/CollectionType'
+import { AddressType, CategoryType } from 'types/CollectionType'
 
-interface IEventsProviderProps {
-  collection: CollectionType
-}
+import { ListStyle } from './style'
 
-const Comercio: React.FC<IEventsProviderProps> = () => {
-  const { events, isLoading, error, fetchEvents } = useEvents()
+const Comercio: React.FC = () => {
+  const { events, categories, isLoading, error, fetchEvents } = useEvents()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
@@ -44,6 +42,30 @@ const Comercio: React.FC<IEventsProviderProps> = () => {
           <Row>
             <Col>
               <TitleH1 title="Eventos" />
+            </Col>
+          </Row>
+          <Row className="d-flex">
+            <Col>
+              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
+                {!isLoading &&
+                  !error &&
+                  categories.map(
+                    (category: {
+                      id: number
+                      label: string
+                      count?: number | undefined
+                    }) => (
+                      <li
+                        key={category.id}
+                        className="d-flex align-items-center"
+                      >
+                        <p className="d-inline-flex w-100 p-0 m-0">
+                          {category.label}
+                        </p>
+                      </li>
+                    ),
+                  )}
+              </ListStyle>
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

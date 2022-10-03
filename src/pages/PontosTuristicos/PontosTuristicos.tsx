@@ -16,15 +16,11 @@ import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
-import { AddressType, CategoryType, CollectionType } from 'types/CollectionType'
+import { AddressType, CategoryType } from 'types/CollectionType'
 
 import { ButtonStyled, InputStyled, ListStyle, SearchDiv } from './style'
 
-interface IPointsProviderProps {
-  collection: CollectionType
-}
-
-const PontosTuristicos: React.FC<IPointsProviderProps> = () => {
+const PontosTuristicos: React.FC = () => {
   const { points, categories, isLoading, error, fetchPoints, searchPoints } =
     usePoints()
   const { t, i18n } = useTranslation()
@@ -79,8 +75,13 @@ const PontosTuristicos: React.FC<IPointsProviderProps> = () => {
                       label: string
                       count?: number | undefined
                     }) => (
-                      <li key={category.id}>
-                        <p className="d-inline-flex w-100">{category.label}</p>
+                      <li
+                        key={category.id}
+                        className="d-flex align-items-center"
+                      >
+                        <p className="d-inline-flex w-100 p-0 m-0">
+                          {category.label}
+                        </p>
                       </li>
                     ),
                   )}

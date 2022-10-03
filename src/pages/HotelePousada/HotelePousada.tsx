@@ -3,12 +3,14 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
 
-import { useTranslation } from 'react-i18next'
 import { BsArrowLeft } from 'react-icons/bs'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { MainStyled } from 'style/style'
+
+import AppleStoreLogo from 'assets/AppleApp.png'
+import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { useHotels } from 'context/HotelsContext'
 
@@ -18,12 +20,17 @@ import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
 
-import { ListStyle, StyledContainer, StyledH1, StyledSmallText } from './style'
+import {
+  ListStyle,
+  StyledContainer,
+  StyledH1,
+  StyledH2,
+  StyledSmallText,
+} from './style'
 
 const HotelePousada: React.FC = () => {
   const { hotel, isLoading, error, fetchHotel } = useHotels()
   const { id } = useParams()
-  const { t, i18n } = useTranslation()
   const settings = {
     dots: true,
     infinite: true,
@@ -49,11 +56,8 @@ const HotelePousada: React.FC = () => {
   }
 
   const setTitle = useTitle()
+  useEffect(() => setTitle(`${hotel?.nome}`))
 
-  useEffect(() => {
-    setTitle(t(`${hotel?.nome}`))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
   useEffect(() => {
     if (id) fetchHotel(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,12 +79,6 @@ const HotelePousada: React.FC = () => {
               <Slider {...settings}>
                 {hotel.images.map((imagem) => (
                   <Col key={imagem.id}>
-                    {/* <img
-                      key={imagem.id}
-                      src={imagem.src}
-                      alt={imagem.src}
-                      className="w-100"
-                    /> */}
                     <Ratio
                       aspectRatio="1x1"
                       style={{
@@ -114,8 +112,11 @@ const HotelePousada: React.FC = () => {
                         !error &&
                         hotel.categorias.map(
                           (category: { id: number; label: string }) => (
-                            <li key={category.id}>
-                              <p className="d-inline-flex w-100">
+                            <li
+                              key={category.id}
+                              className="d-flex align-items-center"
+                            >
+                              <p className="d-inline-flex w-100 p-0 m-0">
                                 {category.label}
                               </p>
                             </li>
@@ -170,7 +171,7 @@ const HotelePousada: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <TitleH2Intern title="restições" />
+                    <TitleH2Intern title="Restrições" />
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -220,6 +221,28 @@ const HotelePousada: React.FC = () => {
                           ),
                         )}
                     </div>
+                  </div>
+                </Col>
+                <Col className="col-4">
+                  <StyledH2>Localização</StyledH2>
+                  <StyledH2>Conheça nosso app</StyledH2>
+                  <div className="d-flex pt-4">
+                    <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
+                      <img
+                        src={AppleStoreLogo}
+                        alt="Logo-Turismo"
+                        width="auto"
+                        className="pe-3 img-fluid"
+                      />
+                    </Link>
+                    <Link to="https://play.google.com/store/apps/details?id=com.marica2030.app">
+                      <img
+                        src={GoogleStoreLogo}
+                        alt="Logo-Turismo"
+                        width="auto"
+                        className="img-fluid"
+                      />
+                    </Link>
                   </div>
                 </Col>
               </Row>
