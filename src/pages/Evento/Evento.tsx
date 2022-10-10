@@ -15,6 +15,7 @@ import GoogleStoreLogo from 'assets/GoogleApp.png'
 import { useEvents } from 'context/EventsContext'
 
 import Footer from 'components/Footer'
+import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
@@ -138,13 +139,7 @@ const EspacoParaEvento: React.FC = () => {
                       )}
                   </div>
                   <div>
-                    <TitleH2Intern title="Comodidades" />
-                    <div className="d-flex flex-wrap">
-                      {event.cafe_manha && <p>Café da manhã Apenas hóspedes</p>}
-                    </div>
-                  </div>
-                  <div>
-                    <TitleH2Intern title="Estruturas" />
+                    <TitleH2Intern title="Valor da Entrada" />
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -171,7 +166,9 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <TitleH2Intern title="Restrições" />
+                    {event.restricoes?.length >= 1 && (
+                      <TitleH2Intern title="Restrições" />
+                    )}
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -197,7 +194,9 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <TitleH2Intern title="Formas de Pagamento" />
+                    {event.formas_pagamento?.length >= 1 && (
+                      <TitleH2Intern title="Formas de Pagamento" />
+                    )}
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -225,6 +224,10 @@ const EspacoParaEvento: React.FC = () => {
                 </Col>
                 <Col className="col-4">
                   <StyledH2>Localização</StyledH2>
+                  <GoogleMapComponent
+                    latitude={Number(event?.addresses[0].lat)}
+                    longitude={Number(event?.addresses[0].lng)}
+                  />
                   <StyledH2>Conheça nosso app</StyledH2>
                   <div className="d-flex pt-4">
                     <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">

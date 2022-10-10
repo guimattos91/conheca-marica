@@ -1,39 +1,46 @@
 import React, { memo } from 'react'
 
 import GoogleMapReact from 'google-map-react'
+import { FaMapMarker } from 'react-icons/fa'
 
 import Config from 'Config'
 
-import { usePoints } from 'context/PointsContext'
-
-import { ItemType } from 'types/ItemType'
-
 interface IGoogleMarkProps {
-  item: ItemType
+  latitude: number
+  longitude: number
 }
-const GoogleMapComponent: React.FC<IGoogleMarkProps> = () => {
-  const { point, isLoading, error, fetchPoint } = usePoints()
 
+interface IMapMarkerProps {
+  lat: number
+  lng: number
+}
+
+const MapMarker: React.FC<IMapMarkerProps> = () => (
+  <FaMapMarker color="red" size={24} />
+)
+
+const GoogleMapComponent: React.FC<IGoogleMarkProps> = ({
+  latitude,
+  longitude,
+}) => {
   const defaultProps = {
     center: {
-      lat: point?.addresses[0].lat,
-      lng: point?.addresses[0].lng,
+      lat: latitude,
+      lng: longitude,
     },
     zoom: 11,
   }
 
   return (
-    {Array?.isArray(point.addresses) && point?.addresses?.length > 0 &&(
-    <div style={{ height: 300, width: '100%' }}>
+    <div style={{ height: 300, width: '100%', background: 'red' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: `${Config.services.google.mapsAPI.key}` }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        {/* <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" /> */}
+        <MapMarker lat={Number(latitude)} lng={Number(longitude)} />
       </GoogleMapReact>
-      </div>
-      )}
+    </div>
   )
 }
 

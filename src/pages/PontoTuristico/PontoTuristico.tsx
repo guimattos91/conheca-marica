@@ -15,6 +15,7 @@ import GoogleStoreLogo from 'assets/GoogleApp.png'
 import { usePoints } from 'context/PointsContext'
 
 import Footer from 'components/Footer'
+import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
@@ -138,95 +139,130 @@ const PontoTuristico: React.FC = () => {
                       )}
                   </div>
                   <div>
-                    <TitleH2Intern title="Comodidades" />
-                    <div className="d-flex flex-wrap">
-                      {point.cafe_manha && <p>Café da manhã Apenas hóspedes</p>}
-                    </div>
+                    {point.dicas_t && (
+                      <>
+                        <TitleH2Intern title="Dicas" />
+                        <div className="d-flex flex-wrap">
+                          <p>{point.dicas_t}</p>
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <div>
-                    <TitleH2Intern title="Estruturas" />
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        point.estruturas.map(
-                          (structure: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={structure.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                color="#6ebd00"
-                                height="auto"
-                                title={structure.label}
-                              />
-                              <p
-                                key={structure.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {structure.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
+                  {point.viajantes && (
+                    <div>
+                      <TitleH2Intern title="Tipos de Viajantes" />
+                      <div className="d-flex flex-wrap">
+                        {!isLoading &&
+                          !error &&
+                          point.viajantes.map(
+                            (traveller: { label: string }) => (
+                              <div className="d-flex align-items-center pe-4 py-4">
+                                <p
+                                  key={traveller.label}
+                                  className="d-inline-flex ps-2 m-0"
+                                >
+                                  {traveller.label}
+                                </p>
+                              </div>
+                            ),
+                          )}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <TitleH2Intern title="Restrições" />
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        point.restricoes.map(
-                          (restriction: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={restriction.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                height="auto"
-                                title={restriction.label}
-                              />
-                              <p
-                                key={restriction.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {restriction.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
+                  )}
+                  {point.estruturas && (
+                    <>
+                      <TitleH2Intern title="Estruturas" />
+                      <div className="d-flex flex-wrap">
+                        {!isLoading &&
+                          !error &&
+                          point.estruturas.map(
+                            (structure: { icone: string; label: string }) => (
+                              <div className="d-flex align-items-center pe-4 py-4">
+                                <SVG
+                                  src={structure.icone}
+                                  width={30}
+                                  fill="#6ebd00"
+                                  color="#6ebd00"
+                                  height="auto"
+                                  title={structure.label}
+                                />
+                                <p
+                                  key={structure.label}
+                                  className="d-inline-flex ps-2 m-0"
+                                >
+                                  {structure.label}
+                                </p>
+                              </div>
+                            ),
+                          )}
+                      </div>
+                    </>
+                  )}
+                  {point.restricoes && (
+                    <div>
+                      <TitleH2Intern title="Restrições" />
+                      <div className="d-flex flex-wrap">
+                        {!isLoading &&
+                          !error &&
+                          point.restricoes.map(
+                            (restriction: { icone: string; label: string }) => (
+                              <div className="d-flex align-items-center pe-4 py-4">
+                                <SVG
+                                  src={restriction.icone}
+                                  width={30}
+                                  fill="#6ebd00"
+                                  height="auto"
+                                  title={restriction.label}
+                                />
+                                <p
+                                  key={restriction.label}
+                                  className="d-inline-flex ps-2 m-0"
+                                >
+                                  {restriction.label}
+                                </p>
+                              </div>
+                            ),
+                          )}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <TitleH2Intern title="Formas de Pagamento" />
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        point.formas_pagamento.map(
-                          (payment: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={payment.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                height="auto"
-                                title={payment.label}
-                              />
-                              <p
-                                key={payment.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {payment.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
+                  )}
+                  {point.formas_pagamento?.length >= 1 && (
+                    <div>
+                      <TitleH2Intern title="Formas de Pagamento" />
+                      <div className="d-flex flex-wrap">
+                        {!isLoading &&
+                          !error &&
+                          point.formas_pagamento.map(
+                            (payment: { icone: string; label: string }) => (
+                              <div className="d-flex align-items-center pe-4 py-4">
+                                <SVG
+                                  src={payment.icone}
+                                  width={30}
+                                  fill="#6ebd00"
+                                  height="auto"
+                                  title={payment.label}
+                                />
+                                <p
+                                  key={payment.label}
+                                  className="d-inline-flex ps-2 m-0"
+                                >
+                                  {payment.label}
+                                </p>
+                              </div>
+                            ),
+                          )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </Col>
                 <Col className="col-4">
                   <StyledH2>Localização</StyledH2>
-                  <StyledH2>Conheça nosso app</StyledH2>
-                  <div className="d-flex pt-4">
+                  <GoogleMapComponent
+                    latitude={Number(point?.addresses[0].lat)}
+                    longitude={Number(point?.addresses[0].lng)}
+                  />
+                  <StyledH2 className="pt-5">Conheça nosso app</StyledH2>
+                  <div className="d-flex pt-2">
                     <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
                       <img
                         src={AppleStoreLogo}

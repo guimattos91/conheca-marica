@@ -15,6 +15,7 @@ import GoogleStoreLogo from 'assets/GoogleApp.png'
 import { useRestaurants } from 'context/RestaurantsContext'
 
 import Footer from 'components/Footer'
+import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
@@ -227,6 +228,10 @@ const BareRestaurante: React.FC = () => {
                 </Col>
                 <Col className="col-4">
                   <StyledH2>Localização</StyledH2>
+                  <GoogleMapComponent
+                    latitude={Number(restaurant?.addresses[0].lat)}
+                    longitude={Number(restaurant?.addresses[0].lng)}
+                  />
                   <StyledH2>Conheça nosso app</StyledH2>
                   <div className="d-flex pt-4">
                     <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">

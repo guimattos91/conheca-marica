@@ -60,6 +60,9 @@ export type RestrictionType = {
   icone: string
   label: string
 }
+export type TavellersType = {
+  label: string
+}
 export type MealType = {
   restricoes: [
     {
@@ -78,6 +81,8 @@ export type ItemType = {
   descricao_t: string | null
   quartos: number
   leitos: number
+  dicas_t: string
+  viajantes: TavellersType[]
   cafe_manha: boolean
   cafe_hospedes: boolean
   almoco: boolean

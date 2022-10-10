@@ -694,6 +694,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/google-map-react@npm:^2.1.7":
+  version: 2.1.7
+  resolution: "@types/google-map-react@npm:2.1.7"
+  dependencies:
+    "@types/react": "*"
+  checksum: 0e8e014208e39624c861616021b4f8f8e085caaad3600418f33e6bf2481451ea97a1167ae4a2157cf3d1e397905721955a012b00e55d7c07d7e4bd95694dc69e
+  languageName: node
+  linkType: hard
+
 "@types/hoist-non-react-statics@npm:*":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
@@ -5430,6 +5439,7 @@ __metadata:
   dependencies:
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^14.4.3
+    "@types/google-map-react": ^2.1.7
     "@types/node": ^18.7.1
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6

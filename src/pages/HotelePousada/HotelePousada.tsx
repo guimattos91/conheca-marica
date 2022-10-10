@@ -3,7 +3,9 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
 
-import { BsArrowLeft } from 'react-icons/bs'
+import { BsArrowLeft, BsKeyFill } from 'react-icons/bs'
+import { FaBed, FaMugHot } from 'react-icons/fa'
+import { GiKnifeFork } from 'react-icons/gi'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
@@ -15,6 +17,7 @@ import GoogleStoreLogo from 'assets/GoogleApp.png'
 import { useHotels } from 'context/HotelsContext'
 
 import Footer from 'components/Footer'
+import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
@@ -139,9 +142,96 @@ const HotelePousada: React.FC = () => {
                   </div>
                   <div>
                     <TitleH2Intern title="Comodidades" />
-                    <div className="d-flex flex-wrap">
-                      {hotel.cafe_manha && <p>Café da manhã Apenas hóspedes</p>}
+                    <div className="d-flex align-items-center">
+                      {hotel.quartos && (
+                        <div className="d-flex align-items-center">
+                          <BsKeyFill
+                            color="#6ebd00"
+                            size={30}
+                            className="pe-2"
+                          />
+                          <p className="pe-5 m-0">{hotel.quartos} Quartos</p>
+                        </div>
+                      )}
+                      {hotel.leitos && (
+                        <div className="d-flex align-items-center ps-5">
+                          <FaBed color="#6ebd00" size={30} className="pe-2" />
+                          <p className="pe-5 m-0">{hotel.leitos} Leitos</p>
+                        </div>
+                      )}
                     </div>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    {hotel.cafe_manha && !hotel.cafe_hospedes && (
+                      <div className="d-flex align-items-center">
+                        <FaMugHot color="#6ebd00" size={30} className="pe-2" />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Café da manhã</p>
+                          <p className="p-0 m-0">Apenas hóspedes</p>
+                        </div>
+                      </div>
+                    )}
+                    {hotel.cafe_hospedes && hotel.cafe_manha && (
+                      <div className="d-flex align-items-center">
+                        <FaMugHot color="#6ebd00" size={30} className="pe-2" />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Café da manhã</p>
+                          <p className="p-0 m-0">Aceita não-hóspedes</p>
+                        </div>
+                      </div>
+                    )}
+                    {hotel.almoco && !hotel.almoco_hospedes && (
+                      <div className="d-flex align-items-center ps-5">
+                        <GiKnifeFork
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Almoço</p>
+                          <p className="p-0 m-0">Apenas hóspedes</p>
+                        </div>
+                      </div>
+                    )}
+                    {hotel.almoco_hospedes && hotel.almoco_hospedes && (
+                      <div className="d-flex align-items-center ps-5">
+                        <GiKnifeFork
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Almoço</p>
+                          <p className="p-0 m-0">Aceita não-hóspedes</p>
+                        </div>
+                      </div>
+                    )}
+                    {hotel.jantar && !hotel.jantar_hospedes && (
+                      <div className="d-flex align-items-center ps-5">
+                        <GiKnifeFork
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Jantar</p>
+                          <p className="p-0 m-0">Apenas hóspedes</p>
+                        </div>
+                      </div>
+                    )}
+                    {hotel.jantar_hospedes && hotel.jantar && (
+                      <div className="d-flex align-items-center ps-5">
+                        <GiKnifeFork
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <div className="d-flex flex-column pt-3">
+                          <p className="p-0 m-0">Jantar</p>
+                          <p className="p-0 m-0">Aceita não-hóspedes</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div>
                     <TitleH2Intern title="Estruturas" />
@@ -171,7 +261,9 @@ const HotelePousada: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <TitleH2Intern title="Restrições" />
+                    {hotel?.restricoes?.length >= 1 && (
+                      <TitleH2Intern title="Restrições" />
+                    )}
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -197,7 +289,9 @@ const HotelePousada: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <TitleH2Intern title="Formas de Pagamento" />
+                    {hotel?.formas_pagamento?.length >= 1 && (
+                      <TitleH2Intern title="Formas de Pagamento" />
+                    )}
                     <div className="d-flex flex-wrap">
                       {!isLoading &&
                         !error &&
@@ -225,6 +319,10 @@ const HotelePousada: React.FC = () => {
                 </Col>
                 <Col className="col-4">
                   <StyledH2>Localização</StyledH2>
+                  <GoogleMapComponent
+                    latitude={Number(hotel?.addresses[0].lat)}
+                    longitude={Number(hotel?.addresses[0].lng)}
+                  />
                   <StyledH2>Conheça nosso app</StyledH2>
                   <div className="d-flex pt-4">
                     <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">

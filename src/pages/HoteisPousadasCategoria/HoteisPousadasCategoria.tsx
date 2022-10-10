@@ -15,15 +15,11 @@ import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import TitleH1 from 'components/TitleH1'
 
-import { strToSlug } from 'helpers'
-
 import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { LinkStyled, ListStyle } from './style'
-
-const Hotels: React.FC = () => {
+const HoteisPousadasCategoria: React.FC = () => {
   const { hotels, categories, isLoading, error, fetchHotels } = useHotels()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
@@ -43,37 +39,7 @@ const Hotels: React.FC = () => {
         <Container>
           <Row>
             <Col>
-              <TitleH1 title="Hotéis e Pousadas" />
-            </Col>
-          </Row>
-          <Row className="d-flex">
-            <Col>
-              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
-                {!isLoading &&
-                  !error &&
-                  categories.map(
-                    (category: {
-                      id: number
-                      label: string
-                      count?: number | undefined
-                    }) => (
-                      <li
-                        key={category.id}
-                        className="d-flex align-items-center"
-                      >
-                        <LinkStyled
-                          to={`hoteis-e-pousadas/${category.id}/${strToSlug(
-                            category.label,
-                          )}`}
-                        >
-                          <p className="d-inline-flex w-100 p-0 m-0">
-                            {category.label}
-                          </p>
-                        </LinkStyled>
-                      </li>
-                    ),
-                  )}
-              </ListStyle>
+              <TitleH1 title={categories.label} />
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -110,4 +76,4 @@ const Hotels: React.FC = () => {
   )
 }
 
-export default memo(Hotels)
+export default memo(HoteisPousadasCategoria)

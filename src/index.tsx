@@ -18,25 +18,23 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <Suspense>
-      <PointsProvider>
-        <HotelsProvider>
-          <RestaurantsProvider>
-            <SpaceProvider>
-              <StoresProvider>
-                <EventProvider>
-                  <BannerProvider>
-                    <AboutProvider>
-                      <App />
-                    </AboutProvider>
-                  </BannerProvider>
-                </EventProvider>
-              </StoresProvider>
-            </SpaceProvider>
-          </RestaurantsProvider>
-        </HotelsProvider>
-      </PointsProvider>
-    </Suspense>
-  </React.StrictMode>,
+  <Suspense>
+    <PointsProvider>
+      <HotelsProvider>
+        <RestaurantsProvider>
+          <SpaceProvider>
+            <StoresProvider>
+              <EventProvider>
+                <BannerProvider>
+                  <AboutProvider>
+                    <App />
+                  </AboutProvider>
+                </BannerProvider>
+              </EventProvider>
+            </StoresProvider>
+          </SpaceProvider>
+        </RestaurantsProvider>
+      </HotelsProvider>
+    </PointsProvider>
+  </Suspense>,
 )

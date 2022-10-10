@@ -15,6 +15,7 @@
   "dependencies": {
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/google-map-react": "^2.1.7",
     "@vitejs/plugin-react": "^2.0.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",

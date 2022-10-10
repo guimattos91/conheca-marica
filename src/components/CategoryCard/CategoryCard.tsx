@@ -23,7 +23,7 @@ const CategoryCard: React.FC<ICategoryCardsProps> = ({
       <div className="d-flex flex-column text-center align-itens-center">
         <LinkStyled href={page}>
           <div className="pt-5">
-            <Icon size={70} />
+            <Icon size={70} color="295C7A" />
           </div>
         </LinkStyled>
         <LinkStyled href={page}>
