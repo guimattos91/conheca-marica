@@ -13,15 +13,9 @@ import Header from 'components/Header'
 
 import useTitle from 'hooks/useTitle'
 
-import { AboutType } from 'types/AboutType'
-
 import { BannerContainer } from './styles'
 
-interface IAboutsProviderProps {
-  about: AboutType
-}
-
-const PontosTuristicos: React.FC<IAboutsProviderProps> = ({ about }) => {
+const PontosTuristicos: React.FC = () => {
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
@@ -38,7 +32,7 @@ const PontosTuristicos: React.FC<IAboutsProviderProps> = ({ about }) => {
           <Container>
             <Row>
               <Col>
-                <AboutCard about={about} />
+                <AboutCard />
               </Col>
             </Row>
           </Container>

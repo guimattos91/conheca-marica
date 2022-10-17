@@ -6,14 +6,9 @@ import { useAbout } from 'context/AboutContext'
 
 import TitleH1 from 'components/TitleH1'
 
-import { AboutType } from 'types/AboutType'
-
 import { BackDiv, DivStyled } from './style'
 
-interface IAboutsProviderProps {
-  about: AboutType
-}
-const AboutCard: React.FC<IAboutsProviderProps> = () => {
+const AboutCard: React.FC = () => {
   const { about, isLoading, error, fetchAbout } = useAbout()
   useEffect(() => {
     fetchAbout()
