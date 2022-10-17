@@ -8,7 +8,7 @@ import {
 
 import Api from 'services/Api'
 
-import { CollectionType } from 'types/CollectionTypes'
+import { CollectionType } from 'types/CollectionType'
 
 interface IContextProps {
   points: CollectionType[]

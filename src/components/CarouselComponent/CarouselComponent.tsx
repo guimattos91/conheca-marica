@@ -4,13 +4,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 import { useBanner } from 'context/BannersContext'
 
-import { BannersType } from 'types/BannersType'
-
-interface IBannersProviderProps {
-  banner: BannersType
-}
-
-const CarouselBanner: React.FC<IBannersProviderProps> = () => {
+const CarouselBanner: React.FC = () => {
   const { banners, isLoading, error, fetchBanners } = useBanner()
   useEffect(() => {
     fetchBanners()

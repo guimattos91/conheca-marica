@@ -33,15 +33,7 @@ const Home: React.FC = () => {
       <MainStyled>
         <Row className="row-cols-1">
           <Col>
-            <CarouselBanner
-              banner={{
-                id: 0,
-                image_l: '',
-                image_s: '',
-                url: '',
-                status: false,
-              }}
-            />
+            <CarouselBanner />
           </Col>
         </Row>
         <Container>
