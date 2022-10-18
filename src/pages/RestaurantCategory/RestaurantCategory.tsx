@@ -3,60 +3,82 @@ import { memo, useCallback, useEffect, useState } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Container, Row, Spinner } from 'react-bootstrap'
 
-import { useTranslation } from 'react-i18next'
-import { BsSearch } from 'react-icons/bs'
-import { LinkStyled, MainStyled } from 'style/style'
+// import Config from 'Config'
 
-import { usePoints } from 'context/PointsContext'
+import { useTranslation } from 'react-i18next'
+import { BsArrowLeft, BsSearch } from 'react-icons/bs'
+import { Link, useParams } from 'react-router-dom'
+import { MainStyled } from 'style/style'
+
+import { useRestaurants } from 'context/RestaurantsContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
-import TitleH1 from 'components/TitleH1'
-
-import { strToSlug } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { ButtonStyled, InputStyled, ListStyle, SearchDiv } from './style'
+import {
+  ButtonStyled,
+  InputStyled,
+  SearchDiv,
+  StyledH1,
+  StyledSmallText,
+} from './style'
 
-const PontosTuristicos: React.FC = () => {
-  const { points, categories, isLoading, error, fetchPoints, searchPoints } =
-    usePoints()
+const HoteisPousadasCategoria: React.FC = () => {
+  const {
+    restaurants,
+    isLoading,
+    error,
+    fetchCategoryRestaurants,
+    searchRestaurants,
+  } = useRestaurants()
   const { t, i18n } = useTranslation()
-  const setTitle = useTitle()
+  const { id } = useParams()
+  const { name } = useParams()
   const [search, setSearch] = useState('')
 
+  const setTitle = useTitle()
   const handleSearch = useCallback(
-    () => searchPoints(search),
-    [searchPoints, search],
+    () => searchRestaurants(search),
+    [searchRestaurants, search],
   )
 
   useEffect(() => {
-    setTitle(t('Pontos Turísticos'))
+    setTitle(t('Hotéis e Pousadas'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
   useEffect(() => {
-    fetchPoints()
+    if (id) fetchCategoryRestaurants(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchCategoryRestaurants, id])
+
   return (
     <>
       <Header />
       <MainStyled>
         <Container>
-          <Row className="row-cols-1 row-cols-md-2 d-flex">
+          <Row className="py-3">
             <Col>
-              <TitleH1 title="Pontos Turísticos" />
+              <div className="d-flex align-items-center">
+                <Link to="/bares-e-restaurantes" className="pe-3">
+                  <BsArrowLeft size={20} color="#333" />
+                </Link>
+                <div className="d-flex flex-column">
+                  <StyledSmallText>Hotéis e Pousadas</StyledSmallText>
+                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                </div>
+              </div>
             </Col>
             <Col className="d-flex align-items-end justify-content-end pb-3">
               <SearchDiv className="d-flex  align-items-center px-3">
                 <InputStyled
                   type="text"
-                  placeholder="Buscar Pontos Turísticos"
+                  placeholder="Buscar Hotéis e Pousadas"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -66,37 +88,7 @@ const PontosTuristicos: React.FC = () => {
               </SearchDiv>
             </Col>
           </Row>
-          <Row className="d-flex">
-            <Col>
-              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
-                {!isLoading &&
-                  !error &&
-                  categories.map(
-                    (category: {
-                      id: number
-                      label: string
-                      count?: number | undefined
-                    }) => (
-                      <li
-                        key={category.id}
-                        className="d-flex align-items-center"
-                      >
-                        <LinkStyled
-                          to={`categorias/${category.id}/${strToSlug(
-                            category.label,
-                          )}`}
-                        >
-                          <p className="d-inline-flex w-100 p-0 m-0">
-                            {category.label}
-                          </p>
-                        </LinkStyled>
-                      </li>
-                    ),
-                  )}
-              </ListStyle>
-            </Col>
-          </Row>
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-5">
             {isLoading && (
               <div className="d-flex justify-content-center">
                 <Spinner animation="grow" variant="success" />
@@ -104,7 +96,7 @@ const PontosTuristicos: React.FC = () => {
             )}
             {!isLoading &&
               !error &&
-              points.map(
+              restaurants.map(
                 (collection: {
                   id: number
                   nome: string
@@ -119,7 +111,7 @@ const PontosTuristicos: React.FC = () => {
                   </Col>
                 ),
               )}
-            {!isLoading && !error && points.length === 0 && (
+            {!isLoading && !error && restaurants.length === 0 && (
               <h2>Nenhum resultado encontrado</h2>
             )}
           </Row>
@@ -130,4 +122,4 @@ const PontosTuristicos: React.FC = () => {
   )
 }
 
-export default memo(PontosTuristicos)
+export default memo(HoteisPousadasCategoria)

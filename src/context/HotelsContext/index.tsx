@@ -81,6 +81,7 @@ export const HotelsProvider: React.FC<IHotelsProviderProps> = ({
       setIsLoading(false)
     }
   }, [])
+
   const fetchCategoryHotels = useCallback(async (id: number) => {
     setIsLoading(true)
     setError(null)

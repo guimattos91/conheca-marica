@@ -20,6 +20,7 @@ interface IContextProps {
   isLoading: boolean
   fetchEvent: (id: number) => Promise<void>
   fetchEvents: () => Promise<void>
+  fetchCategoryEvents: (id: number) => Promise<void>
   searchEvents: (search: string) => Promise<void>
 }
 
@@ -50,7 +51,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
       setEvents(response.data.collection)
       setCategories(response.data.categorias)
     } catch {
-      setError('Erro: Não achamos Nenhum Event ou Pousada')
+      setError('Erro: Não achamos Nenhum Evento')
     } finally {
       setIsLoading(false)
     }
@@ -66,7 +67,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
       const response = await Api.get('/espacos/busca', { params })
       setEvents(response.data.collection)
     } catch {
-      setError('Erro: Não achamos Nenhum Event ou Pousada')
+      setError('Erro: Não achamos Nenhum Evento')
     } finally {
       setIsLoading(false)
     }
@@ -79,7 +80,20 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
       const response = await Api.get(`/eventos/${id}`)
       setEvent(response.data.item)
     } catch {
-      setError('Erro: Não achamos Nenhum Event ou Pousada')
+      setError('Erro: Não achamos Nenhum Evento')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const fetchCategoryEvents = useCallback(async (id: number) => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/eventos/categorias/${id}`)
+      setEvent(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos Nenhum Evento')
     } finally {
       setIsLoading(false)
     }
@@ -96,6 +110,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
           error,
           fetchEvent,
           fetchEvents,
+          fetchCategoryEvents,
           searchEvents,
         }),
         [
@@ -106,6 +121,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
           error,
           fetchEvent,
           fetchEvents,
+          fetchCategoryEvents,
           searchEvents,
         ],
       )}

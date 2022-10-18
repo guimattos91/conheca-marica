@@ -6,7 +6,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
-import { MainStyled } from 'style/style'
+import { LinkStyled, MainStyled } from 'style/style'
 
 import { useRestaurants } from 'context/RestaurantsContext'
 
@@ -14,6 +14,8 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import TitleH1 from 'components/TitleH1'
+
+import { strToSlug } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
@@ -60,9 +62,15 @@ const Restaurants: React.FC = () => {
                         key={category.id}
                         className="d-flex align-items-center"
                       >
-                        <p className="d-inline-flex w-100 p-0 m-0">
-                          {category.label}
-                        </p>
+                        <LinkStyled
+                          to={`categorias/${category.id}/${strToSlug(
+                            category.label,
+                          )}`}
+                        >
+                          <p className="d-inline-flex w-100 p-0 m-0">
+                            {category.label}
+                          </p>
+                        </LinkStyled>
                       </li>
                     ),
                   )}

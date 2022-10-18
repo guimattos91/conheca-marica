@@ -76,7 +76,7 @@ const MenuComponent: React.FC = () => {
             <GiMicrophone color="white" />
             <p className="ps-2 m-0">Eventos</p>
           </LinkStyled>
-          <LinkStyled to="/comercio" className="d-flex align-items-center">
+          <LinkStyled to="/comercios" className="d-flex align-items-center">
             <FaStoreAlt color="white" />
             <p className="ps-2 m-0">Comércio</p>
           </LinkStyled>

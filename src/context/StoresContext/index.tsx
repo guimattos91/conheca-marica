@@ -20,6 +20,7 @@ interface IContextProps {
   isLoading: boolean
   fetchStore: (id: number) => Promise<void>
   fetchStores: () => Promise<void>
+  fetchCategoryStores: (id: number) => Promise<void>
   searchStores: (search: string) => Promise<void>
 }
 
@@ -46,7 +47,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
       setStores(response.data.collection)
       setCategories(response.data.categorias)
     } catch {
-      setError('Erro: Não achamos Nenhum Store ou Pousada')
+      setError('Erro: Não achamos Nenhum Comércio')
     } finally {
       setIsLoading(false)
     }
@@ -61,7 +62,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
       const response = await Api.get('/pontos/busca', { params })
       setStores(response.data.collection)
     } catch {
-      setError('Erro: Não achamos seus Pontos Turísticos')
+      setError('Erro: Não achamos Nenhum Comércio')
     } finally {
       setIsLoading(false)
     }
@@ -74,7 +75,20 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
       const response = await Api.get(`/comercios/${id}`)
       setStore(response.data.item)
     } catch {
-      setError('Erro: Não achamos Nenhum Store ou Pousada')
+      setError('Erro: Não achamos Nenhum Comércio')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const fetchCategoryStores = useCallback(async (id: number) => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/comercios/categorias/${id}`)
+      setStore(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos Nenhum Comércio')
     } finally {
       setIsLoading(false)
     }
@@ -91,6 +105,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
           error,
           fetchStore,
           fetchStores,
+          fetchCategoryStores,
           searchStores,
         }),
         [
@@ -101,6 +116,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
           error,
           fetchStores,
           fetchStore,
+          fetchCategoryStores,
           searchStores,
         ],
       )}

@@ -19,6 +19,7 @@ interface IContextProps {
   error: string | null
   isLoading: boolean
   fetchRestaurant: (id: number) => Promise<void>
+  fetchCategoryRestaurants: (id: number) => Promise<void>
   fetchRestaurants: () => Promise<void>
   searchRestaurants: (search: string) => Promise<void>
 }
@@ -35,20 +36,18 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
   const [restaurants, setRestaurants] = useState<CollectionType[]>([])
   const [restaurant, setRestaurant] = useState<ItemType | null>(null)
   const [categories, setCategories] = useState<CategoryType[]>([])
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const fetchRestaurants = useCallback(async () => {
     setIsLoading(true)
     setError(null)
-
     try {
       const response = await Api.get('/restaurantes')
       setRestaurants(response.data.collection)
       setCategories(response.data.categorias)
     } catch {
-      setError('Erro: Não achamos Nenhum Bar ou restaurantes')
+      setError('Erro: Não achamos Nenhum Bar ou Restaurante')
     } finally {
       setIsLoading(false)
     }
@@ -64,7 +63,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
       const response = await Api.get('/restaurantes/busca', { params })
       setRestaurants(response.data.collection)
     } catch {
-      setError('Erro: Não achamos seus Pontos Turísticos')
+      setError('Erro: Não achamos Nenhum Bar ou Restaurante')
     } finally {
       setIsLoading(false)
     }
@@ -73,12 +72,25 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
   const fetchRestaurant = useCallback(async (id: number) => {
     setIsLoading(true)
     setError(null)
-
     try {
       const response = await Api.get(`/restaurantes/${id}/`)
       setRestaurant(response.data.item)
     } catch {
-      setError('Erro: Não achamos Nenhum Bar ou restaurantes')
+      setError('Erro: Não achamos Nenhum Bar ou Restaurante')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const fetchCategoryRestaurants = useCallback(async (id: number) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await Api.get(`/restaurantes/categorias/${id}/`)
+      setRestaurants(response.data.collection)
+    } catch {
+      setError('Erro: Não achamos Nenhum Bar ou Restaurante')
     } finally {
       setIsLoading(false)
     }
@@ -95,6 +107,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           error,
           fetchRestaurant,
           fetchRestaurants,
+          fetchCategoryRestaurants,
           searchRestaurants,
         }),
         [
@@ -105,6 +118,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           error,
           fetchRestaurants,
           fetchRestaurant,
+          fetchCategoryRestaurants,
           searchRestaurants,
         ],
       )}
