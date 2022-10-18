@@ -9,7 +9,7 @@ export const BackDiv = styled.div`
 export const StyledH1 = styled.h1`
   color: #333333;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 24px;
   margin: 0;
 `
 export const StyledSmallText = styled.p`
@@ -47,7 +47,6 @@ export const LinkStyled = styled(Link)`
     color: white;
   }
 `
-
 export const InputStyled = styled.input`
   background-color: white;
   border: none;

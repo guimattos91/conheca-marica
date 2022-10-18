@@ -12,6 +12,7 @@ import Evento from 'pages/Evento'
 import Eventos from 'pages/Eventos'
 import Home from 'pages/Home'
 import Hoteis from 'pages/HoteisPousadas'
+import HoteisCategoria from 'pages/HoteisPousadasCategoria'
 import Hotel from 'pages/HotelePousada'
 import NotFound from 'pages/NotFound'
 import Pontos from 'pages/PontosTuristicos'
@@ -27,6 +28,10 @@ const Routes: React.FC = () => {
         <Route path="/pontos-turisticos/:id/:name" element={<Ponto />} />
         <Route path="/hoteis-e-pousadas" element={<Hoteis />} />
         <Route path="/hoteis-e-pousadas/:id/:name" element={<Hotel />} />
+        <Route
+          path="/hoteis-e-pousadas/categorias/:id/:name"
+          element={<HoteisCategoria />}
+        />
         <Route path="/bares-e-restaurantes" element={<Restaurantes />} />
         <Route
           path="/bares-e-restaurantes/:id/:name"
