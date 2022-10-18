@@ -2,48 +2,54 @@ import { memo } from 'react'
 
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom'
 
-import Restaurante from 'pages/BareRestaurante'
-import Restaurantes from 'pages/BaresRestaurantes'
-import Comercio from 'pages/Comercio'
-import Comercios from 'pages/Comercios'
-import Espaco from 'pages/EspacoParaEvento'
-import Espacos from 'pages/EspacosParaEventos'
-import Evento from 'pages/Evento'
-import Eventos from 'pages/Eventos'
+import About from 'pages/About'
+import CityEvent from 'pages/CityEvent'
+import CityEvents from 'pages/CityEvents'
+import EventSpace from 'pages/EventSpace'
+import EventSpaces from 'pages/EventSpaces'
 import Home from 'pages/Home'
-import Hoteis from 'pages/HoteisPousadas'
-import HoteisCategoria from 'pages/HoteisPousadasCategoria'
-import Hotel from 'pages/HotelePousada'
+import HotelAndInn from 'pages/HotelAndInn'
+import HotelAndInnCategory from 'pages/HotelAndInnCategory'
+import HotelsAndInns from 'pages/HotelsAndInns'
 import NotFound from 'pages/NotFound'
-import Pontos from 'pages/PontosTuristicos'
-import Ponto from 'pages/PontoTuristico'
-import Sobre from 'pages/Sobre'
+import Restaurant from 'pages/Restaurant'
+import Restaurants from 'pages/Restaurants'
+import Store from 'pages/Store'
+import Stores from 'pages/Stores'
+import TouristicPoint from 'pages/TouristicPoint'
+import TouristicPoints from 'pages/TouristicPoints'
 
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<Home />} />
-        <Route path="/pontos-turisticos" element={<Pontos />} />
-        <Route path="/pontos-turisticos/:id/:name" element={<Ponto />} />
-        <Route path="/hoteis-e-pousadas" element={<Hoteis />} />
-        <Route path="/hoteis-e-pousadas/:id/:name" element={<Hotel />} />
+        <Route path="/pontos-turisticos" element={<TouristicPoints />} />
+        <Route
+          path="/pontos-turisticos/:id/:name"
+          element={<TouristicPoint />}
+        />
+        <Route path="/hoteis-e-pousadas" element={<HotelsAndInns />} />
+        <Route path="/hoteis-e-pousadas/:id/:name" element={<HotelAndInn />} />
         <Route
           path="/hoteis-e-pousadas/categorias/:id/:name"
-          element={<HoteisCategoria />}
+          element={<HotelAndInnCategory />}
         />
-        <Route path="/bares-e-restaurantes" element={<Restaurantes />} />
+        <Route path="/bares-e-restaurantes" element={<Restaurants />} />
         <Route
           path="/bares-e-restaurantes/:id/:name"
-          element={<Restaurante />}
+          element={<Restaurant />}
         />
-        <Route path="/espacos-para-eventos" element={<Espacos />} />
-        <Route path="/espacos-para-eventos/:id/:name" element={<Espaco />} />
-        <Route path="/eventos" element={<Eventos />} />
-        <Route path="/eventos/:id/:name" element={<Evento />} />
-        <Route path="/comercios" element={<Comercios />} />
-        <Route path="/comercios/:id/:name" element={<Comercio />} />
-        <Route path="/sobre" element={<Sobre />} />
+        <Route path="/espacos-para-eventos" element={<EventSpaces />} />
+        <Route
+          path="/espacos-para-eventos/:id/:name"
+          element={<EventSpace />}
+        />
+        <Route path="/eventos" element={<CityEvents />} />
+        <Route path="/eventos/:id/:name" element={<CityEvent />} />
+        <Route path="/comercios" element={<Stores />} />
+        <Route path="/comercios/:id/:name" element={<Store />} />
+        <Route path="/sobre" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
     </BrowserRouter>
