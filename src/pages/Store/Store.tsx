@@ -7,7 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { MainStyled } from 'style/style'
+import { MainStyled, TextDescription } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -75,28 +75,26 @@ const Comercio: React.FC = () => {
         )}
         {!isLoading && !error && store && (
           <>
-            <Row className="d-flex row-cols-1 pb-5">
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Slider {...settings}>
-                {store.images.map((imagem) => (
-                  <Col key={imagem.id}>
-                    <Ratio
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                    >
-                      <div />
-                    </Ratio>
-                  </Col>
-                ))}
-              </Slider>
-            </Row>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Slider {...settings}>
+              {store.images.map((imagem) => (
+                <div key={imagem.id}>
+                  <Ratio
+                    aspectRatio="1x1"
+                    style={{
+                      backgroundImage: `url(${imagem.src})`,
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center center',
+                    }}
+                  >
+                    <div />
+                  </Ratio>
+                </div>
+              ))}
+            </Slider>
             <StyledContainer>
-              <Row>
+              <Row className="pt-5">
                 <Col key={store.id}>
                   <div className="d-flex align-items-center">
                     <Link to="/hoteis-e-pousadas" className="pe-3">
@@ -124,7 +122,7 @@ const Comercio: React.FC = () => {
                           ),
                         )}
                     </ListStyle>
-                    <p>{store.descricao_t}</p>
+                    <TextDescription>{store.descricao_t}</TextDescription>
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
@@ -224,14 +222,14 @@ const Comercio: React.FC = () => {
                     </div>
                   </div>
                 </Col>
-                <Col className="col-4">
-                  <StyledH2>Localização</StyledH2>
+                <Col xs={12} lg={4}>
+                  <StyledH2 className="pb-2">Localização</StyledH2>
                   <GoogleMapComponent
                     latitude={Number(store?.addresses[0].lat)}
                     longitude={Number(store?.addresses[0].lng)}
                   />
-                  <StyledH2>Conheça nosso app</StyledH2>
-                  <div className="d-flex pt-4">
+                  <StyledH2 className="pt-5">Conheça nosso app</StyledH2>
+                  <div className="d-flex pt-2">
                     <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
                       <img
                         src={AppleStoreLogo}

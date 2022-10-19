@@ -60,11 +60,11 @@ const TouristicPointsCategory: React.FC = () => {
           <Row className="py-3">
             <Col>
               <div className="d-flex align-items-center">
-                <Link to="/bares-e-restaurantes" className="pe-3">
+                <Link to="/pontos-turisticos" className="pe-3">
                   <BsArrowLeft size={20} color="#333" />
                 </Link>
                 <div className="d-flex flex-column">
-                  <StyledSmallText>Hotéis e Pousadas</StyledSmallText>
+                  <StyledSmallText>Pontos Turísticos</StyledSmallText>
                   <StyledH1>{name?.toUpperCase()}</StyledH1>
                 </div>
               </div>

@@ -1,9 +1,10 @@
-import { memo, useEffect } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Container, Row, Spinner } from 'react-bootstrap'
 
 import { useTranslation } from 'react-i18next'
+import { BsSearch } from 'react-icons/bs'
 import { LinkStyled, MainStyled } from 'style/style'
 
 import { useSpace } from 'context/SpacesContext'
@@ -19,12 +20,14 @@ import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { ListStyle } from './style'
+import { ButtonStyled, InputStyled, ListStyle, SearchDiv } from './style'
 
 const EspacosParaEventos: React.FC = () => {
-  const { spaces, categories, isLoading, error, fetchSpaces } = useSpace()
+  const { spaces, categories, isLoading, error, fetchSpaces, searchSpaces } =
+    useSpace()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     setTitle(t('Espaço para Eventos'))
@@ -34,6 +37,12 @@ const EspacosParaEventos: React.FC = () => {
     fetchSpaces()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleSearch = useCallback(
+    () => searchSpaces(search),
+    [searchSpaces, search],
+  )
+
   return (
     <>
       <Header />
@@ -42,6 +51,19 @@ const EspacosParaEventos: React.FC = () => {
           <Row>
             <Col>
               <TitleH1 title="Espaços para eventos" />
+            </Col>
+            <Col className="d-flex align-items-end justify-content-end pb-3">
+              <SearchDiv className="d-flex  align-items-center px-3">
+                <InputStyled
+                  type="text"
+                  placeholder="Buscar Espaços para Eventos"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <ButtonStyled type="button" onClick={handleSearch}>
+                  <BsSearch />
+                </ButtonStyled>
+              </SearchDiv>
             </Col>
           </Row>
           <Row className="d-flex">

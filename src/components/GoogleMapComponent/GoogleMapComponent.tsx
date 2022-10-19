@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
 
 import GoogleMapReact from 'google-map-react'
-import { FaMapMarker } from 'react-icons/fa'
 
 import Config from 'Config'
+
+import { FaMapMarkerStyled } from './style'
 
 interface IGoogleMarkProps {
   latitude: number
@@ -16,7 +17,7 @@ interface IMapMarkerProps {
 }
 
 const MapMarker: React.FC<IMapMarkerProps> = () => (
-  <FaMapMarker color="red" size={24} />
+  <FaMapMarkerStyled color="red" size={24} />
 )
 
 const GoogleMapComponent: React.FC<IGoogleMarkProps> = ({
@@ -28,7 +29,7 @@ const GoogleMapComponent: React.FC<IGoogleMarkProps> = ({
       lat: latitude,
       lng: longitude,
     },
-    zoom: 11,
+    zoom: 15,
   }
 
   return (

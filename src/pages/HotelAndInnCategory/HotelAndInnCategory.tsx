@@ -28,7 +28,7 @@ import {
   StyledSmallText,
 } from './style'
 
-const HoteisPousadasCategoria: React.FC = () => {
+const HotelAndInnCategory: React.FC = () => {
   const { hotels, isLoading, error, fetchCategoryHotels, searchHotels } =
     useHotels()
   const { t, i18n } = useTranslation()
@@ -117,4 +117,4 @@ const HoteisPousadasCategoria: React.FC = () => {
   )
 }
 
-export default memo(HoteisPousadasCategoria)
+export default memo(HotelAndInnCategory)

@@ -64,7 +64,7 @@ const Home: React.FC = () => {
             </Col>
             <Col>
               <CategoryCard
-                page="Comercio"
+                page="comercios"
                 title="Comércio Local"
                 icon={FaStoreAlt}
                 description="Veja onde fazer as suas compras"

@@ -7,7 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { MainStyled } from 'style/style'
+import { MainStyled, TextDescription } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -75,26 +75,24 @@ const EspacoParaEvento: React.FC = () => {
         )}
         {!isLoading && !error && event && (
           <>
-            <Row className="d-flex row-cols-1 pb-5">
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Slider {...settings}>
-                {event.images.map((imagem) => (
-                  <Col key={imagem.id}>
-                    <Ratio
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                    >
-                      <div />
-                    </Ratio>
-                  </Col>
-                ))}
-              </Slider>
-            </Row>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Slider {...settings}>
+              {event.images.map((imagem) => (
+                <div key={imagem.id}>
+                  <Ratio
+                    aspectRatio="1x1"
+                    style={{
+                      backgroundImage: `url(${imagem.src})`,
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center center',
+                    }}
+                  >
+                    <div />
+                  </Ratio>
+                </div>
+              ))}
+            </Slider>
             <StyledContainer>
               <Row>
                 <Col key={event.id}>
@@ -124,7 +122,7 @@ const EspacoParaEvento: React.FC = () => {
                           ),
                         )}
                     </ListStyle>
-                    <p>{event.descricao_t}</p>
+                    <TextDescription>{event.descricao_t}</TextDescription>
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
@@ -222,7 +220,7 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                 </Col>
-                <Col className="col-4">
+                <Col xs={12} xl={4}>
                   <StyledH2>Localização</StyledH2>
                   <GoogleMapComponent
                     latitude={Number(event?.addresses[0].lat)}

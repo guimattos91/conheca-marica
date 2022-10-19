@@ -7,7 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { MainStyled } from 'style/style'
+import { MainStyled, TextDescription } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -34,10 +34,11 @@ const PontoTuristico: React.FC = () => {
   const { id } = useParams()
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 3,
+    arrows: false,
     responsive: [
       {
         breakpoint: 780,
@@ -75,28 +76,26 @@ const PontoTuristico: React.FC = () => {
         )}
         {!isLoading && !error && point && (
           <>
-            <Row className="d-flex row-cols-1 pb-5">
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Slider {...settings}>
-                {point.images.map((imagem) => (
-                  <Col key={imagem.id}>
-                    <Ratio
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                    >
-                      <div />
-                    </Ratio>
-                  </Col>
-                ))}
-              </Slider>
-            </Row>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Slider {...settings} className="w-98">
+              {point.images.map((imagem) => (
+                <div key={imagem.id}>
+                  <Ratio
+                    aspectRatio="1x1"
+                    style={{
+                      backgroundImage: `url(${imagem.src})`,
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center center',
+                    }}
+                  >
+                    <div />
+                  </Ratio>
+                </div>
+              ))}
+            </Slider>
             <StyledContainer>
-              <Row>
+              <Row className="pt-5">
                 <Col key={point.id}>
                   <div className="d-flex align-items-center">
                     <Link to="/pontos-turisticos" className="pe-3">
@@ -124,7 +123,7 @@ const PontoTuristico: React.FC = () => {
                           ),
                         )}
                     </ListStyle>
-                    <p>{point.descricao_t}</p>
+                    <TextDescription>{point.descricao_t}</TextDescription>
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
@@ -255,8 +254,8 @@ const PontoTuristico: React.FC = () => {
                     </div>
                   )}
                 </Col>
-                <Col className="col-4">
-                  <StyledH2>Localização</StyledH2>
+                <Col xs={12} lg={4}>
+                  <StyledH2 className="pb-2">Localização</StyledH2>
                   <GoogleMapComponent
                     latitude={Number(point?.addresses[0].lat)}
                     longitude={Number(point?.addresses[0].lng)}

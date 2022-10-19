@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const BackDiv = styled.div`
@@ -8,7 +9,7 @@ export const BackDiv = styled.div`
 export const StyledH1 = styled.h1`
   color: #333333;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 24px;
   margin: 0;
 `
 export const StyledSmallText = styled.p`
@@ -38,7 +39,14 @@ export const ListStyle = styled.ul`
     height: 30px;
   }
 `
+export const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: white;
 
+  :hover {
+    color: white;
+  }
+`
 export const InputStyled = styled.input`
   background-color: white;
   border: none;
@@ -52,7 +60,6 @@ export const SearchDiv = styled.div`
   padding: 5px 15px;
   border-image-repeat: no-repeat;
 `
-
 export const ButtonStyled = styled.button`
   background: none;
   color: #333;

@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Container, Row, Spinner } from 'react-bootstrap'
@@ -6,6 +6,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
+import { BsSearch } from 'react-icons/bs'
 import { LinkStyled, MainStyled } from 'style/style'
 
 import { useEvents } from 'context/EventsContext'
@@ -21,12 +22,14 @@ import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { ListStyle } from './style'
+import { ButtonStyled, InputStyled, ListStyle, SearchDiv } from './style'
 
 const Comercio: React.FC = () => {
-  const { events, categories, isLoading, error, fetchEvents } = useEvents()
+  const { events, categories, isLoading, error, fetchEvents, searchEvents } =
+    useEvents()
   const { t, i18n } = useTranslation()
   const setTitle = useTitle()
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     setTitle(t('Eventos'))
@@ -36,6 +39,11 @@ const Comercio: React.FC = () => {
     fetchEvents()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  const handleSearch = useCallback(
+    () => searchEvents(search),
+    [searchEvents, search],
+  )
+
   return (
     <>
       <Header />
@@ -44,6 +52,19 @@ const Comercio: React.FC = () => {
           <Row>
             <Col>
               <TitleH1 title="Eventos" />
+            </Col>
+            <Col className="d-flex align-items-end justify-content-end pb-3">
+              <SearchDiv className="d-flex  align-items-center px-3">
+                <InputStyled
+                  type="text"
+                  placeholder="Buscar Espaços para Eventos"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <ButtonStyled type="button" onClick={handleSearch}>
+                  <BsSearch />
+                </ButtonStyled>
+              </SearchDiv>
             </Col>
           </Row>
           <Row className="d-flex">

@@ -28,7 +28,7 @@ import {
   StyledSmallText,
 } from './style'
 
-const HoteisPousadasCategoria: React.FC = () => {
+const RestaurantCategory: React.FC = () => {
   const {
     restaurants,
     isLoading,
@@ -69,7 +69,7 @@ const HoteisPousadasCategoria: React.FC = () => {
                   <BsArrowLeft size={20} color="#333" />
                 </Link>
                 <div className="d-flex flex-column">
-                  <StyledSmallText>Hotéis e Pousadas</StyledSmallText>
+                  <StyledSmallText>Bares e Restaurantes</StyledSmallText>
                   <StyledH1>{name?.toUpperCase()}</StyledH1>
                 </div>
               </div>
@@ -122,4 +122,4 @@ const HoteisPousadasCategoria: React.FC = () => {
   )
 }
 
-export default memo(HoteisPousadasCategoria)
+export default memo(RestaurantCategory)

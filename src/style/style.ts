@@ -12,3 +12,6 @@ export const LinkStyled = styled(Link)`
     color: white;
   }
 `
+export const TextDescription = styled.p`
+  margin-top: 1rem;
+`
