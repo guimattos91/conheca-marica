@@ -4,14 +4,30 @@ export const InputStyled = styled.input`
   background-color: white;
   border: none;
   outline: none;
+  flex: flex;
+  flex-grow: 1;
 `
 export const SearchDiv = styled.div`
   border: 1px solid #2d6d7f;
   color: #6ebd00;
   border-radius: 2rem;
   background-color: white;
-  padding: 5px 15px;
+  padding: 5px 5px;
+  width: 100%;
   border-image-repeat: no-repeat;
+`
+export const MapButton = styled.div`
+  color: white;
+  border-radius: 2rem;
+  background-color: #2d677f;
+  padding: 7px 25px;
+  border-image-repeat: no-repeat;
+
+  p {
+    font-size: 14;
+    padding: 0;
+    margin: 0;
+  }
 `
 export const TextStyled = styled.p`
   margin: 0px 10px 10px 0px;
@@ -49,5 +65,9 @@ export const ListStyle = styled.ul`
     flex-wrap: nowrap;
     align-items: center;
     height: 30px;
+
+    :hover {
+      background-color: #81de00;
+    }
   }
 `

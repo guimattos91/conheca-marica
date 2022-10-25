@@ -7,6 +7,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap'
 
 import { useTranslation } from 'react-i18next'
 import { BsSearch } from 'react-icons/bs'
+import { FaMapMarkedAlt } from 'react-icons/fa'
 import { LinkStyled, MainStyled } from 'style/style'
 
 import { useStores } from 'context/StoresContext'
@@ -22,7 +23,13 @@ import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { ButtonStyled, InputStyled, ListStyle, SearchDiv } from './style'
+import {
+  ButtonStyled,
+  InputStyled,
+  ListStyle,
+  MapButton,
+  SearchDiv,
+} from './style'
 
 const Comercios: React.FC = () => {
   const { stores, categories, isLoading, error, fetchStores, searchStores } =
@@ -50,11 +57,17 @@ const Comercios: React.FC = () => {
       <Header />
       <MainStyled>
         <Container>
-          <Row>
+          <Row className="d-flex align-items-center py-2">
             <Col>
               <TitleH1 title="Comércio" />
             </Col>
-            <Col className="d-flex align-items-end justify-content-end pb-3">
+            <Col className="d-flex align-items-end justify-content-end">
+              <LinkStyled to="mapa">
+                <MapButton className="d-flex  align-items-center px-3 me-2">
+                  <FaMapMarkedAlt color="white" className="me-2" />
+                  <p>Mapa</p>
+                </MapButton>
+              </LinkStyled>
               <SearchDiv className="d-flex  align-items-center px-3">
                 <InputStyled
                   type="text"

@@ -62,3 +62,16 @@ export const ButtonStyled = styled.button`
   cursor: pointer;
   outline: inherit;
 `
+export const MapButton = styled.div`
+  color: white;
+  border-radius: 2rem;
+  background-color: #2d677f;
+  padding: 7px 25px;
+  border-image-repeat: no-repeat;
+
+  p {
+    font-size: 14;
+    padding: 0;
+    margin: 0;
+  }
+`
