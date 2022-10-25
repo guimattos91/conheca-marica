@@ -5,8 +5,10 @@ import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom'
 import About from 'pages/About'
 import CityEvent from 'pages/CityEvent'
 import CityEvents from 'pages/CityEvents'
+import CityEventsCategory from 'pages/CityEventsCategory'
 import EventSpace from 'pages/EventSpace'
 import EventSpaces from 'pages/EventSpaces'
+import EventSpacesCategory from 'pages/EventsSpacesCategory'
 import Home from 'pages/Home'
 import HotelAndInn from 'pages/HotelAndInn'
 import HotelAndInnCategory from 'pages/HotelAndInnCategory'
@@ -56,8 +58,16 @@ const Routes: React.FC = () => {
           path="/espacos-para-eventos/:id/:name"
           element={<EventSpace />}
         />
+        <Route
+          path="/espacos-para-eventos/categorias/:id/:name"
+          element={<EventSpacesCategory />}
+        />
         <Route path="/eventos" element={<CityEvents />} />
         <Route path="/eventos/:id/:name" element={<CityEvent />} />
+        <Route
+          path="/eventos/categorias/:id/:name"
+          element={<CityEventsCategory />}
+        />
         <Route path="/comercios" element={<Stores />} />
         <Route path="/comercios/:id/:name" element={<Store />} />
         <Route

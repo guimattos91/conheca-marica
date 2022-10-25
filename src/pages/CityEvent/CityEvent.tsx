@@ -7,7 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { MainStyled, TextDescription } from 'style/style'
+import { LinkStyled, MainStyled, TextDescription } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -18,6 +18,8 @@ import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
+
+import { strToSlug } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
@@ -101,7 +103,7 @@ const EspacoParaEvento: React.FC = () => {
                       <BsArrowLeft size={20} color="#333" />
                     </Link>
                     <div className="d-flex flex-column">
-                      <StyledSmallText>Espaços de Eventos</StyledSmallText>
+                      <StyledSmallText>Eventos</StyledSmallText>
                       <StyledH1>{event.nome}</StyledH1>
                     </div>
                   </div>
@@ -115,9 +117,15 @@ const EspacoParaEvento: React.FC = () => {
                               key={category.id}
                               className="d-flex align-items-center"
                             >
-                              <p className="d-inline-flex w-100 p-0 m-0">
-                                {category.label}
-                              </p>
+                              <LinkStyled
+                                to={`/eventos/categorias/${
+                                  category.id
+                                }/${strToSlug(category.label)}`}
+                              >
+                                <p className="d-inline-flex w-100 p-0 m-0">
+                                  {category.label}
+                                </p>
+                              </LinkStyled>
                             </li>
                           ),
                         )}

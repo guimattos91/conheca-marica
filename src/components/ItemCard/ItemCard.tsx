@@ -16,10 +16,16 @@ import {
 
 interface ICollectionTypeProps {
   collection: CollectionType
+  linkcategory: string
 }
-const CategoryCard: React.FC<ICollectionTypeProps> = ({ collection }) => (
+const CategoryCard: React.FC<ICollectionTypeProps> = ({
+  collection,
+  linkcategory,
+}) => (
   <BackDiv className="d-flex flex-column w-100">
-    <LinkStyled to={`${collection.id}/${strToSlug(collection.nome)}`}>
+    <LinkStyled
+      to={`/${linkcategory}/${collection.id}/${strToSlug(collection.nome)}`}
+    >
       <Ratio
         aspectRatio="16x9"
         style={{
@@ -33,14 +39,18 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({ collection }) => (
       </Ratio>
     </LinkStyled>
     <div className="p-3">
-      <LinkStyled to={`${collection.id}/${strToSlug(collection.nome)}`}>
+      <LinkStyled
+        to={`/${linkcategory}/${collection.id}/${strToSlug(collection.nome)}`}
+      >
         <StyledTitle className="pb-2">{collection.nome}</StyledTitle>
       </LinkStyled>
       <ListStyle className="d-flex">
         {collection?.categorias.slice(0, 4).map((categoria) => (
           <li key={categoria.id}>
             <LinkStyled
-              to={`categorias/${categoria.id}/${strToSlug(categoria.label)}`}
+              to={`/${linkcategory}/categorias/${categoria.id}/${strToSlug(
+                categoria.label,
+              )}`}
             >
               {categoria.label}
             </LinkStyled>

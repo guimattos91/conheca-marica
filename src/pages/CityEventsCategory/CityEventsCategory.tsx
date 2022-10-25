@@ -102,7 +102,7 @@ const CityEventsCategory: React.FC = () => {
                   categorias: CategoryType[]
                 }) => (
                   <Col key={collection.id} className="d-flex">
-                    <ItemCard collection={collection} />
+                    <ItemCard collection={collection} linkcategory="eventos" />
                   </Col>
                 ),
               )}

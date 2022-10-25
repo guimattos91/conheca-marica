@@ -9,7 +9,7 @@ import { GiKnifeFork } from 'react-icons/gi'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { MainStyled } from 'style/style'
+import { LinkStyled, MainStyled } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -20,6 +20,8 @@ import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
+
+import { strToSlug } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
@@ -117,9 +119,15 @@ const HotelePousada: React.FC = () => {
                               key={category.id}
                               className="d-flex align-items-center"
                             >
-                              <p className="d-inline-flex w-100 p-0 m-0">
-                                {category.label}
-                              </p>
+                              <LinkStyled
+                                to={`/hoteis-e-pousadas/categorias/${
+                                  category.id
+                                }/${strToSlug(category.label)}`}
+                              >
+                                <p className="d-inline-flex w-100 p-0 m-0">
+                                  {category.label}
+                                </p>
+                              </LinkStyled>
                             </li>
                           ),
                         )}
