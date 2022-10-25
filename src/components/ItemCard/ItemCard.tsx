@@ -38,7 +38,13 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({ collection }) => (
       </LinkStyled>
       <ListStyle className="d-flex">
         {collection?.categorias.slice(0, 4).map((categoria) => (
-          <li key={categoria.id}>{categoria.label}</li>
+          <li key={categoria.id}>
+            <LinkStyled
+              to={`categorias/${categoria.id}/${strToSlug(categoria.label)}`}
+            >
+              {categoria.label}
+            </LinkStyled>
+          </li>
         ))}
       </ListStyle>
       <div>

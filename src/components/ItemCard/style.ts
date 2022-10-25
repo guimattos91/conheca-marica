@@ -51,4 +51,9 @@ export const ButtonDiv = styled.div`
 `
 export const LinkStyled = styled(Link)`
   text-decoration: none;
+  color: #666666;
+
+  &:hover {
+    color: #666666;
+  }
 `
