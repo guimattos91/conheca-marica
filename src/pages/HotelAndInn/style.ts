@@ -44,3 +44,10 @@ export const ListStyle = styled.ul`
     height: 30px;
   }
 `
+export const DivIcon = styled.div`
+  i {
+    color: #6ebd00;
+    font-size: 24px;
+    padding-right: 0.5rem;
+  }
+`

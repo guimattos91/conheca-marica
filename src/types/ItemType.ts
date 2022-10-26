@@ -15,28 +15,20 @@ export type ImagesType = {
   ordem: number
   src: string
 }
-export type HourType = {
-  horario_funcionamento: [
-    {
-      label: string
-      is24: boolean
-      horario: {
-        abre: string
-        fecha: string
-      }
-    },
-  ]
+export type WorkingHourType = {
+  label: string
+  is24: boolean
+  horario: {
+    abre: string
+    fecha: string
+  }
 }
 export type PhoneType = {
-  phones: [
-    {
-      id: number
-      nome: string
-      whatsapp: boolean
-      ordem: number
-      number: string
-    },
-  ]
+  id: number
+  nome: string
+  whatsapp: boolean
+  ordem: number
+  number: string
 }
 export type CategoryType = {
   id: number
@@ -77,6 +69,8 @@ export type MealType = {
 export type ItemType = {
   id: number | string
   nome: string
+  email: string
+  site: string
   capa: string | undefined
   descricao_t: string | null
   quartos: number
@@ -96,4 +90,6 @@ export type ItemType = {
   redes: NetworkType[]
   formas_pagamento: PaymentType[]
   restricoes: RestrictionType[]
+  phones: PhoneType[]
+  horario_funcionamento: WorkingHourType[]
 }

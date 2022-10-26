@@ -3,9 +3,11 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
 
-import { BsArrowLeft, BsKeyFill } from 'react-icons/bs'
+import { AiOutlineGlobal } from 'react-icons/ai'
+import { BsArrowLeft, BsKeyFill, BsTelephone, BsWhatsapp } from 'react-icons/bs'
 import { FaBed, FaMugHot } from 'react-icons/fa'
 import { GiKnifeFork } from 'react-icons/gi'
+import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
@@ -26,6 +28,7 @@ import { strToSlug } from 'helpers'
 import useTitle from 'hooks/useTitle'
 
 import {
+  DivIcon,
   ListStyle,
   StyledContainer,
   StyledH1,
@@ -51,7 +54,7 @@ const HotelePousada: React.FC = () => {
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 760,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -79,24 +82,28 @@ const HotelePousada: React.FC = () => {
         )}
         {!isLoading && !error && hotel && (
           <>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settings}>
-              {hotel.images.map((imagem) => (
-                <div key={imagem.id}>
-                  <Ratio
-                    aspectRatio="1x1"
-                    style={{
-                      backgroundImage: `url(${imagem.src})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center center',
-                    }}
-                  >
-                    <div />
-                  </Ratio>
-                </div>
-              ))}
-            </Slider>
+            <Row>
+              <Col>
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Slider {...settings}>
+                  {hotel.images.map((imagem) => (
+                    <div key={imagem.id}>
+                      <Ratio
+                        aspectRatio="1x1"
+                        style={{
+                          backgroundImage: `url(${imagem.src})`,
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center center',
+                        }}
+                      >
+                        <div />
+                      </Ratio>
+                    </div>
+                  ))}
+                </Slider>
+              </Col>
+            </Row>
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={hotel.id}>
@@ -136,15 +143,90 @@ const HotelePousada: React.FC = () => {
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
-                    {!isLoading &&
-                      !error &&
-                      hotel.addresses.map(
-                        (address: { id: number; label: string }) => (
-                          <p key={address.id} className="d-inline-flex w-100">
+                    {hotel.addresses.map(
+                      (address: { id: number; label: string }) => (
+                        <div className="d-flex align-items-center pb-4">
+                          <MdOutlineLocationOn
+                            color="#6ebd00"
+                            size={36}
+                            className="pe-2"
+                          />
+                          <p key={address.id} className="m-0">
                             {address.label}
                           </p>
-                        ),
-                      )}
+                        </div>
+                      ),
+                    )}
+                    {hotel.phones.map(
+                      (phone: {
+                        id: number
+                        number: string
+                        nome: string
+                        whatsapp: boolean
+                      }) => (
+                        <div
+                          className="d-flex align-items-center pb-3"
+                          key={phone.id}
+                        >
+                          {phone.whatsapp && (
+                            <BsWhatsapp
+                              color="#6ebd00"
+                              size={30}
+                              className="pe-2"
+                            />
+                          )}
+                          {!phone.whatsapp && (
+                            <BsTelephone
+                              color="#6ebd00"
+                              size={30}
+                              className="pe-2"
+                            />
+                          )}
+                          <div className="d-flex flex-column">
+                            <StyledSmallText className="m-0 ">
+                              {phone.nome}
+                            </StyledSmallText>
+                            <p className="m-0">{phone.number}</p>
+                          </div>
+                        </div>
+                      ),
+                    )}
+                    {hotel.email && (
+                      <div className="d-flex align-items-center pb-3">
+                        <MdOutlineEmail
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <a href={`mailto:${hotel.email}`}>{hotel.email}</a>
+                      </div>
+                    )}
+                    {hotel.site && (
+                      <div className="d-flex align-items-center pb-3">
+                        <AiOutlineGlobal
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <a href={hotel.site}>{hotel.site}</a>
+                      </div>
+                    )}
+                    {hotel.redes.map(
+                      (network: {
+                        icone: string
+                        nome: string
+                        user: string
+                        url: string
+                      }) => (
+                        <DivIcon
+                          key={network.nome}
+                          className="d-flex align-items-center pb-3"
+                        >
+                          <i className={network.icone} />
+                          <a href={network.url}>{network.user}</a>
+                        </DivIcon>
+                      ),
+                    )}
                   </div>
                   <div>
                     <TitleH2Intern title="Comodidades" />
@@ -239,88 +321,82 @@ const HotelePousada: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  <div>
+                  {hotel?.estruturas?.length >= 1 && (
                     <TitleH2Intern title="Estruturas" />
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        hotel.estruturas.map(
-                          (structure: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={structure.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                color="#6ebd00"
-                                height="auto"
-                                title={structure.label}
-                              />
-                              <p
-                                key={structure.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {structure.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                    </div>
-                  </div>
-                  <div>
-                    {hotel?.restricoes?.length >= 1 && (
-                      <TitleH2Intern title="Restrições" />
+                  )}
+                  <div className="d-flex flex-wrap">
+                    {hotel.estruturas.map(
+                      (structure: { icone: string; label: string }) => (
+                        <div className="d-flex align-items-center pe-4 py-4">
+                          <SVG
+                            src={structure.icone}
+                            width={30}
+                            fill="#6ebd00"
+                            color="#6ebd00"
+                            height="auto"
+                            title={structure.label}
+                          />
+                          <p
+                            key={structure.label}
+                            className="d-inline-flex ps-2 m-0"
+                          >
+                            {structure.label}
+                          </p>
+                        </div>
+                      ),
                     )}
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        hotel.restricoes.map(
-                          (restriction: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={restriction.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                height="auto"
-                                title={restriction.label}
-                              />
-                              <p
-                                key={restriction.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {restriction.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                    </div>
                   </div>
-                  <div>
-                    {hotel?.formas_pagamento?.length >= 1 && (
-                      <TitleH2Intern title="Formas de Pagamento" />
-                    )}
-                    <div className="d-flex flex-wrap">
-                      {!isLoading &&
-                        !error &&
-                        hotel.formas_pagamento.map(
-                          (payment: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={payment.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                height="auto"
-                                title={payment.label}
-                              />
-                              <p
-                                key={payment.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {payment.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                    </div>
+                  {hotel?.restricoes?.length >= 1 && (
+                    <TitleH2Intern title="Restrições" />
+                  )}
+                  <div className="d-flex flex-wrap">
+                    {!isLoading &&
+                      !error &&
+                      hotel.restricoes.map(
+                        (restriction: { icone: string; label: string }) => (
+                          <div className="d-flex align-items-center pe-4 py-4">
+                            <SVG
+                              src={restriction.icone}
+                              width={30}
+                              fill="#6ebd00"
+                              height="auto"
+                              title={restriction.label}
+                            />
+                            <p
+                              key={restriction.label}
+                              className="d-inline-flex ps-2 m-0"
+                            >
+                              {restriction.label}
+                            </p>
+                          </div>
+                        ),
+                      )}
+                  </div>
+                  {hotel?.formas_pagamento?.length >= 1 && (
+                    <TitleH2Intern title="Formas de Pagamento" />
+                  )}
+                  <div className="d-flex flex-wrap">
+                    {!isLoading &&
+                      !error &&
+                      hotel.formas_pagamento.map(
+                        (payment: { icone: string; label: string }) => (
+                          <div className="d-flex align-items-center pe-4 py-4">
+                            <SVG
+                              src={payment.icone}
+                              width={30}
+                              fill="#6ebd00"
+                              height="auto"
+                              title={payment.label}
+                            />
+                            <p
+                              key={payment.label}
+                              className="d-inline-flex ps-2 m-0"
+                            >
+                              {payment.label}
+                            </p>
+                          </div>
+                        ),
+                      )}
                   </div>
                 </Col>
                 <Col xs={12} lg={4}>

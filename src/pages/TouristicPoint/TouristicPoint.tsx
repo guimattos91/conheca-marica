@@ -156,7 +156,7 @@ const PontoTuristico: React.FC = () => {
                     )}
                   </div>
                   {point.viajantes && (
-                    <div>
+                    <>
                       <TitleH2Intern title="Tipos de Viajantes" />
                       <div className="d-flex flex-wrap">
                         {!isLoading &&
@@ -174,7 +174,7 @@ const PontoTuristico: React.FC = () => {
                             ),
                           )}
                       </div>
-                    </div>
+                    </>
                   )}
                   {point.estruturas && (
                     <>
