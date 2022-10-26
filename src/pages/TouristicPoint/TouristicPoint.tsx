@@ -3,7 +3,15 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
 
-import { BsArrowLeft } from 'react-icons/bs'
+import { AiOutlineGlobal } from 'react-icons/ai'
+import {
+  BsArrowLeft,
+  BsCheckCircle,
+  BsClock,
+  BsTelephone,
+  BsWhatsapp,
+} from 'react-icons/bs'
+import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
@@ -24,7 +32,9 @@ import { strToSlug } from 'helpers'
 import useTitle from 'hooks/useTitle'
 
 import {
+  DivIcon,
   ListStyle,
+  RatioResponsive,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -58,6 +68,30 @@ const PontoTuristico: React.FC = () => {
       },
     ],
   }
+  const settingsSmall = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 0,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 0,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${point?.nome}`))
@@ -79,23 +113,45 @@ const PontoTuristico: React.FC = () => {
         {!isLoading && !error && point && (
           <>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settings} className="w-98">
-              {point.images.map((imagem) => (
-                <div key={imagem.id}>
-                  <Ratio
-                    aspectRatio="1x1"
-                    style={{
-                      backgroundImage: `url(${imagem.src})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center center',
-                    }}
-                  >
-                    <div />
-                  </Ratio>
-                </div>
-              ))}
+            <Slider {...settings}>
+              {point.images.length >= 4 &&
+                point.images.map((imagem) => (
+                  <div key={imagem.id}>
+                    <Ratio
+                      aspectRatio="1x1"
+                      style={{
+                        backgroundImage: `url(${imagem.src})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center center',
+                      }}
+                    >
+                      <div />
+                    </Ratio>
+                  </div>
+                ))}
             </Slider>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Slider {...settingsSmall}>
+              <div className="d-flex justify-content-center">
+                {point.images.length < 4 &&
+                  point.images.map((imagem) => (
+                    <RatioResponsive
+                      aspectRatio="1x1"
+                      style={{
+                        backgroundImage: `url(${imagem.src})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center center',
+                      }}
+                      key={imagem.id}
+                    >
+                      <div />
+                    </RatioResponsive>
+                  ))}
+              </div>
+            </Slider>
+
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={point.id}>
@@ -135,15 +191,120 @@ const PontoTuristico: React.FC = () => {
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
-                    {!isLoading &&
-                      !error &&
-                      point.addresses.map(
-                        (address: { id: number; label: string }) => (
-                          <p key={address.id} className="d-inline-flex w-100">
-                            {address.label}
-                          </p>
-                        ),
-                      )}
+                    {point.addresses.map(
+                      (address: { id: number; label: string }) => (
+                        <div
+                          className="d-flex align-items-center pb-4"
+                          key={address.id}
+                        >
+                          <MdOutlineLocationOn
+                            color="#6ebd00"
+                            size={36}
+                            className="pe-2"
+                          />
+                          <p className="m-0">{address.label}</p>
+                        </div>
+                      ),
+                    )}
+                    {point.phones.map(
+                      (phone: {
+                        id: number
+                        number: string
+                        nome: string
+                        whatsapp: boolean
+                      }) => (
+                        <div
+                          className="d-flex align-items-center pb-3"
+                          key={phone.id}
+                        >
+                          {phone.whatsapp && (
+                            <BsWhatsapp
+                              color="#6ebd00"
+                              size={30}
+                              className="pe-2"
+                            />
+                          )}
+                          {!phone.whatsapp && (
+                            <BsTelephone
+                              color="#6ebd00"
+                              size={30}
+                              className="pe-2"
+                            />
+                          )}
+                          <div className="d-flex flex-column">
+                            <StyledSmallText className="m-0 ">
+                              {phone.nome}
+                            </StyledSmallText>
+                            <p className="m-0">{phone.number}</p>
+                          </div>
+                        </div>
+                      ),
+                    )}
+                    {point.email && (
+                      <div className="d-flex align-items-center pb-3">
+                        <MdOutlineEmail
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <a href={`mailto:${point.email}`}>{point.email}</a>
+                      </div>
+                    )}
+                    {point.site && (
+                      <div className="d-flex align-items-center pb-3">
+                        <AiOutlineGlobal
+                          color="#6ebd00"
+                          size={30}
+                          className="pe-2"
+                        />
+                        <a href={point.site}>{point.site}</a>
+                      </div>
+                    )}
+                    {point.redes.map(
+                      (network: {
+                        icone: string
+                        nome: string
+                        user: string
+                        url: string
+                      }) => (
+                        <DivIcon
+                          key={network.nome}
+                          className="d-flex align-items-center pb-3"
+                        >
+                          <i className={network.icone} />
+                          <a href={network.url}>{network.user}</a>
+                        </DivIcon>
+                      ),
+                    )}
+                    {point?.horario_funcionamento?.length >= 1 && (
+                      <div className="d-flex align-items-start">
+                        <BsClock color="#6ebd00" size={20} className="me-4" />
+                        <table>
+                          <tbody>
+                            {point.horario_funcionamento.map(
+                              (workinghours: {
+                                label: string
+                                horario: { abre: string; fecha: string }
+                                is24: boolean
+                              }) => (
+                                <tr>
+                                  <td
+                                    className="fw-bold pe-5"
+                                    key={workinghours.label}
+                                  >
+                                    {workinghours.label}
+                                  </td>
+                                  <td>
+                                    {workinghours.horario.abre} às
+                                    {workinghours.horario.fecha}
+                                  </td>
+                                </tr>
+                              ),
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
                   </div>
                   <div>
                     {point.dicas_t && (
@@ -155,7 +316,7 @@ const PontoTuristico: React.FC = () => {
                       </>
                     )}
                   </div>
-                  {point.viajantes && (
+                  {point?.viajantes?.length >= 1 && (
                     <>
                       <TitleH2Intern title="Tipos de Viajantes" />
                       <div className="d-flex flex-wrap">
@@ -163,10 +324,15 @@ const PontoTuristico: React.FC = () => {
                           !error &&
                           point.viajantes.map(
                             (traveller: { label: string }) => (
-                              <div className="d-flex align-items-center pe-4 py-4">
+                              <div className="d-flex align-items-center pe-4 pb-4">
+                                <BsCheckCircle
+                                  color="#6ebd00"
+                                  size={30}
+                                  className="pe-2"
+                                />
                                 <p
                                   key={traveller.label}
-                                  className="d-inline-flex ps-2 m-0"
+                                  className="d-inline-flex m-0"
                                 >
                                   {traveller.label}
                                 </p>
@@ -176,7 +342,7 @@ const PontoTuristico: React.FC = () => {
                       </div>
                     </>
                   )}
-                  {point.estruturas && (
+                  {point?.estruturas?.length >= 1 && (
                     <>
                       <TitleH2Intern title="Estruturas" />
                       <div className="d-flex flex-wrap">
@@ -184,7 +350,7 @@ const PontoTuristico: React.FC = () => {
                           !error &&
                           point.estruturas.map(
                             (structure: { icone: string; label: string }) => (
-                              <div className="d-flex align-items-center pe-4 py-4">
+                              <div className="d-flex align-items-center pe-4 pb-4">
                                 <SVG
                                   src={structure.icone}
                                   width={30}
@@ -213,7 +379,7 @@ const PontoTuristico: React.FC = () => {
                           !error &&
                           point.restricoes.map(
                             (restriction: { icone: string; label: string }) => (
-                              <div className="d-flex align-items-center pe-4 py-4">
+                              <div className="d-flex align-items-center pe-4 pb-4">
                                 <SVG
                                   src={restriction.icone}
                                   width={30}

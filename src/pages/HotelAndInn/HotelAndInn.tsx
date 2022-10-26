@@ -30,6 +30,7 @@ import useTitle from 'hooks/useTitle'
 import {
   DivIcon,
   ListStyle,
+  RatioResponsive,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -62,7 +63,30 @@ const HotelePousada: React.FC = () => {
       },
     ],
   }
-
+  const settingsSmall = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 0,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 0,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
   const setTitle = useTitle()
   useEffect(() => setTitle(`${hotel?.nome}`))
 
@@ -86,9 +110,28 @@ const HotelePousada: React.FC = () => {
               <Col>
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Slider {...settings}>
-                  {hotel.images.map((imagem) => (
-                    <div key={imagem.id}>
-                      <Ratio
+                  {hotel.images.length >= 4 &&
+                    hotel.images.map((imagem) => (
+                      <div key={imagem.id}>
+                        <Ratio
+                          aspectRatio="1x1"
+                          style={{
+                            backgroundImage: `url(${imagem.src})`,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center center',
+                          }}
+                        >
+                          <div />
+                        </Ratio>
+                      </div>
+                    ))}
+                </Slider>
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                <Slider {...settingsSmall}>
+                  {hotel.images.length < 4 &&
+                    hotel.images.map((imagem) => (
+                      <RatioResponsive
                         aspectRatio="1x1"
                         style={{
                           backgroundImage: `url(${imagem.src})`,
@@ -96,11 +139,11 @@ const HotelePousada: React.FC = () => {
                           backgroundRepeat: 'no-repeat',
                           backgroundPosition: 'center center',
                         }}
+                        key={imagem.id}
                       >
                         <div />
-                      </Ratio>
-                    </div>
-                  ))}
+                      </RatioResponsive>
+                    ))}
                 </Slider>
               </Col>
             </Row>
@@ -145,15 +188,16 @@ const HotelePousada: React.FC = () => {
                     <TitleH2Intern title="Sobre" />
                     {hotel.addresses.map(
                       (address: { id: number; label: string }) => (
-                        <div className="d-flex align-items-center pb-4">
+                        <div
+                          className="d-flex align-items-center pb-4"
+                          key={address.id}
+                        >
                           <MdOutlineLocationOn
                             color="#6ebd00"
                             size={36}
                             className="pe-2"
                           />
-                          <p key={address.id} className="m-0">
-                            {address.label}
-                          </p>
+                          <p className="m-0">{address.label}</p>
                         </div>
                       ),
                     )}
@@ -254,7 +298,9 @@ const HotelePousada: React.FC = () => {
                       <div className="d-flex align-items-center">
                         <FaMugHot color="#6ebd00" size={30} className="pe-2" />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Café da manhã</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Café da manhã
+                          </StyledSmallText>
                           <p className="p-0 m-0">Apenas hóspedes</p>
                         </div>
                       </div>
@@ -263,7 +309,9 @@ const HotelePousada: React.FC = () => {
                       <div className="d-flex align-items-center">
                         <FaMugHot color="#6ebd00" size={30} className="pe-2" />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Café da manhã</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Café da manhã
+                          </StyledSmallText>
                           <p className="p-0 m-0">Aceita não-hóspedes</p>
                         </div>
                       </div>
@@ -276,7 +324,9 @@ const HotelePousada: React.FC = () => {
                           className="pe-2"
                         />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Almoço</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Almoço
+                          </StyledSmallText>
                           <p className="p-0 m-0">Apenas hóspedes</p>
                         </div>
                       </div>
@@ -289,7 +339,9 @@ const HotelePousada: React.FC = () => {
                           className="pe-2"
                         />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Almoço</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Almoço
+                          </StyledSmallText>
                           <p className="p-0 m-0">Aceita não-hóspedes</p>
                         </div>
                       </div>
@@ -302,7 +354,9 @@ const HotelePousada: React.FC = () => {
                           className="pe-2"
                         />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Jantar</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Jantar
+                          </StyledSmallText>
                           <p className="p-0 m-0">Apenas hóspedes</p>
                         </div>
                       </div>
@@ -315,7 +369,9 @@ const HotelePousada: React.FC = () => {
                           className="pe-2"
                         />
                         <div className="d-flex flex-column pt-3">
-                          <p className="p-0 m-0">Jantar</p>
+                          <StyledSmallText className="p-0 m-0">
+                            Jantar
+                          </StyledSmallText>
                           <p className="p-0 m-0">Aceita não-hóspedes</p>
                         </div>
                       </div>
@@ -349,28 +405,26 @@ const HotelePousada: React.FC = () => {
                   {hotel?.restricoes?.length >= 1 && (
                     <TitleH2Intern title="Restrições" />
                   )}
-                  <div className="d-flex flex-wrap">
-                    {!isLoading &&
-                      !error &&
-                      hotel.restricoes.map(
-                        (restriction: { icone: string; label: string }) => (
-                          <div className="d-flex align-items-center pe-4 py-4">
-                            <SVG
-                              src={restriction.icone}
-                              width={30}
-                              fill="#6ebd00"
-                              height="auto"
-                              title={restriction.label}
-                            />
-                            <p
-                              key={restriction.label}
-                              className="d-inline-flex ps-2 m-0"
-                            >
-                              {restriction.label}
-                            </p>
-                          </div>
-                        ),
-                      )}
+                  <div className="d-flex flex-wrap justify-content-between">
+                    {hotel.restricoes.map(
+                      (restriction: { icone: string; label: string }) => (
+                        <div className="d-flex align-items-center pe-4 py-4">
+                          <SVG
+                            src={restriction.icone}
+                            width={30}
+                            fill="#6ebd00"
+                            height="auto"
+                            title={restriction.label}
+                          />
+                          <p
+                            key={restriction.label}
+                            className="d-inline-flex ps-2 m-0"
+                          >
+                            {restriction.label}
+                          </p>
+                        </div>
+                      ),
+                    )}
                   </div>
                   {hotel?.formas_pagamento?.length >= 1 && (
                     <TitleH2Intern title="Formas de Pagamento" />
@@ -383,7 +437,7 @@ const HotelePousada: React.FC = () => {
                           <div className="d-flex align-items-center pe-4 py-4">
                             <SVG
                               src={payment.icone}
-                              width={30}
+                              width={20}
                               fill="#6ebd00"
                               height="auto"
                               title={payment.label}

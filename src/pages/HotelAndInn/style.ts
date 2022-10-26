@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap'
+import { Container, Ratio } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const BackDiv = styled.div`
@@ -49,5 +49,10 @@ export const DivIcon = styled.div`
     color: #6ebd00;
     font-size: 24px;
     padding-right: 0.5rem;
+  }
+`
+export const RatioResponsive = styled(Ratio)`
+  @media only screen and (min-width: 768px) {
+    width: 50%;
   }
 `
