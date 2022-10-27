@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap'
+import { Container, Ratio } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const BackDiv = styled.div`
@@ -42,5 +42,27 @@ export const ListStyle = styled.ul`
     flex-wrap: nowrap;
     align-items: center;
     height: 30px;
+  }
+`
+export const DeliverySpan = styled.span`
+  border-radius: 90px;
+  padding: 5px 15px 5px 15px;
+  margin: 0px 10px 10px 0px;
+  background-color: #2d677f;
+  color: white;
+  border-style: none;
+  align-items: center;
+  font-size: 14px;
+`
+export const RatioResponsive = styled(Ratio)`
+  @media only screen and (min-width: 768px) {
+    width: 50%;
+  }
+`
+export const DivIcon = styled.div`
+  i {
+    color: #6ebd00;
+    font-size: 24px;
+    padding-right: 0.5rem;
   }
 `

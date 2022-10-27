@@ -151,7 +151,6 @@ const PontoTuristico: React.FC = () => {
                   ))}
               </div>
             </Slider>
-
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={point.id}>
@@ -306,16 +305,14 @@ const PontoTuristico: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  <div>
-                    {point.dicas_t && (
-                      <>
-                        <TitleH2Intern title="Dicas" />
-                        <div className="d-flex flex-wrap">
-                          <p>{point.dicas_t}</p>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                  {point.dicas_t && (
+                    <>
+                      <TitleH2Intern title="Dicas" />
+                      <div className="d-flex flex-wrap">
+                        <p>{point.dicas_t}</p>
+                      </div>
+                    </>
+                  )}
                   {point?.viajantes?.length >= 1 && (
                     <>
                       <TitleH2Intern title="Tipos de Viajantes" />
@@ -408,13 +405,7 @@ const PontoTuristico: React.FC = () => {
                           point.formas_pagamento.map(
                             (payment: { icone: string; label: string }) => (
                               <div className="d-flex align-items-center pe-4 py-4">
-                                <SVG
-                                  src={payment.icone}
-                                  width={30}
-                                  fill="#6ebd00"
-                                  height="auto"
-                                  title={payment.label}
-                                />
+                                <BsCheckCircle color="#6ebd00" size={30} />
                                 <p
                                   key={payment.label}
                                   className="d-inline-flex ps-2 m-0"

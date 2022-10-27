@@ -6,6 +6,16 @@ export const BackDiv = styled.div`
   border-radius: 0.25rem;
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 5px;
 `
+export const DeliverySpan = styled.span`
+  border-radius: 90px;
+  padding: 5px 15px 5px 15px;
+  margin: 0px 10px 10px 0px;
+  background-color: #2d677f;
+  color: white;
+  border-style: none;
+  align-items: center;
+  font-size: 14px;
+`
 
 export const StyledTitle = styled.h2`
   font-style: normal;

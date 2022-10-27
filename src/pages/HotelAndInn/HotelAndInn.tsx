@@ -4,7 +4,13 @@ import { memo, useEffect } from 'react'
 import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
 
 import { AiOutlineGlobal } from 'react-icons/ai'
-import { BsArrowLeft, BsKeyFill, BsTelephone, BsWhatsapp } from 'react-icons/bs'
+import {
+  BsArrowLeft,
+  BsCheckCircle,
+  BsKeyFill,
+  BsTelephone,
+  BsWhatsapp,
+} from 'react-icons/bs'
 import { FaBed, FaMugHot } from 'react-icons/fa'
 import { GiKnifeFork } from 'react-icons/gi'
 import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
@@ -435,13 +441,7 @@ const HotelePousada: React.FC = () => {
                       hotel.formas_pagamento.map(
                         (payment: { icone: string; label: string }) => (
                           <div className="d-flex align-items-center pe-4 py-4">
-                            <SVG
-                              src={payment.icone}
-                              width={20}
-                              fill="#6ebd00"
-                              height="auto"
-                              title={payment.label}
-                            />
+                            <BsCheckCircle color="#6ebd00" size={30} />
                             <p
                               key={payment.label}
                               className="d-inline-flex ps-2 m-0"

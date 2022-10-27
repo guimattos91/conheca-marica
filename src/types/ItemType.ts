@@ -56,12 +56,12 @@ export type TavellersType = {
   label: string
 }
 export type MealType = {
-  restricoes: [
-    {
-      label: string
-    },
-  ]
+  label: string
 }
+export type CookType = {
+  label: string
+}
+
 // export type PanoramicType = {
 //     panoramas: []
 // },
@@ -92,4 +92,7 @@ export type ItemType = {
   restricoes: RestrictionType[]
   phones: PhoneType[]
   horario_funcionamento: WorkingHourType[]
+  refeicoes: MealType[]
+  cozinhas: CookType[]
+  is_delivery: number
 }
