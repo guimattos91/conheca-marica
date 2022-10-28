@@ -7,23 +7,32 @@ export const StyleBackgrounDiv = styled.div`
   color: white;
 `
 export const DivStripes = styled.div`
-  color: white;
-  border-style: none none solid none;
   border: 1px;
-  border-color: white;
-
-  ::after {
-    content: '';
-    height: 2px;
-    width: 100%;
-    background-color: white;
-  }
+  border-style: none none solid none;
+  border-color: #292929;
+  padding-bottom: 1rem;
 `
 export const LinkStyled = styled(Link)`
   text-decoration: none;
   color: white;
   padding: 1rem 0 0 0;
   flex: flex;
+  p {
+    font-size: 18;
+  }
+
+  &:hover {
+    color: white;
+  }
+`
+export const AStyled = styled.a`
+  text-decoration: none;
+  color: white;
+  padding: 1rem 0 0 0;
+  flex: flex;
+  p {
+    font-size: 18;
+  }
 
   &:hover {
     color: white;
@@ -34,6 +43,7 @@ export const ButtonStyled = styled(Button)`
   background-color: transparent;
   border: none;
   color: white;
+
   &:hover {
     text-decoration: none;
     background-color: none;
@@ -43,7 +53,7 @@ export const ButtonStyled = styled(Button)`
 `
 export const OffCanvasStyled = styled(Offcanvas)`
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   border: none;
   color: white;
 `

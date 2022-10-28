@@ -324,8 +324,8 @@ const PontoTuristico: React.FC = () => {
                               <div className="d-flex align-items-center pe-4 pb-4">
                                 <BsCheckCircle
                                   color="#6ebd00"
-                                  size={30}
-                                  className="pe-2"
+                                  size={20}
+                                  className="me-2"
                                 />
                                 <p
                                   key={traveller.label}
@@ -405,7 +405,7 @@ const PontoTuristico: React.FC = () => {
                           point.formas_pagamento.map(
                             (payment: { icone: string; label: string }) => (
                               <div className="d-flex align-items-center pe-4 py-4">
-                                <BsCheckCircle color="#6ebd00" size={30} />
+                                <BsCheckCircle color="#6ebd00" size={20} />
                                 <p
                                   key={payment.label}
                                   className="d-inline-flex ps-2 m-0"

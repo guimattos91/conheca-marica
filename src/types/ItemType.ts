@@ -7,6 +7,11 @@ export type AddressType = {
   lng: number
   label: string
 }
+export type EquipamentType = {
+  id: number
+  label: string
+  total: number
+}
 export type ImagesType = {
   id: number
   legenda: {
@@ -61,6 +66,17 @@ export type MealType = {
 export type CookType = {
   label: string
 }
+export type SpaceType = {
+  id: number
+  espaco_id: number
+  nome: string
+  descricao: string
+  area: number
+  pe_direito: number
+  medidas: string
+  capacidade: number
+  ordem: number
+}
 
 // export type PanoramicType = {
 //     panoramas: []
@@ -95,4 +111,7 @@ export type ItemType = {
   refeicoes: MealType[]
   cozinhas: CookType[]
   is_delivery: number
+  gratuito: number
+  equipamentos: EquipamentType[]
+  espacos: SpaceType[]
 }

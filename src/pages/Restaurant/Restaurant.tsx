@@ -321,8 +321,8 @@ const BareRestaurante: React.FC = () => {
                           <div className="d-flex align-items-center pe-4 pb-4">
                             <BsCheckCircle
                               color="#6ebd00"
-                              size={30}
-                              className="pe-2"
+                              size={20}
+                              className="me-2"
                             />
                             <p key={meal.label} className="d-inline-flex m-0">
                               {meal.label}
@@ -340,8 +340,8 @@ const BareRestaurante: React.FC = () => {
                           <div className="d-flex align-items-center pe-4 pb-4">
                             <BsCheckCircle
                               color="#6ebd00"
-                              size={30}
-                              className="pe-2"
+                              size={20}
+                              className="me-2"
                             />
                             <p key={cook.label} className="d-inline-flex m-0">
                               {cook.label}
@@ -410,12 +410,12 @@ const BareRestaurante: React.FC = () => {
                       <div className="d-flex flex-wrap">
                         {restaurant.formas_pagamento.map(
                           (payment: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 pb-4">
-                              <BsCheckCircle color="#6ebd00" size={30} />
-                              <p
-                                key={payment.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
+                            <div
+                              className="d-flex align-items-center pe-4 pb-4"
+                              key={payment.label}
+                            >
+                              <BsCheckCircle color="#6ebd00" size={20} />
+                              <p className="d-inline-flex ps-2 m-0">
                                 {payment.label}
                               </p>
                             </div>
