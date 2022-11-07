@@ -11,7 +11,10 @@ const CarouselBanner: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [0])
   return (
-    <Carousel>
+    <Carousel
+      controls={banners.length < 1 && false}
+      indicators={banners.length < 1 && false}
+    >
       {!isLoading &&
         !error &&
         banners.map(

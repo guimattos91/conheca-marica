@@ -17,25 +17,23 @@ import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { LinkStyled, MainStyled } from 'style/style'
+import { MainStyled } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { useHotels } from 'context/HotelsContext'
 
+import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
-import { strToSlug } from 'helpers'
-
 import useTitle from 'hooks/useTitle'
 
 import {
   DivIcon,
-  ListStyle,
   RatioResponsive,
   StyledContainer,
   StyledH1,
@@ -44,7 +42,7 @@ import {
 } from './style'
 
 const HotelePousada: React.FC = () => {
-  const { hotel, isLoading, error, fetchHotel } = useHotels()
+  const { hotel, categories, isLoading, error, fetchHotel } = useHotels()
   const { id } = useParams()
   const settings = {
     dots: true,
@@ -52,6 +50,7 @@ const HotelePousada: React.FC = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 3,
+    arrows: false,
     responsive: [
       {
         breakpoint: 780,
@@ -65,23 +64,25 @@ const HotelePousada: React.FC = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
   }
   const settingsSmall = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 0,
-    arrows: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 780,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 0,
+          arrows: false,
         },
       },
       {
@@ -89,10 +90,12 @@ const HotelePousada: React.FC = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],
   }
+
   const setTitle = useTitle()
   useEffect(() => setTitle(`${hotel?.nome}`))
 
@@ -112,7 +115,7 @@ const HotelePousada: React.FC = () => {
         )}
         {!isLoading && !error && hotel && (
           <>
-            <Row>
+            <Row className="g-0">
               <Col>
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Slider {...settings}>
@@ -166,28 +169,11 @@ const HotelePousada: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <ListStyle className="d-flex">
-                      {!isLoading &&
-                        !error &&
-                        hotel.categorias.map(
-                          (category: { id: number; label: string }) => (
-                            <li
-                              key={category.id}
-                              className="d-flex align-items-center"
-                            >
-                              <LinkStyled
-                                to={`/hoteis-e-pousadas/categorias/${
-                                  category.id
-                                }/${strToSlug(category.label)}`}
-                              >
-                                <p className="d-inline-flex w-100 p-0 m-0">
-                                  {category.label}
-                                </p>
-                              </LinkStyled>
-                            </li>
-                          ),
-                        )}
-                    </ListStyle>
+                    <CategoryPillsComponent
+                      Loading={isLoading}
+                      Error={error}
+                      Categories={categories}
+                    />
                     <p>{hotel.descricao_t}</p>
                   </div>
                   <div>
@@ -278,28 +264,22 @@ const HotelePousada: React.FC = () => {
                       ),
                     )}
                   </div>
-                  <div>
-                    <TitleH2Intern title="Comodidades" />
-                    <div className="d-flex align-items-center">
-                      {hotel.quartos && (
-                        <div className="d-flex align-items-center">
-                          <BsKeyFill
-                            color="#6ebd00"
-                            size={30}
-                            className="pe-2"
-                          />
-                          <p className="pe-5 m-0">{hotel.quartos} Quartos</p>
-                        </div>
-                      )}
-                      {hotel.leitos && (
-                        <div className="d-flex align-items-center ps-5">
-                          <FaBed color="#6ebd00" size={30} className="pe-2" />
-                          <p className="pe-5 m-0">{hotel.leitos} Leitos</p>
-                        </div>
-                      )}
-                    </div>
+                  <TitleH2Intern title="Comodidades" />
+                  <div className="d-flex flex-column flex-md-row align-items-md-center">
+                    {hotel.quartos && (
+                      <div className="d-flex align-items-center">
+                        <BsKeyFill color="#6ebd00" size={30} className="pe-2" />
+                        <p className="pe-5 m-0">{hotel.quartos} Quartos</p>
+                      </div>
+                    )}
+                    {hotel.leitos && (
+                      <div className="d-flex align-items-center ps-5">
+                        <FaBed color="#6ebd00" size={30} className="pe-2" />
+                        <p className="pe-5 m-0">{hotel.leitos} Leitos</p>
+                      </div>
+                    )}
                   </div>
-                  <div className="d-flex align-items-center">
+                  <div className="d-flex flex-column flex-md-row align-items-md-center">
                     {hotel.cafe_manha && !hotel.cafe_hospedes && (
                       <div className="d-flex align-items-center">
                         <FaMugHot color="#6ebd00" size={30} className="pe-2" />

@@ -15,25 +15,23 @@ import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
-import { LinkStyled, MainStyled, TextDescription } from 'style/style'
+import { MainStyled, TextDescription } from 'style/style'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { useSpace } from 'context/SpacesContext'
 
+import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import TitleH2Intern from 'components/TitleH2Intern'
 
-import { strToSlug } from 'helpers'
-
 import useTitle from 'hooks/useTitle'
 
 import {
   DivIcon,
-  ListStyle,
   RatioResponsive,
   StyledContainer,
   StyledH1,
@@ -43,7 +41,7 @@ import {
 } from './style'
 
 const EspacoParaEvento: React.FC = () => {
-  const { space, isLoading, error, fetchSpace } = useSpace()
+  const { space, categories, isLoading, error, fetchSpace } = useSpace()
   const { id } = useParams()
   const settings = {
     dots: true,
@@ -51,6 +49,7 @@ const EspacoParaEvento: React.FC = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 3,
+    arrows: false,
     responsive: [
       {
         breakpoint: 780,
@@ -64,23 +63,25 @@ const EspacoParaEvento: React.FC = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
   }
   const settingsSmall = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 0,
-    arrows: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 780,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 0,
+          arrows: false,
         },
       },
       {
@@ -88,6 +89,7 @@ const EspacoParaEvento: React.FC = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],
@@ -161,26 +163,11 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <ListStyle className="d-flex">
-                      {space.categorias.map(
-                        (category: { id: number; label: string }) => (
-                          <li
-                            key={category.id}
-                            className="d-flex align-items-center"
-                          >
-                            <LinkStyled
-                              to={`/espacos-para-eventos/categorias/${
-                                category.id
-                              }/${strToSlug(category.label)}`}
-                            >
-                              <p className="d-inline-flex w-100 p-0 m-0">
-                                {category.label}
-                              </p>
-                            </LinkStyled>
-                          </li>
-                        ),
-                      )}
-                    </ListStyle>
+                    <CategoryPillsComponent
+                      Loading={isLoading}
+                      Error={error}
+                      Categories={categories}
+                    />
                     <TextDescription>{space.descricao_t}</TextDescription>
                   </div>
                   <div>

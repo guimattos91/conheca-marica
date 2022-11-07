@@ -25,6 +25,7 @@ export const ListStyle = styled.ul`
   padding: 0;
   margin: 0;
   flex: flex;
+  overflow-x: scroll;
   li {
     border-radius: 90px;
     padding: 0px 15px;

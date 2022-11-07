@@ -27,12 +27,12 @@ const MenuComponent: React.FC = () => {
   return (
     <>
       <ButtonStyled
-        variant="outline-light"
-        className="d-flex align-items-center"
+        variant="link"
+        className="d-flex align-items-center text-white"
         onClick={handleShow}
       >
         <BiMenu size={28} />
-        Menu
+        <span className="d-none d-md-inline">Menu</span>
       </ButtonStyled>
 
       <OffCanvasStyled show={show} onHide={handleClose}>

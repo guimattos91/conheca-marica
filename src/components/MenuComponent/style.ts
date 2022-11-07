@@ -46,7 +46,7 @@ export const ButtonStyled = styled(Button)`
 
   &:hover {
     text-decoration: none;
-    background-color: none;
+    background-color: transparent;
     border: none;
     color: white;
   }

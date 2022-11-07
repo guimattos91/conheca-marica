@@ -18,4 +18,5 @@ export type CollectionType = {
   lng: number | null
   enderecos: AddressType[]
   categorias: CategoryType[]
+  datahora_inicio?: string
 }

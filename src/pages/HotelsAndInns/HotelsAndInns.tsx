@@ -12,12 +12,11 @@ import { MainStyled } from 'style/style'
 
 import { useHotels } from 'context/HotelsContext'
 
+import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import TitleH1 from 'components/TitleH1'
-
-import { strToSlug } from 'helpers'
 
 import useTitle from 'hooks/useTitle'
 
@@ -28,7 +27,6 @@ import {
   InputStyled,
   LinkStyled,
   MapButton,
-  ListStyle,
   SearchDiv,
 } from './style'
 
@@ -84,32 +82,11 @@ const Hotels: React.FC = () => {
           </Row>
           <Row className="d-flex">
             <Col>
-              <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3 flex-grow-0 pb-3">
-                {!isLoading &&
-                  !error &&
-                  categories.map(
-                    (category: {
-                      id: number
-                      label: string
-                      count?: number | undefined
-                    }) => (
-                      <li
-                        key={category.id}
-                        className="d-flex align-items-center"
-                      >
-                        <LinkStyled
-                          to={`categorias/${category.id}/${strToSlug(
-                            category.label,
-                          )}`}
-                        >
-                          <p className="d-inline-flex w-100 p-0 m-0">
-                            {category.label}
-                          </p>
-                        </LinkStyled>
-                      </li>
-                    ),
-                  )}
-              </ListStyle>
+              <CategoryPillsComponent
+                Loading={isLoading}
+                Error={error}
+                Categories={categories}
+              />
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

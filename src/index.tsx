@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 
 import ReactDOM from 'react-dom/client'
+import { GlobalStyle } from 'style/style'
 
 import { AboutProvider } from 'context/AboutContext'
 import { BannerProvider } from 'context/BannersContext'
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <BannerProvider>
                   <AboutProvider>
                     <App />
+                    <GlobalStyle />
                   </AboutProvider>
                 </BannerProvider>
               </EventProvider>

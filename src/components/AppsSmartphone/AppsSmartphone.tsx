@@ -19,7 +19,7 @@ const AppsSmartphone: React.FC = () => (
     <StyleDetailDiv className="d-none d-md-flex" />
     <Container className="d-flex justify-content-between">
       <Row style={{ zIndex: 1 }} className="row-cols-1 row-cols-md-2">
-        <Col className="col-7">
+        <Col xs={12} md={7}>
           <div className="d-flex flex-column justify-content-center">
             <StyleTitle>Conheça nosso aplicativo</StyleTitle>
             <StyleText>
@@ -46,7 +46,7 @@ const AppsSmartphone: React.FC = () => (
             </Link>
           </div>
         </Col>
-        <Col className="text-center text-lg-end pt-4">
+        <Col xs={12} md={5} className="text-center text-lg-end pt-4">
           <img src={MockupFone} alt="Logo-Turismo" className="img-fluid" />
         </Col>
       </Row>
