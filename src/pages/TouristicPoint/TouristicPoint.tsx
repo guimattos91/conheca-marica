@@ -1,7 +1,7 @@
 import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
-import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
+import { Col, Row, Spinner } from 'react-bootstrap'
 
 import { AiOutlineGlobal } from 'react-icons/ai'
 import {
@@ -14,25 +14,22 @@ import {
 import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
-import Slider from 'react-slick'
 import { MainStyled, TextDescription } from 'style/style'
-
-import AppleStoreLogo from 'assets/AppleApp.png'
-import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { usePoints } from 'context/PointsContext'
 
+import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
 import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
+import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
 
 import {
   DivIcon,
-  RatioResponsive,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -42,57 +39,6 @@ import {
 const PontoTuristico: React.FC = () => {
   const { point, categories, isLoading, error, fetchPoint } = usePoints()
   const { id } = useParams()
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-        },
-      },
-    ],
-  }
-  const settingsSmall = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 0,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 0,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  }
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${point?.nome}`))
@@ -113,45 +59,7 @@ const PontoTuristico: React.FC = () => {
         )}
         {!isLoading && !error && point && (
           <>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settings}>
-              {point.images.length >= 4 &&
-                point.images.map((imagem) => (
-                  <div key={imagem.id}>
-                    <Ratio
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                    >
-                      <div />
-                    </Ratio>
-                  </div>
-                ))}
-            </Slider>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settingsSmall}>
-              <div className="d-flex justify-content-center">
-                {point.images.length < 4 &&
-                  point.images.map((imagem) => (
-                    <RatioResponsive
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                      key={imagem.id}
-                    >
-                      <div />
-                    </RatioResponsive>
-                  ))}
-              </div>
-            </Slider>
+            <SliderCarouselComponent itemCategory={point} />
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={point.id}>
@@ -160,7 +68,7 @@ const PontoTuristico: React.FC = () => {
                       <BsArrowLeft size={20} color="#333" />
                     </Link>
                     <div className="d-flex flex-column">
-                      <StyledSmallText>Pontos</StyledSmallText>
+                      <StyledSmallText>Pontos Turísticos</StyledSmallText>
                       <StyledH1>{point.nome}</StyledH1>
                     </div>
                   </div>
@@ -352,7 +260,7 @@ const PontoTuristico: React.FC = () => {
                       </div>
                     </>
                   )}
-                  {point.restricoes && (
+                  {point.restricoes?.length >= 1 && (
                     <div>
                       <TitleH2Intern title="Restrições" />
                       <div className="d-flex flex-wrap">
@@ -409,25 +317,7 @@ const PontoTuristico: React.FC = () => {
                     latitude={Number(point?.addresses[0].lat)}
                     longitude={Number(point?.addresses[0].lng)}
                   />
-                  <StyledH2 className="pt-5">Conheça nosso app</StyledH2>
-                  <div className="d-flex pt-2">
-                    <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
-                      <img
-                        src={AppleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="pe-3 img-fluid"
-                      />
-                    </Link>
-                    <Link to="https://play.google.com/store/apps/details?id=com.marica2030.app">
-                      <img
-                        src={GoogleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="img-fluid"
-                      />
-                    </Link>
-                  </div>
+                  <AppsSmartphoneInternalPage />
                 </Col>
               </Row>
             </StyledContainer>

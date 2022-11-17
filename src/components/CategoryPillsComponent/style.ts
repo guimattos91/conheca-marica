@@ -15,7 +15,7 @@ export const LinkStyled = styled(Link)`
   border-radius: 20px;
   white-space: nowrap;
 
-  > &:hover {
+  :hover {
     color: white;
     background-color: #6ebd00;
   }

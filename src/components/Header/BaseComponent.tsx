@@ -36,16 +36,32 @@ const Header: React.FC = () => (
         </Col>
         <Col className="d-none d-md-flex align-items-center justify-content-end">
           <div className="pt-3">
-            <StyledA href="https://web.facebook.com/prefeiturademarica">
+            <StyledA
+              href="https://web.facebook.com/prefeiturademarica"
+              target="_blank"
+              rel="noreferrer"
+            >
               <BsFacebook className="mx-2" />
             </StyledA>
-            <StyledA href="https://www.instagram.com/prefeiturademarica">
+            <StyledA
+              href="https://www.instagram.com/prefeiturademarica"
+              target="_blank"
+              rel="noreferrer"
+            >
               <BsInstagram />
             </StyledA>
-            <StyledA href="https://twitter.com/MaricaRJ">
+            <StyledA
+              href="https://twitter.com/MaricaRJ"
+              target="_blank"
+              rel="noreferrer"
+            >
               <BsTwitter className="mx-2" />
             </StyledA>
-            <StyledA href="https://www.youtube.com/user/prefeiturademarica1">
+            <StyledA
+              href="https://www.youtube.com/user/prefeiturademarica1"
+              target="_blank"
+              rel="noreferrer"
+            >
               <BsYoutube />
             </StyledA>
           </div>

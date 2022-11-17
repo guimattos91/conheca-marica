@@ -1,7 +1,7 @@
 import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
-import { Col, Ratio, Row, Spinner } from 'react-bootstrap'
+import { Col, Row, Spinner } from 'react-bootstrap'
 
 import { AiOutlineGlobal } from 'react-icons/ai'
 import {
@@ -16,25 +16,22 @@ import { GiKnifeFork } from 'react-icons/gi'
 import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
-import Slider from 'react-slick'
 import { MainStyled } from 'style/style'
-
-import AppleStoreLogo from 'assets/AppleApp.png'
-import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { useHotels } from 'context/HotelsContext'
 
+import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
 import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
+import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
 
 import {
   DivIcon,
-  RatioResponsive,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -44,57 +41,6 @@ import {
 const HotelePousada: React.FC = () => {
   const { hotel, categories, isLoading, error, fetchHotel } = useHotels()
   const { id } = useParams()
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-        },
-      },
-    ],
-  }
-  const settingsSmall = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 0,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 0,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  }
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${hotel?.nome}`))
@@ -117,43 +63,7 @@ const HotelePousada: React.FC = () => {
           <>
             <Row className="g-0">
               <Col>
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                <Slider {...settings}>
-                  {hotel.images.length >= 4 &&
-                    hotel.images.map((imagem) => (
-                      <div key={imagem.id}>
-                        <Ratio
-                          aspectRatio="1x1"
-                          style={{
-                            backgroundImage: `url(${imagem.src})`,
-                            backgroundSize: 'cover',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center center',
-                          }}
-                        >
-                          <div />
-                        </Ratio>
-                      </div>
-                    ))}
-                </Slider>
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                <Slider {...settingsSmall}>
-                  {hotel.images.length < 4 &&
-                    hotel.images.map((imagem) => (
-                      <RatioResponsive
-                        aspectRatio="1x1"
-                        style={{
-                          backgroundImage: `url(${imagem.src})`,
-                          backgroundSize: 'cover',
-                          backgroundRepeat: 'no-repeat',
-                          backgroundPosition: 'center center',
-                        }}
-                        key={imagem.id}
-                      >
-                        <div />
-                      </RatioResponsive>
-                    ))}
-                </Slider>
+                <SliderCarouselComponent itemCategory={hotel} />
               </Col>
             </Row>
             <StyledContainer>
@@ -439,25 +349,7 @@ const HotelePousada: React.FC = () => {
                     latitude={Number(hotel?.addresses[0].lat)}
                     longitude={Number(hotel?.addresses[0].lng)}
                   />
-                  <StyledH2 className="pt-5">Conheça nosso app</StyledH2>
-                  <div className="d-flex pt-2">
-                    <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
-                      <img
-                        src={AppleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="pe-3 img-fluid"
-                      />
-                    </Link>
-                    <Link to="https://play.google.com/store/apps/details?id=com.marica2030.app">
-                      <img
-                        src={GoogleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="img-fluid"
-                      />
-                    </Link>
-                  </div>
+                  <AppsSmartphoneInternalPage />
                 </Col>
               </Row>
             </StyledContainer>

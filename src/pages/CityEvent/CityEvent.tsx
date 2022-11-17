@@ -1,7 +1,7 @@
 import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
-import { Col, Ratio, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 
 import { AiOutlineGlobal } from 'react-icons/ai'
 import {
@@ -15,26 +15,23 @@ import { FaRegMoneyBillAlt } from 'react-icons/fa'
 import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
 import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
-import Slider from 'react-slick'
 import { MainStyled, TextDescription } from 'style/style'
-
-import AppleStoreLogo from 'assets/AppleApp.png'
-import GoogleStoreLogo from 'assets/GoogleApp.png'
 
 import { useEvents } from 'context/EventsContext'
 
+import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
 import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import LoadingComponent from 'components/LoadingComponent'
+import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
 
 import {
   DivIcon,
-  RatioResponsive,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -44,57 +41,6 @@ import {
 const EspacoParaEvento: React.FC = () => {
   const { event, categories, isLoading, error, fetchEvent } = useEvents()
   const { id } = useParams()
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-        },
-      },
-    ],
-  }
-  const settingsSmall = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 0,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 0,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  }
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${event?.nome}`))
@@ -111,45 +57,8 @@ const EspacoParaEvento: React.FC = () => {
         <LoadingComponent Loading={isLoading} />
         {!isLoading && !error && event && (
           <>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settings}>
-              {event.images.length >= 4 &&
-                event.images.map((imagem) => (
-                  <div key={imagem.id}>
-                    <Ratio
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                    >
-                      <div />
-                    </Ratio>
-                  </div>
-                ))}
-            </Slider>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Slider {...settingsSmall}>
-              <div className="d-flex justify-content-center">
-                {event.images.length < 4 &&
-                  event.images.map((imagem) => (
-                    <RatioResponsive
-                      aspectRatio="1x1"
-                      style={{
-                        backgroundImage: `url(${imagem.src})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                      }}
-                      key={imagem.id}
-                    >
-                      <div />
-                    </RatioResponsive>
-                  ))}
-              </div>
-            </Slider>
+            <SliderCarouselComponent itemCategory={event} />
+
             <StyledContainer>
               <Row className="mt-4">
                 <Col key={event.id}>
@@ -407,25 +316,7 @@ const EspacoParaEvento: React.FC = () => {
                     latitude={Number(event?.addresses[0].lat)}
                     longitude={Number(event?.addresses[0].lng)}
                   />
-                  <StyledH2>Conheça nosso app</StyledH2>
-                  <div className="d-flex pt-4">
-                    <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
-                      <img
-                        src={AppleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="pe-3 img-fluid"
-                      />
-                    </Link>
-                    <Link to="https://play.google.com/store/apps/details?id=com.marica2030.app">
-                      <img
-                        src={GoogleStoreLogo}
-                        alt="Logo-Turismo"
-                        width="auto"
-                        className="img-fluid"
-                      />
-                    </Link>
-                  </div>
+                  <AppsSmartphoneInternalPage />
                 </Col>
               </Row>
             </StyledContainer>

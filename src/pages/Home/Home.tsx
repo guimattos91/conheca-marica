@@ -31,7 +31,7 @@ const Home: React.FC = () => {
     <>
       <Header />
       <MainStyled>
-        <Row className="row-cols-1">
+        <Row className="row-cols-1 g-0">
           <Col>
             <CarouselBanner />
           </Col>

@@ -1,7 +1,6 @@
 import { memo } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 import AppleStoreLogo from 'assets/AppleApp.png'
 import GoogleStoreLogo from 'assets/GoogleApp.png'
@@ -28,22 +27,30 @@ const AppsSmartphone: React.FC = () => (
             </StyleText>
           </div>
           <div className="d-flex pt-4">
-            <Link to="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199">
+            <a
+              href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 src={AppleStoreLogo}
                 alt="Logo-Turismo"
                 width="auto"
                 className="pe-3 img-fluid"
               />
-            </Link>
-            <Link to="https://play.google.com/store/apps/details?id=com.marica2030.app">
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.marica2030.app"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 src={GoogleStoreLogo}
                 alt="Logo-Turismo"
                 width="auto"
                 className="img-fluid"
               />
-            </Link>
+            </a>
           </div>
         </Col>
         <Col xs={12} md={5} className="text-center text-lg-end pt-4">
