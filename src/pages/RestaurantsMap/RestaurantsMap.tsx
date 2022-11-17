@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
 import GoogleMapReact from 'google-map-react'
-import { Spinner } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsArrowLeft } from 'react-icons/bs'
 import { MainStyled } from 'style/style'
@@ -13,6 +13,7 @@ import { useRestaurants } from 'context/RestaurantsContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import LoadingComponent from 'components/LoadingComponent'
 import { StyledLink } from 'components/TitleH1/style'
 
 import useTitle from 'hooks/useTitle'
@@ -69,9 +70,9 @@ const RestaurantsMap: React.FC = () => {
             defaultZoom={defaultProps.zoom}
           >
             {isLoading && (
-              <div className="d-flex justify-content-center">
-                <Spinner animation="grow" variant="success" />
-              </div>
+              <Col className="d-flex justify-content-center">
+                <LoadingComponent Loading={isLoading} />
+              </Col>
             )}
             {!isLoading &&
               !error &&

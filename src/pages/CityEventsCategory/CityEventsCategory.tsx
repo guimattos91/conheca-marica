@@ -84,8 +84,12 @@ const CityEventsCategory: React.FC = () => {
               </SearchDiv>
             </Col>
           </Row>
-          <LoadingComponent Loading={isLoading} />
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-5">
+            {isLoading && (
+              <Col className="d-flex justify-content-center">
+                <LoadingComponent Loading={isLoading} />
+              </Col>
+            )}
             {!isLoading &&
               !error &&
               events.map(

@@ -54,7 +54,11 @@ const EspacoParaEvento: React.FC = () => {
     <>
       <Header />
       <MainStyled className="pb-5">
-        <LoadingComponent Loading={isLoading} />
+        {isLoading && (
+          <Col className="d-flex justify-content-center">
+            <LoadingComponent Loading={isLoading} />
+          </Col>
+        )}
         {!isLoading && !error && event && (
           <>
             <SliderCarouselComponent itemCategory={event} />

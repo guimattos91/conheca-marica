@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export const MainStyled = styled.main`
   background-color: #f5f5f5;
+  padding-bottom: 2.5rem;
 `
 export const LinkStyled = styled(Link)`
   text-decoration: none;

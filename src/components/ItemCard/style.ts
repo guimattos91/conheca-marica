@@ -6,15 +6,18 @@ export const BackDiv = styled.div`
   border-radius: 0.25rem;
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 5px;
 `
-export const DeliverySpan = styled.span`
-  border-radius: 90px;
-  padding: 5px 15px 5px 15px;
-  margin: 0px 10px 10px 0px;
-  background-color: #2d677f;
-  color: white;
-  border-style: none;
+export const DataDiv = styled.div`
+  flex: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  font-size: 14px;
+  padding-right: 0.5rem;
+
+  p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
 `
 
 export const StyledTitle = styled.h2`
@@ -45,20 +48,7 @@ export const ListStyle = styled.ul`
     font-size: 14px;
   }
 `
-export const ButtonDiv = styled.div`
-  border-radius: 90px;
-  padding: 5px 5px 5px 5px;
-  background-color: #fff;
-  border-color: #dedede;
-  border-style: solid;
-  border-width: thin;
-  flex: flex;
-  align-items: center;
 
-  &:hover {
-    border-color: #97ae76;
-  }
-`
 export const LinkStyled = styled(Link)`
   text-decoration: none;
   color: #666666;

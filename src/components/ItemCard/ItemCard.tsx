@@ -8,6 +8,7 @@ import { CollectionType } from 'types/CollectionType'
 
 import {
   BackDiv,
+  DataDiv,
   LinkStyled,
   ListStyle,
   StyledText,
@@ -22,8 +23,6 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({
   collection,
   linkcategory,
 }) => {
-  console.log(getDay(String(collection.datahora_inicio)))
-
   return (
     <BackDiv className="d-flex flex-column w-100">
       <LinkStyled
@@ -42,11 +41,25 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({
         </Ratio>
       </LinkStyled>
       <div className="p-3">
-        <LinkStyled
-          to={`/${linkcategory}/${collection.id}/${strToSlug(collection.nome)}`}
-        >
-          <StyledTitle className="pb-2">{collection.nome}</StyledTitle>
-        </LinkStyled>
+        <div className="d-flex">
+          {collection.datahora_inicio && (
+            <DataDiv>
+              <p style={{ color: 'red' }}>
+                {getMonth(String(collection.datahora_inicio))}
+              </p>
+              <p>{getDay(String(collection.datahora_inicio))}</p>
+            </DataDiv>
+          )}
+          <div>
+            <LinkStyled
+              to={`/${linkcategory}/${collection.id}/${strToSlug(
+                collection.nome,
+              )}`}
+            >
+              <StyledTitle className="pb-2">{collection.nome}</StyledTitle>
+            </LinkStyled>
+          </div>
+        </div>
         <ListStyle className="d-flex">
           {collection?.categorias.slice(0, 4).map((categoria) => (
             <li key={categoria.id}>

@@ -1,7 +1,7 @@
 import { memo, useEffect } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
-import { Col, Row, Spinner } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 
 import { AiOutlineGlobal } from 'react-icons/ai'
 import {
@@ -23,6 +23,7 @@ import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
+import LoadingComponent from 'components/LoadingComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
@@ -54,9 +55,9 @@ const EspacoParaEvento: React.FC = () => {
       <Header />
       <MainStyled className="pb-5">
         {isLoading && (
-          <div className="d-flex justify-content-center">
-            <Spinner animation="grow" variant="success" />
-          </div>
+          <Col className="d-flex justify-content-center">
+            <LoadingComponent Loading={isLoading} />
+          </Col>
         )}
         {!isLoading && !error && space && (
           <>

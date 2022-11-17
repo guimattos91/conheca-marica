@@ -84,7 +84,11 @@ const Comercio: React.FC = () => {
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <LoadingComponent Loading={isLoading} />
+            {isLoading && (
+              <Col className="d-flex justify-content-center">
+                <LoadingComponent Loading={isLoading} />
+              </Col>
+            )}
             {!isLoading &&
               !error &&
               events.map(

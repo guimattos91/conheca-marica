@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
-import { Col, Container, Row, Spinner } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 
 // import Config from 'Config'
 
@@ -15,6 +15,7 @@ import { useRestaurants } from 'context/RestaurantsContext'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
+import LoadingComponent from 'components/LoadingComponent'
 
 import useTitle from 'hooks/useTitle'
 
@@ -90,9 +91,9 @@ const RestaurantCategory: React.FC = () => {
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-5">
             {isLoading && (
-              <div className="d-flex justify-content-center">
-                <Spinner animation="grow" variant="success" />
-              </div>
+              <Col className="d-flex justify-content-center">
+                <LoadingComponent Loading={isLoading} />
+              </Col>
             )}
             {!isLoading &&
               !error &&
