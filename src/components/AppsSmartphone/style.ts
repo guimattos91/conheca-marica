@@ -5,17 +5,7 @@ export const StyleBackgrounDiv = styled.div`
   color: white;
   position: relative;
 `
-// export const StyleDetailDiv = styled.div`
-//   position: absolute;
-//   width: 600px;
-//   height: 0px;
-//   top: 0px;
-//   right: 0px;
-//   border-style: solid;
-//   border-top: 600px solid white;
-//   border-left: 300px solid transparent;
-//   z-index: 0;
-// `
+
 export const StyleDetailDiv = styled.div`
   position: absolute;
   background-color: white;
@@ -25,11 +15,6 @@ export const StyleDetailDiv = styled.div`
   right: 0px;
   z-index: 0;
   clip-path: polygon(30% 0, 100% 0, 100% 100%, 57% 100%);
-
-  /* @media (max-width: 1024px) {
-    width: 600px;
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 57% 100%);
-  } */
 
   @media (max-width: 768px) {
     width: 400px;

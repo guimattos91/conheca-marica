@@ -77,7 +77,7 @@ const EspacosParaEventos: React.FC = () => {
               />
             </Col>
           </Row>
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
             {isLoading && (
               <Col className="d-flex justify-content-center">
                 <LoadingComponent Loading={isLoading} />

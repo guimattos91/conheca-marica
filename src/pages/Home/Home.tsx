@@ -37,7 +37,7 @@ const Home: React.FC = () => {
           </Col>
         </Row>
         <Container>
-          <Row className="row-cols-1 row-cols-md-3 g-3 p-5">
+          <Row className="row-cols-1 row-cols-md-3 g-3 py-5">
             <Col>
               <CategoryCard
                 page="/pontos-turisticos"
