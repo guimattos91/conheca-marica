@@ -56,3 +56,17 @@ export const RatioResponsive = styled(Ratio)`
     width: 50%;
   }
 `
+
+export const DataDiv = styled.div`
+  flex: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0.5rem;
+
+  p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+`

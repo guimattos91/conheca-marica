@@ -21,3 +21,20 @@ export const getDay = (date: string): string =>
       day: 'numeric',
     })
     .padStart(2, '0')
+
+export const NormalizeDate = (date: string): string =>
+  new Date(date)
+    .toLocaleString('pt-BR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+    .padStart(2, '0')
+
+export const GetHour = (date: string): string =>
+  new Date(date)
+    .toLocaleString('pt-BR', {
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+    .padStart(2, '0')

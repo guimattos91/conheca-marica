@@ -87,18 +87,22 @@ export type ItemType = {
   nome: string
   email: string
   site: string
+  datahora_inicio_f: string
+  datahora_fim_f: string
+  is_delivery: number
+  gratuito: number
   capa: string | undefined
   descricao_t: string | null
   quartos: number
   leitos: number
   dicas_t: string
-  viajantes: TavellersType[]
   cafe_manha: boolean
   cafe_hospedes: boolean
   almoco: boolean
   almoco_hospedes: boolean
   jantar: boolean
   jantar_hospedes: boolean
+  viajantes: TavellersType[]
   addresses: AddressType[]
   categorias: CategoryType[]
   images: ImagesType[]
@@ -110,8 +114,6 @@ export type ItemType = {
   horario_funcionamento: WorkingHourType[]
   refeicoes: MealType[]
   cozinhas: CookType[]
-  is_delivery: number
-  gratuito: number
   equipamentos: EquipamentType[]
   espacos: SpaceType[]
 }

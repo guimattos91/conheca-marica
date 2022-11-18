@@ -231,7 +231,7 @@ const EspacoParaEvento: React.FC = () => {
                               className="d-flex align-items-center pe-4 pb-4"
                               key={equipament.id}
                             >
-                              <BsCheckCircle color="#6ebd00" size={30} />
+                              <BsCheckCircle color="#6ebd00" size={20} />
                               <p className="d-inline-flex ps-2 m-0">
                                 {equipament.label}
                               </p>

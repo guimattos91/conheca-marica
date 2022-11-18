@@ -200,7 +200,7 @@ const BareRestaurante: React.FC = () => {
                                     {workinghours.label}
                                   </td>
                                   <td>
-                                    {workinghours.horario.abre} às
+                                    {workinghours.horario.abre} às{' '}
                                     {workinghours.horario.fecha}
                                   </td>
                                 </tr>
@@ -312,7 +312,11 @@ const BareRestaurante: React.FC = () => {
                               className="d-flex align-items-center pe-4 pb-4"
                               key={payment.label}
                             >
-                              <BsCheckCircle color="#6ebd00" size={20} />
+                              <BsCheckCircle
+                                color="#6ebd00"
+                                size={20}
+                                className="me-2"
+                              />
                               <p className="d-inline-flex ps-2 m-0">
                                 {payment.label}
                               </p>

@@ -28,9 +28,12 @@ import LoadingComponent from 'components/LoadingComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
+import { getDay, GetHour, getMonth, NormalizeDate } from 'helpers'
+
 import useTitle from 'hooks/useTitle'
 
 import {
+  DataDiv,
   DivIcon,
   StyledContainer,
   StyledH1,
@@ -82,6 +85,24 @@ const EspacoParaEvento: React.FC = () => {
                       Categories={categories}
                     />
                     <TextDescription>{event.descricao_t}</TextDescription>
+                  </div>
+                  <div className="d-flex">
+                    <DataDiv>
+                      <p style={{ color: 'red' }}>
+                        {getMonth(String(event.datahora_inicio_f))}
+                      </p>
+                      <p>{getDay(String(event.datahora_inicio_f))}</p>
+                    </DataDiv>
+                    <div>
+                      <p className="p-0 m-0">
+                        De: {NormalizeDate(String(event.datahora_inicio_f))}, às{' '}
+                        {GetHour(String(event.datahora_inicio_f))}h
+                      </p>
+                      <p className="p-0 m-0">
+                        Até: {NormalizeDate(String(event.datahora_fim_f))}, às{' '}
+                        {GetHour(String(event.datahora_fim_f))}h
+                      </p>
+                    </div>
                   </div>
                   <div>
                     <TitleH2Intern title="Sobre" />
@@ -303,7 +324,11 @@ const EspacoParaEvento: React.FC = () => {
                               className="d-flex align-items-center pe-4 pb-4"
                               key={payment.label}
                             >
-                              <BsCheckCircle color="#6ebd00" size={20} />
+                              <BsCheckCircle
+                                color="#6ebd00"
+                                size={20}
+                                className="me-2"
+                              />
                               <p className="d-inline-flex ps-2 m-0">
                                 {payment.label}
                               </p>
