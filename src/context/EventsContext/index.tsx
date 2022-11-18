@@ -64,7 +64,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
       busca: search,
     }
     try {
-      const response = await Api.get('/espacos/busca', { params })
+      const response = await Api.get('/eventos/busca', { params })
       setEvents(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Evento')

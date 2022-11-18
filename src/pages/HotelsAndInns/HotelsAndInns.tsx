@@ -6,7 +6,6 @@ import { Col, Container, Row } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
-import { BsSearch } from 'react-icons/bs'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { MainStyled } from 'style/style'
 
@@ -17,19 +16,14 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import LoadingComponent from 'components/LoadingComponent'
+import SearchComponent from 'components/SearchComponent'
 import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import {
-  ButtonStyled,
-  InputStyled,
-  LinkStyled,
-  MapButton,
-  SearchDiv,
-} from './style'
+import { LinkStyled, MapButton } from './style'
 
 const Hotels: React.FC = () => {
   const { hotels, categories, isLoading, error, fetchHotels, searchHotels } =
@@ -68,17 +62,12 @@ const Hotels: React.FC = () => {
                   <p>Mapa</p>
                 </MapButton>
               </LinkStyled>
-              <SearchDiv className="d-flex  align-items-center px-3">
-                <InputStyled
-                  type="text"
-                  placeholder="Buscar Hotéis e Pousadas"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <ButtonStyled type="button" onClick={handleSearch}>
-                  <BsSearch />
-                </ButtonStyled>
-              </SearchDiv>
+              <SearchComponent
+                placeholderText="Buscar Hotéis e Pousadas"
+                handleSearch={handleSearch}
+                search={search}
+                setSearch={setSearch}
+              />
             </Col>
           </Row>
           <Row className="d-flex">

@@ -4,7 +4,6 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
 import { useTranslation } from 'react-i18next'
-import { BsSearch } from 'react-icons/bs'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { LinkStyled, MainStyled } from 'style/style'
 
@@ -15,13 +14,14 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import LoadingComponent from 'components/LoadingComponent'
+import SearchComponent from 'components/SearchComponent'
 import TitleH1 from 'components/TitleH1'
 
 import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { ButtonStyled, InputStyled, MapButton, SearchDiv } from './style'
+import { MapButton } from './style'
 
 const PontosTuristicos: React.FC = () => {
   const { points, categories, isLoading, error, fetchPoints, searchPoints } =
@@ -60,17 +60,12 @@ const PontosTuristicos: React.FC = () => {
                   <p>Mapa</p>
                 </MapButton>
               </LinkStyled>
-              <SearchDiv className="d-flex align-items-center px-3">
-                <InputStyled
-                  type="text"
-                  placeholder="Buscar pontos turísticos"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <ButtonStyled type="button" onClick={handleSearch}>
-                  <BsSearch />
-                </ButtonStyled>
-              </SearchDiv>
+              <SearchComponent
+                placeholderText="Buscar Pontos Turísticos"
+                handleSearch={handleSearch}
+                search={search}
+                setSearch={setSearch}
+              />
             </Col>
           </Row>
           <Row className="d-flex">
