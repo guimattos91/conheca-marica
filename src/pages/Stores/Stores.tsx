@@ -51,9 +51,9 @@ const Comercios: React.FC = () => {
       <Header />
       <MainStyled>
         <Container>
-          <Row className="d-flex align-items-center py-2">
+          <Row className="row-cols-1 row-cols-md-2 d-flex align-items-center py-2">
             <Col>
-              <TitleH1 title="Comércio" />
+              <TitleH1 title="Comércio Local" />
             </Col>
             <Col className="d-flex align-items-end justify-content-end">
               <LinkStyled to="mapa">

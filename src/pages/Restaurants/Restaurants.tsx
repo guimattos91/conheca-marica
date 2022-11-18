@@ -56,7 +56,7 @@ const Restaurants: React.FC = () => {
       <Header />
       <MainStyled>
         <Container>
-          <Row className="d-flex align-items-center py-2">
+          <Row className="row-cols-1 row-cols-md-2 d-flex align-items-center py-2">
             <Col>
               <TitleH1 title="Bares e Restaurantes" />
             </Col>

@@ -10,6 +10,7 @@ export const InputStyled = styled.input`
   background-color: white;
   border: none;
   outline: none;
+  width: 100%;
 `
 export const SearchDiv = styled.div`
   border: 1px solid #2d6d7f;

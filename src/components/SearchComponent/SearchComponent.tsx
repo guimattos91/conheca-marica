@@ -18,7 +18,7 @@ const SearchComponent: React.FC<ISearchProps> = ({
   setSearch,
 }) => {
   return (
-    <SearchDiv className="d-flex  align-items-center px-3">
+    <SearchDiv className="d-flex align-items-center flex-grow-1 px-3">
       <InputStyled
         type="text"
         placeholder={placeholderText}
