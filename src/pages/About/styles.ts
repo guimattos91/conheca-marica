@@ -6,10 +6,15 @@ export const BannerContainer = styled.div`
   position: relative;
   background-image: url(${BannerImage});
   background-size: cover;
-  height: 80vh;
+  height: 60vh;
   background-attachment: fixed;
   background-position: center top;
   background-repeat: no-repeat;
+
+  @media (max-width: 768px) {
+    height: 30vh;
+  }
+
   ::after {
     content: ' ';
     position: absolute;

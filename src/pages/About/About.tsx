@@ -6,6 +6,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
+import { MainStyled } from 'style/style'
 
 import AboutCard from 'components/AboutCard'
 import Footer from 'components/Footer'
@@ -26,7 +27,7 @@ const PontosTuristicos: React.FC = () => {
   return (
     <>
       <Header />
-      <main>
+      <MainStyled>
         <BannerContainer />
         <div>
           <Container>
@@ -37,7 +38,7 @@ const PontosTuristicos: React.FC = () => {
             </Row>
           </Container>
         </div>
-      </main>
+      </MainStyled>
       <Footer />
     </>
   )
