@@ -84,7 +84,6 @@ const EspacoParaEvento: React.FC = () => {
                       Error={error}
                       Categories={categories}
                     />
-                    <TextDescription>{event.descricao_t}</TextDescription>
                   </div>
                   <div className="d-flex">
                     <DataDiv>
@@ -104,6 +103,7 @@ const EspacoParaEvento: React.FC = () => {
                       </p>
                     </div>
                   </div>
+                  <TextDescription>{event.descricao_t}</TextDescription>
                   <div>
                     <TitleH2Intern title="Sobre" />
                     {event.addresses.map(
