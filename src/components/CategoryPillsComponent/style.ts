@@ -27,13 +27,16 @@ export const ListStyle = styled.ul`
   margin-bottom: 20px;
   display: flex;
   flex: flex;
-  overflow-x: scroll;
 
   li {
     color: white;
     display: inline;
     list-style: none;
     margin: 0px 10px 10px 0px;
+  }
+
+  @media (max-width: 768px) {
+    overflow-x: scroll;
   }
 `
 
