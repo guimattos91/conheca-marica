@@ -42,7 +42,7 @@ const PontoTuristico: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${point?.nome}`))
+  useEffect(() => setTitle(`${point?.nome} | Pontos Turísticos`))
 
   useEffect(() => {
     if (id) fetchPoint(Number(id))

@@ -45,7 +45,7 @@ const BareRestaurante: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${restaurant?.nome}`))
+  useEffect(() => setTitle(`${restaurant?.nome} | Bares e Restaurantes`))
 
   useEffect(() => {
     if (id) fetchRestaurant(Number(id))

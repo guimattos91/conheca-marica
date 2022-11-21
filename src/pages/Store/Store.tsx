@@ -42,7 +42,7 @@ const Comercio: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${store?.nome}`))
+  useEffect(() => setTitle(`${store?.nome} | Comércio Local`))
 
   useEffect(() => {
     if (id) fetchStore(Number(id))
@@ -65,7 +65,7 @@ const Comercio: React.FC = () => {
               <Row className="pt-5">
                 <Col key={store.id}>
                   <div className="d-flex align-items-center">
-                    <Link to="/hoteis-e-pousadas" className="pe-3">
+                    <Link to="/comercios" className="pe-3">
                       <BsArrowLeft size={20} color="#333" />
                     </Link>
                     <div className="d-flex flex-column">

@@ -43,7 +43,7 @@ const EspacoParaEvento: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${space?.nome}`))
+  useEffect(() => setTitle(`${space?.nome} | Espaços para Eventos`))
 
   useEffect(() => {
     if (id) fetchSpace(Number(id))
@@ -71,7 +71,7 @@ const EspacoParaEvento: React.FC = () => {
                       <BsArrowLeft size={20} color="#333" />
                     </Link>
                     <div className="d-flex flex-column">
-                      <StyledSmallText>Espaços de Eventos</StyledSmallText>
+                      <StyledSmallText>Espaços para Eventos</StyledSmallText>
                       <StyledH1>{space.nome}</StyledH1>
                     </div>
                   </div>

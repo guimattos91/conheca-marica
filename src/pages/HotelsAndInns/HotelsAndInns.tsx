@@ -36,6 +36,9 @@ const Hotels: React.FC = () => {
     () => searchHotels(search),
     [searchHotels, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
 
   useEffect(() => {
     setTitle(t('Hotéis e Pousadas'))
@@ -65,6 +68,7 @@ const Hotels: React.FC = () => {
               <SearchComponent
                 placeholderText="Buscar Hotéis e Pousadas"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />

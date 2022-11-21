@@ -1,4 +1,4 @@
-import { FaMapMarker } from 'react-icons/fa'
+import { IoIosPin } from 'react-icons/io'
 import styled from 'styled-components'
 
 export const InputStyled = styled.input`
@@ -7,7 +7,7 @@ export const InputStyled = styled.input`
   outline: none;
 `
 
-export const FaMapMarkerStyled = styled(FaMapMarker)`
+export const FaMapMarkerStyled = styled(IoIosPin)`
   transform: translate(-50%, -200%);
 `
 

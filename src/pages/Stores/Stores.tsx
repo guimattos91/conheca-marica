@@ -36,6 +36,9 @@ const Comercios: React.FC = () => {
     () => searchStores(search),
     [searchStores, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
 
   useEffect(() => {
     setTitle(t('Comércio Local'))
@@ -65,6 +68,7 @@ const Comercios: React.FC = () => {
               <SearchComponent
                 placeholderText="Buscar Comércio Local"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />

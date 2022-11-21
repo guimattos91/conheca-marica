@@ -44,6 +44,10 @@ const EspacosParaEventos: React.FC = () => {
     [searchSpaces, search],
   )
 
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
+
   return (
     <>
       <Header />
@@ -59,10 +63,11 @@ const EspacosParaEventos: React.FC = () => {
                   <FaMapMarkedAlt color="white" className="me-2" />
                   <p>Mapa</p>
                 </MapButton>
-              </LinkStyled>{' '}
+              </LinkStyled>
               <SearchComponent
                 placeholderText="Buscar Espaços para Eventos"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />

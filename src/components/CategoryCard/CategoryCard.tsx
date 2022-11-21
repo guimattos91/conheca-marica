@@ -9,12 +9,16 @@ interface ICategoryCardsProps {
   description: string
   icon: IconType
   page: string
+  target: string
+  rel: string
 }
 const CategoryCard: React.FC<ICategoryCardsProps> = ({
   title,
   icon,
   description,
   page,
+  target,
+  rel,
 }) => {
   const Icon = icon
 
@@ -32,7 +36,7 @@ const CategoryCard: React.FC<ICategoryCardsProps> = ({
         <TextStyled className="ps-2 pe-2 ">{description}</TextStyled>
       </div>
       <div className="d-flex justify-content-center align-items-end">
-        <LinkStyled href={page}>
+        <LinkStyled href={page} target={target} rel={rel}>
           <ButtonDiv className="d-inline-flex">Acessar</ButtonDiv>
         </LinkStyled>
       </div>

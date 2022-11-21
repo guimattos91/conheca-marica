@@ -34,6 +34,9 @@ const PontosTuristicos: React.FC = () => {
     () => searchPoints(search),
     [searchPoints, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
 
   useEffect(() => {
     setTitle(t('Pontos Turísticos'))
@@ -63,6 +66,7 @@ const PontosTuristicos: React.FC = () => {
               <SearchComponent
                 placeholderText="Buscar Pontos Turísticos"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />

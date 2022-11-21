@@ -1,6 +1,7 @@
 import { memo, useState } from 'react'
 
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import { AiOutlineClose } from 'react-icons/ai'
 import { BiMenu } from 'react-icons/bi'
 import { BsHouseDoorFill } from 'react-icons/bs'
 import { FaUmbrellaBeach, FaBed, FaStoreAlt, FaRoute } from 'react-icons/fa'
@@ -35,7 +36,20 @@ const MenuComponent: React.FC = () => {
         <span className="d-none d-md-inline">Menu</span>
       </ButtonStyled>
 
-      <OffCanvasStyled show={show} onHide={handleClose}>
+      <OffCanvasStyled
+        show={show}
+        onHide={handleClose}
+        style={{ width: '250px' }}
+      >
+        <Offcanvas.Header className="d-flex m-0 p-0 justify-content-end">
+          <ButtonStyled
+            variant="link"
+            className="d-flex align-items-center text-white mt-3"
+            onClick={handleClose}
+          >
+            <AiOutlineClose size={18} />
+          </ButtonStyled>
+        </Offcanvas.Header>
         <Offcanvas.Body className="d-flex flex-column">
           <DivStripes className="pt-3">
             <LinkStyled to="/" className="d-flex align-items-center">
@@ -108,6 +122,8 @@ const MenuComponent: React.FC = () => {
           <DivStripes>
             <AStyled
               href="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
+              target="_blank"
+              rel="noreferrer"
               className="d-flex align-items-center"
             >
               <FaRoute color="white" />
@@ -118,6 +134,8 @@ const MenuComponent: React.FC = () => {
           <DivStripes>
             <AStyled
               href="https://www.feirartemarica.com.br/"
+              target="_blank"
+              rel="noreferrer"
               className="d-flex align-items-center"
             >
               <GiSewingNeedle color="white" />

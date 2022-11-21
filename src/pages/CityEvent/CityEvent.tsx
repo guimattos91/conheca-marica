@@ -46,7 +46,7 @@ const EspacoParaEvento: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${event?.nome}`))
+  useEffect(() => setTitle(`${event?.nome} | Eventos`))
 
   useEffect(() => {
     if (id) fetchEvent(Number(id))

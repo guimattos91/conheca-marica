@@ -44,6 +44,9 @@ const Comercio: React.FC = () => {
     () => searchEvents(search),
     [searchEvents, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
 
   return (
     <>
@@ -64,6 +67,7 @@ const Comercio: React.FC = () => {
               <SearchComponent
                 placeholderText="Buscar Eventos"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />

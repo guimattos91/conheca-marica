@@ -43,6 +43,8 @@ const Home: React.FC = () => {
                 page="/pontos-turisticos"
                 title="Pontos Turísticos"
                 icon={FaUmbrellaBeach}
+                target="_self"
+                rel="noreferrer"
                 description="Conheça nossas praias, lagoas, grutas e outros pontos turísticos"
               />
             </Col>
@@ -51,6 +53,8 @@ const Home: React.FC = () => {
                 page="hoteis-e-pousadas"
                 title="Hotéis e Pousadas"
                 icon={FaBed}
+                target="_self"
+                rel="noreferrer"
                 description="Saiba onde se hospedar em Maricá"
               />
             </Col>
@@ -59,6 +63,8 @@ const Home: React.FC = () => {
                 page="bares-e-Restaurantes"
                 title="Bares e Restaurantes"
                 icon={MdRestaurant}
+                target="_self"
+                rel="noreferrer"
                 description="Aprecie a gastronomia de Maricá"
               />
             </Col>
@@ -67,6 +73,8 @@ const Home: React.FC = () => {
                 page="comercios"
                 title="Comércio Local"
                 icon={FaStoreAlt}
+                target="_self"
+                rel="noreferrer"
                 description="Veja onde fazer as suas compras"
               />
             </Col>
@@ -75,6 +83,8 @@ const Home: React.FC = () => {
                 page="espacos-para-eventos"
                 title="Espaços para Eventos"
                 icon={GiMicrophone}
+                target="_self"
+                rel="noreferrer"
                 description="Locais para fazer suas festas ou reuniões"
               />
             </Col>
@@ -83,6 +93,8 @@ const Home: React.FC = () => {
                 page="eventos"
                 title="Eventos"
                 icon={MdDateRange}
+                target="_self"
+                rel="noreferrer"
                 description="Confira o calendário de eventos da cidade"
               />
             </Col>
@@ -91,6 +103,8 @@ const Home: React.FC = () => {
                 page="/sobre"
                 title="Sobre a cidade"
                 icon={BsFillHouseFill}
+                target="_self"
+                rel="noreferrer"
                 description="Conheça mais sobre Maricá"
               />
             </Col>
@@ -99,6 +113,8 @@ const Home: React.FC = () => {
                 page="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
                 title="Roteiros Turísticos"
                 icon={FaRoute}
+                target="_blank"
+                rel="noreferrer"
                 description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
               />
             </Col>
@@ -107,6 +123,8 @@ const Home: React.FC = () => {
                 page="https://www.feirartemarica.com.br/"
                 title="Artesanato"
                 icon={GiSewingNeedle}
+                target="_blank"
+                rel="noreferrer"
                 description="Conheça e compre as criações dos artesãos de Maricá/RJ"
               />
             </Col>

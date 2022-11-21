@@ -44,7 +44,7 @@ const HotelePousada: React.FC = () => {
   const { id } = useParams()
 
   const setTitle = useTitle()
-  useEffect(() => setTitle(`${hotel?.nome}`))
+  useEffect(() => setTitle(`${hotel?.nome} | Hotéis e Pousadas`))
 
   useEffect(() => {
     if (id) fetchHotel(Number(id))

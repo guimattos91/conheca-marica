@@ -42,6 +42,9 @@ const Restaurants: React.FC = () => {
     () => searchRestaurants(search),
     [searchRestaurants, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
   useEffect(() => {
     setTitle(t('Bares e Restaurantes'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,6 +73,7 @@ const Restaurants: React.FC = () => {
               <SearchComponent
                 placeholderText="Buscar Bares e Restaurantes"
                 handleSearch={handleSearch}
+                clearSearch={clearSearch}
                 search={search}
                 setSearch={setSearch}
               />
