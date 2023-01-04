@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState, useRef } from 'react'
 
 // eslint-disable-next-line import-helpers/order-imports
 import GoogleMapReact from 'google-map-react'
@@ -20,7 +20,13 @@ import useTitle from 'hooks/useTitle'
 
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import { BackDiv, DivMap, FaMapMarkerStyled, StyledH1 } from './style'
+import {
+  BackDiv,
+  ButtonStyled,
+  DivMap,
+  FaMapMarkerStyled,
+  StyledH1,
+} from './style'
 
 interface IMapMarkerProps {
   lat: number
@@ -41,8 +47,9 @@ const TouristicPointsMap: React.FC = () => {
     },
     zoom: 11,
   }
+
   useEffect(() => {
-    setTitle(t('Pontos Turísticos'))
+    setTitle(t('Mapa | Pontos Turísticos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
