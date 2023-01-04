@@ -21,6 +21,7 @@ interface IContextProps {
   fetchPoint: (id: number) => Promise<void>
   fetchPoints: () => Promise<void>
   fetchCategoryPoints: (id: number) => Promise<void>
+  fetchAllCategoryPoints: () => Promise<void>
   searchPoints: (search: string) => Promise<void>
 }
 
@@ -95,6 +96,19 @@ export const PointsProvider: React.FC<IPointsProviderProps> = ({
     }
   }, [])
 
+  const fetchAllCategoryPoints = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/pontos/categorias/`)
+      setCategories(response.data.categorias)
+    } catch {
+      setError('Erro: Ponto não encontrado')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -106,6 +120,7 @@ export const PointsProvider: React.FC<IPointsProviderProps> = ({
           error,
           fetchPoint,
           fetchPoints,
+          fetchAllCategoryPoints,
           fetchCategoryPoints,
           searchPoints,
         }),
@@ -118,6 +133,7 @@ export const PointsProvider: React.FC<IPointsProviderProps> = ({
           fetchPoints,
           fetchPoint,
           fetchCategoryPoints,
+          fetchAllCategoryPoints,
           searchPoints,
         ],
       )}

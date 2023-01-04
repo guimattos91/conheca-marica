@@ -21,6 +21,7 @@ interface IContextProps {
   fetchStore: (id: number) => Promise<void>
   fetchStores: () => Promise<void>
   fetchCategoryStores: (id: number) => Promise<void>
+  fetchAllCategoryStores: () => Promise<void>
   searchStores: (search: string) => Promise<void>
 }
 
@@ -94,6 +95,19 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
     }
   }, [])
 
+  const fetchAllCategoryStores = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/comercios/categorias/`)
+      setCategories(response.data.categorias)
+    } catch {
+      setError('Erro: Não achamos Nenhum Comércio')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -106,6 +120,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
           fetchStore,
           fetchStores,
           fetchCategoryStores,
+          fetchAllCategoryStores,
           searchStores,
         }),
         [
@@ -117,6 +132,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
           fetchStores,
           fetchStore,
           fetchCategoryStores,
+          fetchAllCategoryStores,
           searchStores,
         ],
       )}

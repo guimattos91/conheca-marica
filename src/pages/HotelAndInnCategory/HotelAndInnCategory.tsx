@@ -30,11 +30,17 @@ import {
 } from './style'
 
 const HotelAndInnCategory: React.FC = () => {
-  const { hotels, isLoading, error, fetchCategoryHotels, searchHotels } =
-    useHotels()
+  const {
+    hotels,
+    categories,
+    isLoading,
+    error,
+    fetchCategoryHotels,
+    fetchAllCategoryHotels,
+    searchHotels,
+  } = useHotels()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
@@ -50,8 +56,10 @@ const HotelAndInnCategory: React.FC = () => {
 
   useEffect(() => {
     if (id) fetchCategoryHotels(Number(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchCategoryHotels, id])
+    fetchAllCategoryHotels()
+  }, [fetchCategoryHotels, id, fetchAllCategoryHotels])
+
+  const hotelNomalized = categories.find((hotel) => hotel.id === Number(id))
 
   return (
     <>
@@ -66,7 +74,7 @@ const HotelAndInnCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Hotéis e Pousadas</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{hotelNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>

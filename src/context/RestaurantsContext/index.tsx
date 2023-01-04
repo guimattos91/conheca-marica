@@ -20,6 +20,7 @@ interface IContextProps {
   isLoading: boolean
   fetchRestaurant: (id: number) => Promise<void>
   fetchCategoryRestaurants: (id: number) => Promise<void>
+  fetchAllCategoryRestaurants: () => Promise<void>
   fetchRestaurants: () => Promise<void>
   searchRestaurants: (search: string) => Promise<void>
 }
@@ -96,6 +97,20 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
     }
   }, [])
 
+  const fetchAllCategoryRestaurants = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await Api.get(`/restaurantes/categorias/`)
+      setCategories(response.data.categorias)
+    } catch {
+      setError('Erro: Não achamos Nenhum Bar ou Restaurante')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -107,6 +122,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           error,
           fetchRestaurant,
           fetchRestaurants,
+          fetchAllCategoryRestaurants,
           fetchCategoryRestaurants,
           searchRestaurants,
         }),
@@ -118,6 +134,7 @@ export const RestaurantsProvider: React.FC<IRestaurantsProviderProps> = ({
           error,
           fetchRestaurants,
           fetchRestaurant,
+          fetchAllCategoryRestaurants,
           fetchCategoryRestaurants,
           searchRestaurants,
         ],

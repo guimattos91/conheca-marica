@@ -30,11 +30,17 @@ import {
 } from './style'
 
 const StoresCategory: React.FC = () => {
-  const { stores, isLoading, error, fetchCategoryStores, searchStores } =
-    useStores()
+  const {
+    stores,
+    categories,
+    isLoading,
+    error,
+    fetchCategoryStores,
+    fetchAllCategoryStores,
+    searchStores,
+  } = useStores()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
@@ -50,8 +56,10 @@ const StoresCategory: React.FC = () => {
 
   useEffect(() => {
     if (id) fetchCategoryStores(Number(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchCategoryStores, id])
+    fetchAllCategoryStores()
+  }, [fetchCategoryStores, fetchAllCategoryStores, id])
+
+  const storeNomalized = categories.find((store) => store.id === Number(id))
 
   return (
     <>
@@ -66,7 +74,7 @@ const StoresCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Comércio</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{storeNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>

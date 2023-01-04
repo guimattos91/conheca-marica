@@ -32,6 +32,7 @@ import {
 const RestaurantCategory: React.FC = () => {
   const {
     restaurants,
+    categories,
     isLoading,
     error,
     fetchCategoryRestaurants,
@@ -39,7 +40,6 @@ const RestaurantCategory: React.FC = () => {
   } = useRestaurants()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
@@ -58,6 +58,10 @@ const RestaurantCategory: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchCategoryRestaurants, id])
 
+  const restaurantNomalized = categories.find(
+    (restaurant) => restaurant.id === Number(id),
+  )
+
   return (
     <>
       <Header />
@@ -71,7 +75,7 @@ const RestaurantCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Bares e Restaurantes</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{restaurantNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>

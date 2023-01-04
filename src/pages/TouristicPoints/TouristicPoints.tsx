@@ -72,6 +72,11 @@ const PontosTuristicos: React.FC = () => {
               />
             </Col>
           </Row>
+          {isLoading && (
+            <Col className="d-flex justify-content-center">
+              <LoadingComponent Loading={isLoading} />
+            </Col>
+          )}
           <Row className="d-flex">
             <Col>
               <CategoryPillsComponent
@@ -82,11 +87,6 @@ const PontosTuristicos: React.FC = () => {
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
-            {isLoading && (
-              <Col className="d-flex justify-content-center">
-                <LoadingComponent Loading={isLoading} />
-              </Col>
-            )}
             {!isLoading &&
               !error &&
               points.map(

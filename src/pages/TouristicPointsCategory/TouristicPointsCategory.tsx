@@ -30,14 +30,22 @@ import {
 } from './style'
 
 const TouristicPointsCategory: React.FC = () => {
-  const { points, isLoading, error, fetchCategoryPoints, searchPoints } =
-    usePoints()
+  const {
+    points,
+    categories,
+    isLoading,
+    error,
+    fetchCategoryPoints,
+    fetchAllCategoryPoints,
+    searchPoints,
+  } = usePoints()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
+  // const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
+
   const handleSearch = useCallback(
     () => searchPoints(search),
     [searchPoints, search],
@@ -50,8 +58,15 @@ const TouristicPointsCategory: React.FC = () => {
 
   useEffect(() => {
     if (id) fetchCategoryPoints(Number(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchCategoryPoints, id])
+    fetchAllCategoryPoints()
+  }, [fetchCategoryPoints, id, fetchAllCategoryPoints])
+
+  const pointNomalized = categories.find((point) => point.id === Number(id))
+
+  // const handleId = useCallback(
+  //   () => points.find,
+  //   [searchPoints, search],
+  // )
 
   return (
     <>
@@ -66,7 +81,7 @@ const TouristicPointsCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Pontos Turísticos</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{pointNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>

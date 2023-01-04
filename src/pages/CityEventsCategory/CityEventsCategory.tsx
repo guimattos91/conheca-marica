@@ -30,11 +30,17 @@ import {
 } from './style'
 
 const CityEventsCategory: React.FC = () => {
-  const { events, isLoading, error, fetchCategoryEvents, searchEvents } =
-    useEvents()
+  const {
+    events,
+    categories,
+    isLoading,
+    error,
+    fetchCategoryEvents,
+    fetchAllCategoryEvents,
+    searchEvents,
+  } = useEvents()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
@@ -50,8 +56,10 @@ const CityEventsCategory: React.FC = () => {
 
   useEffect(() => {
     if (id) fetchCategoryEvents(Number(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchCategoryEvents, id])
+    fetchAllCategoryEvents()
+  }, [fetchCategoryEvents, fetchAllCategoryEvents, id])
+
+  const eventNomalized = categories.find((point) => point.id === Number(id))
 
   return (
     <>
@@ -66,7 +74,7 @@ const CityEventsCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Eventos</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{eventNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>

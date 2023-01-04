@@ -18,6 +18,7 @@ export const StyledA = styled.a`
   text-decoration: none;
   color: white;
   margin-right: 0.5rem;
+  text-decoration: underline;
 
   :hover {
     color: white;

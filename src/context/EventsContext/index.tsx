@@ -21,6 +21,7 @@ interface IContextProps {
   fetchEvent: (id: number) => Promise<void>
   fetchEvents: () => Promise<void>
   fetchCategoryEvents: (id: number) => Promise<void>
+  fetchAllCategoryEvents: () => Promise<void>
   searchEvents: (search: string) => Promise<void>
 }
 
@@ -99,6 +100,19 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
     }
   }, [])
 
+  const fetchAllCategoryEvents = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/eventos/categorias/`)
+      setCategories(response.data.categorias)
+    } catch {
+      setError('Erro: Não achamos Nenhum Evento')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -111,6 +125,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
           fetchEvent,
           fetchEvents,
           fetchCategoryEvents,
+          fetchAllCategoryEvents,
           searchEvents,
         }),
         [
@@ -122,6 +137,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
           fetchEvent,
           fetchEvents,
           fetchCategoryEvents,
+          fetchAllCategoryEvents,
           searchEvents,
         ],
       )}

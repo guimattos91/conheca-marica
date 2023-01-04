@@ -21,6 +21,7 @@ interface IContextProps {
   fetchSpace: (id: number) => Promise<void>
   fetchSpaces: () => Promise<void>
   fetchCategorySpaces: (id: number) => Promise<void>
+  fetchAllCategorySpaces: () => Promise<void>
   searchSpaces: (search: string) => Promise<void>
 }
 
@@ -93,6 +94,19 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
     }
   }, [])
 
+  const fetchAllCategorySpaces = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await Api.get(`/espacos/categorias/`)
+      setCategories(response.data.categorias)
+    } catch {
+      setError('Erro: Não achamos Nenhum Space ou Pousada')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
   return (
     <ReactContext.Provider
       value={useMemo(
@@ -105,6 +119,7 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
           fetchSpace,
           fetchSpaces,
           fetchCategorySpaces,
+          fetchAllCategorySpaces,
           searchSpaces,
         }),
         [
@@ -116,6 +131,7 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
           fetchSpace,
           fetchSpaces,
           fetchCategorySpaces,
+          fetchAllCategorySpaces,
           searchSpaces,
         ],
       )}

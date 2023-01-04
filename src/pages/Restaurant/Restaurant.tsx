@@ -64,7 +64,6 @@ const BareRestaurante: React.FC = () => {
         {!isLoading && !error && restaurant && (
           <>
             <SliderCarouselComponent itemCategory={restaurant} />
-
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={restaurant.id}>

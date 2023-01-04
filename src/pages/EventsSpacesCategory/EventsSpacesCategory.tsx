@@ -30,11 +30,17 @@ import {
 } from './style'
 
 const EventsSpacesCategory: React.FC = () => {
-  const { spaces, isLoading, error, fetchCategorySpaces, searchSpaces } =
-    useSpace()
+  const {
+    spaces,
+    categories,
+    isLoading,
+    error,
+    fetchCategorySpaces,
+    fetchAllCategorySpaces,
+    searchSpaces,
+  } = useSpace()
   const { t, i18n } = useTranslation()
   const { id } = useParams()
-  const { name } = useParams()
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
@@ -50,8 +56,10 @@ const EventsSpacesCategory: React.FC = () => {
 
   useEffect(() => {
     if (id) fetchCategorySpaces(Number(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchCategorySpaces, id])
+    fetchAllCategorySpaces()
+  }, [fetchCategorySpaces, fetchAllCategorySpaces, id])
+
+  const spaceNomalized = categories.find((space) => space.id === Number(id))
 
   return (
     <>
@@ -66,7 +74,7 @@ const EventsSpacesCategory: React.FC = () => {
                 </Link>
                 <div className="d-flex flex-column">
                   <StyledSmallText>Espaços para Evento</StyledSmallText>
-                  <StyledH1>{name?.toUpperCase()}</StyledH1>
+                  <StyledH1>{spaceNomalized?.label}</StyledH1>
                 </div>
               </div>
             </Col>
