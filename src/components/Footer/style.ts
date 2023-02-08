@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StyleFooter = styled.footer`
+export const StyleFooter = styled.div`
   background-color: #333;
   color: white;
 `

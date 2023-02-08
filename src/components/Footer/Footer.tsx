@@ -12,7 +12,7 @@ import SiteSignature from 'components/SiteSignature'
 import { StyledA, StyleFooter } from './style'
 
 const Footer: React.FC = () => (
-  <>
+  <footer>
     <StyleFooter>
       <Container>
         <Row className="row-cols-1 row-cols-xl-2 d-flex align-items-center pb-5">
@@ -115,7 +115,7 @@ const Footer: React.FC = () => (
       </Container>
     </StyleFooter>
     <SiteSignature />
-  </>
+  </footer>
 )
 
 export default memo(Footer)
