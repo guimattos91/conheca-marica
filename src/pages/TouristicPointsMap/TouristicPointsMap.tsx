@@ -1,57 +1,21 @@
-import React, { memo, useEffect, useState, useRef } from 'react'
-
-// eslint-disable-next-line import-helpers/order-imports
-import GoogleMapReact from 'google-map-react'
-import { Col } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
-import { BsArrowLeft } from 'react-icons/bs'
-import { MainStyled } from 'style/style'
-
-import Config from 'Config'
+import React, { memo, useEffect } from 'react'
 
 import { usePoints } from 'context/PointsContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
-import LoadingComponent from 'components/LoadingComponent'
-import { StyledLink } from 'components/TitleH1/style'
+import PageMapComponent from 'components/PageMapComponent'
 
 import useTitle from 'hooks/useTitle'
 
-import { AddressType, CategoryType } from 'types/CollectionType'
-
-import {
-  BackDiv,
-  ButtonStyled,
-  DivMap,
-  FaMapMarkerStyled,
-  StyledH1,
-} from './style'
-
-interface IMapMarkerProps {
-  lat: number
-  lng: number
-}
-
-const MapMarker: React.FC<IMapMarkerProps> = () => (
-  <FaMapMarkerStyled color="red" size={24} />
-)
 const TouristicPointsMap: React.FC = () => {
   const { points, isLoading, error, fetchPoints } = usePoints()
-  const { t, i18n } = useTranslation()
   const setTitle = useTitle()
-  const defaultProps = {
-    center: {
-      lat: -22.910508771435765,
-      lng: -42.81977648729461,
-    },
-    zoom: 11,
-  }
 
   useEffect(() => {
-    setTitle(t('Mapa | Pontos Turísticos'))
+    setTitle('Mapa | Pontos Turísticos')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+  }, [])
 
   useEffect(() => {
     fetchPoints()
@@ -61,47 +25,12 @@ const TouristicPointsMap: React.FC = () => {
   return (
     <>
       <Header />
-      <MainStyled>
-        <BackDiv className="p-3">
-          <StyledLink to="/pontos-turisticos">
-            <div className="d-flex align-items-center">
-              <BsArrowLeft color="#333" />
-              <StyledH1 className="ps-2">Pontos Turísticos</StyledH1>
-            </div>
-          </StyledLink>
-        </BackDiv>
-        <DivMap style={{ height: '100%', width: '100%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: `${Config.services.google.mapsAPI.key}` }}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
-          >
-            {isLoading && (
-              <Col className="d-flex justify-content-center">
-                <LoadingComponent Loading={isLoading} />
-              </Col>
-            )}
-            {!isLoading &&
-              !error &&
-              points.map(
-                (point: {
-                  id: number
-                  nome: string
-                  capa: string | undefined
-                  lat: number | null
-                  lng: number | null
-                  enderecos: AddressType[]
-                  categorias: CategoryType[]
-                }) => (
-                  <MapMarker lat={Number(point.lat)} lng={Number(point.lng)} />
-                ),
-              )}
-            {!isLoading && !error && points.length === 0 && (
-              <h2>Nenhum resultado encontrado</h2>
-            )}
-          </GoogleMapReact>
-        </DivMap>
-      </MainStyled>
+      <PageMapComponent
+        category={points}
+        isloading={isLoading}
+        error={error}
+        title="Pontos Turísticos"
+      />
       <Footer />
     </>
   )

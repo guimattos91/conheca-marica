@@ -10,6 +10,7 @@ import {
   BackDiv,
   DataDiv,
   LinkStyled,
+  LinkStyledPill,
   ListStyle,
   StyledText,
   StyledTitle,
@@ -19,7 +20,7 @@ interface ICollectionTypeProps {
   collection: CollectionType
   linkcategory: string
 }
-const CategoryCard: React.FC<ICollectionTypeProps> = ({
+const ItemCard: React.FC<ICollectionTypeProps> = ({
   collection,
   linkcategory,
 }) => {
@@ -51,25 +52,27 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({
             </DataDiv>
           )}
           <div>
-            <LinkStyled
-              to={`/${linkcategory}/${collection.id}/${strToSlug(
-                collection.nome,
-              )}`}
-            >
-              <StyledTitle className="pb-2">{collection.nome}</StyledTitle>
-            </LinkStyled>
+            <StyledTitle className="pb-2">
+              <LinkStyled
+                to={`/${linkcategory}/${collection.id}/${strToSlug(
+                  collection.nome,
+                )}`}
+              >
+                {collection.nome}{' '}
+              </LinkStyled>
+            </StyledTitle>
           </div>
         </div>
         <ListStyle className="d-flex">
           {collection?.categorias.slice(0, 4).map((categoria) => (
             <li key={categoria.id}>
-              <LinkStyled
+              <LinkStyledPill
                 to={`/${linkcategory}/categorias/${categoria.id}/${strToSlug(
                   categoria.label,
                 )}`}
               >
                 {categoria.label}
-              </LinkStyled>
+              </LinkStyledPill>
             </li>
           ))}
         </ListStyle>
@@ -82,4 +85,4 @@ const CategoryCard: React.FC<ICollectionTypeProps> = ({
     </BackDiv>
   )
 }
-export default memo(CategoryCard)
+export default memo(ItemCard)

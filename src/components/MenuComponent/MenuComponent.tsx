@@ -20,10 +20,9 @@ import {
 const MenuComponent: React.FC = () => {
   const [show, setShow] = useState(false)
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleClose = () => setShow(false)
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleShow = () => setShow(true)
+  const handleClose = (): void => setShow(false)
+
+  const handleShow = (): void => setShow(true)
 
   return (
     <>

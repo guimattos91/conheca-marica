@@ -1,6 +1,7 @@
 import { memo } from 'react'
 
 import { Ratio } from 'react-bootstrap'
+// import { MdArrowForwardIos } from 'react-icons/md'
 import Slider from 'react-slick'
 
 import { ItemType } from 'types/ItemType'
@@ -65,30 +66,39 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
   }
   return (
     <>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Slider {...settings}>
-        {itemCategory.images.length >= 4 &&
-          itemCategory.images.map((imagem) => (
-            <div key={imagem.id}>
-              <Ratio
-                aspectRatio="1x1"
-                style={{
-                  backgroundImage: `url(${imagem.src})`,
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center center',
-                }}
-              >
-                <div />
-              </Ratio>
-            </div>
-          ))}
-      </Slider>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Slider {...settingsSmall}>
-        <div className="d-flex justify-content-center">
-          {itemCategory.images.length < 4 &&
-            itemCategory.images.map((imagem) => (
+      {itemCategory.images.length >= 4 && (
+        <>
+          {/* <ArrowDivPrevious type="button" className="slick-arrow slick-prev">
+            <MdArrowForwardIos size={50} />
+          </ArrowDivPrevious> */}
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Slider {...settings}>
+            {itemCategory.images.map((imagem) => (
+              <div key={imagem.id}>
+                <Ratio
+                  aspectRatio="1x1"
+                  style={{
+                    backgroundImage: `url(${imagem.src})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                  }}
+                >
+                  <div />
+                </Ratio>
+              </div>
+            ))}
+          </Slider>
+          {/* <ArrowDiv>
+            <MdArrowForwardIos />
+          </ArrowDiv> */}
+        </>
+      )}
+      {itemCategory.images.length < 4 && (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Slider {...settingsSmall}>
+          <div className="d-flex justify-content-center">
+            {itemCategory.images.map((imagem) => (
               <RatioResponsive
                 aspectRatio="1x1"
                 style={{
@@ -102,8 +112,9 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
                 <div />
               </RatioResponsive>
             ))}
-        </div>
-      </Slider>
+          </div>
+        </Slider>
+      )}
     </>
   )
 }
