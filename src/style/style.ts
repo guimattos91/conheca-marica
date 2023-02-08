@@ -28,7 +28,13 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     };
 
-  html, body, #root{
-        min-height: 100vh;
+    html, body, #root{
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     };
+
+    footer{
+      margin-top: auto;
+    }
 `
