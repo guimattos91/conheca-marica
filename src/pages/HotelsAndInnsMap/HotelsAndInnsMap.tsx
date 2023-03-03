@@ -30,6 +30,7 @@ const HotelsAndInnsMap: React.FC = () => {
         isloading={isLoading}
         error={error}
         title="Hotéis e Pousadas"
+        categoryPage="/hoteis-e-pousadas"
       />
       <Footer />
     </>

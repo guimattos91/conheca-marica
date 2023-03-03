@@ -30,6 +30,7 @@ const TouristicPointsMap: React.FC = () => {
         isloading={isLoading}
         error={error}
         title="Pontos Turísticos"
+        categoryPage="/pontos-turisticos"
       />
       <Footer />
     </>

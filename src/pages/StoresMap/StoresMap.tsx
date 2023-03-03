@@ -30,6 +30,7 @@ const StoresMap: React.FC = () => {
         isloading={isLoading}
         error={error}
         title="Comércio Local"
+        categoryPage="/comercios"
       />
       <Footer />
     </>

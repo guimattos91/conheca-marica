@@ -1,9 +1,6 @@
 import { memo, useEffect } from 'react'
 
 import { Col, Container, Row } from 'react-bootstrap'
-// eslint-disable-next-line import-helpers/order-imports
-import { useTranslation } from 'react-i18next'
-
 import { BsFillHouseFill } from 'react-icons/bs'
 import { FaUmbrellaBeach, FaBed, FaStoreAlt, FaRoute } from 'react-icons/fa'
 import { GiMicrophone, GiSewingNeedle } from 'react-icons/gi'
@@ -19,13 +16,11 @@ import Header from 'components/Header'
 import useTitle from 'hooks/useTitle'
 
 const Home: React.FC = () => {
-  const { t, i18n } = useTranslation()
   const setTitle = useTitle()
 
   useEffect(() => {
-    setTitle(t('home.head-title'))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.resolvedLanguage])
+    setTitle('')
+  }, [setTitle])
 
   return (
     <>
@@ -46,6 +41,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Conheça nossas praias, lagoas, grutas e outros pontos turísticos"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -56,6 +52,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Saiba onde se hospedar em Maricá"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -66,6 +63,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Aprecie a gastronomia de Maricá"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -76,6 +74,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Veja onde fazer as suas compras"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -86,6 +85,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Locais para fazer suas festas ou reuniões"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -96,6 +96,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Confira o calendário de eventos da cidade"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -106,6 +107,7 @@ const Home: React.FC = () => {
                 target="_self"
                 rel="noreferrer"
                 description="Conheça mais sobre Maricá"
+                turnOn="on"
               />
             </Col>
             <Col>
@@ -116,6 +118,7 @@ const Home: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
+                turnOn="off"
               />
             </Col>
             <Col>
@@ -126,6 +129,7 @@ const Home: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 description="Conheça e compre as criações dos artesãos de Maricá/RJ"
+                turnOn="off"
               />
             </Col>
           </Row>

@@ -92,7 +92,7 @@ export const EventProvider: React.FC<IEventsProviderProps> = ({ children }) => {
     setError(null)
     try {
       const response = await Api.get(`/eventos/categorias/${id}`)
-      setEvent(response.data.collection)
+      setEvents(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Evento')
     } finally {

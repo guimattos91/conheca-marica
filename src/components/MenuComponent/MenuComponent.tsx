@@ -138,7 +138,7 @@ const MenuComponent: React.FC = () => {
               className="d-flex align-items-center"
             >
               <GiSewingNeedle color="white" />
-              <p className="ps-2 m-0">Artesanatos</p>
+              <p className="ps-2 m-0">Artesanato</p>
             </AStyled>
           </DivStripes>
         </Offcanvas.Body>

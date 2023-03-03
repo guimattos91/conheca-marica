@@ -1,4 +1,4 @@
-import { memo, SetStateAction } from 'react'
+import { memo, SetStateAction, useCallback, useRef } from 'react'
 
 import { BsSearch } from 'react-icons/bs'
 
@@ -19,6 +19,19 @@ const SearchComponent: React.FC<ISearchProps> = ({
   search,
   setSearch,
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  const handleKeyPress = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        buttonRef.current?.click()
+      }
+    },
+    [],
+  )
+
   return (
     <SearchDiv className="d-flex align-items-center flex-grow-1 px-3">
       <InputStyled
@@ -26,13 +39,15 @@ const SearchComponent: React.FC<ISearchProps> = ({
         placeholder={placeholderText}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        ref={inputRef}
+        onKeyDown={handleKeyPress}
       />
       {search.length > 1 && (
         <ButtonStyled type="button" onClick={clearSearch}>
           <p className="p-0 m-0 pe-2">x</p>
         </ButtonStyled>
       )}
-      <ButtonStyled type="button" onClick={handleSearch}>
+      <ButtonStyled type="button" onClick={handleSearch} ref={buttonRef}>
         <BsSearch />
       </ButtonStyled>
     </SearchDiv>

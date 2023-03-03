@@ -30,6 +30,7 @@ const EventsSpacesMap: React.FC = () => {
         isloading={isLoading}
         error={error}
         title="Espaços para Eventos"
+        categoryPage="/espacos-para-eventos"
       />
       <Footer />
     </>

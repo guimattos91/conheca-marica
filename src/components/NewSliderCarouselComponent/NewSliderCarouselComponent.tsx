@@ -8,19 +8,15 @@ import Slider, { Settings } from 'react-slick'
 
 import { ItemType } from 'types/ItemType'
 
-import {
-  ArrowDiv,
-  ArrowDivPrevious,
-  DivSmallSlider,
-  ImageCarouselBackground,
-  RatioResponsive,
-} from './style'
+import { ArrowDiv, ArrowDivPrevious, RatioResponsive } from './style'
 
 interface ISlideProps {
   itemCategory: ItemType
 }
 
-const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
+const NewSliderCarouselComponent: React.FC<ISlideProps> = ({
+  itemCategory,
+}) => {
   const customeSlider = useRef<Slider>(null)
 
   const [sliderSettings, setSliderSettings] = useState<Settings>({
@@ -93,23 +89,24 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 2,
     slidesToScroll: 0,
     arrows: false,
     responsive: [
       {
-        breakpoint: 992,
+        breakpoint: 780,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 0,
+          arrows: false,
         },
       },
       {
-        breakpoint: 576,
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots: false,
+          arrows: false,
         },
       },
     ],
@@ -154,16 +151,26 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
         </>
       )}
       {itemCategory.images.length < 4 && (
-        <>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Slider {...settingsSmall}>
-            {itemCategory.images.map((imagem) => (
-              <ImageCarouselBackground key={imagem.id} image={imagem.src} />
-            ))}
-          </Slider>
-        </>
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Slider {...settingsSmall}>
+          {itemCategory.images.map((imagem) => (
+            <div key={imagem.id}>
+              <Ratio
+                aspectRatio="1x1"
+                style={{
+                  backgroundImage: `url(${imagem.src})`,
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center center',
+                }}
+              >
+                <div />
+              </Ratio>
+            </div>
+          ))}
+        </Slider>
       )}
     </>
   )
 }
-export default memo(SliderCarouselComponent)
+export default memo(NewSliderCarouselComponent)

@@ -6,7 +6,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
-import { BsArrowLeft, BsSearch } from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
+import { FaMapMarkedAlt } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
 import { MainStyled } from 'style/style'
 
@@ -16,18 +17,15 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import LoadingComponent from 'components/LoadingComponent'
+import SearchComponent from 'components/SearchComponent'
 
 import useTitle from 'hooks/useTitle'
 
+import { MapButton } from 'pages/EventSpaces/style'
+
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import {
-  ButtonStyled,
-  InputStyled,
-  SearchDiv,
-  StyledH1,
-  StyledSmallText,
-} from './style'
+import { LinkStyled, StyledH1, StyledSmallText } from './style'
 
 const EventsSpacesCategory: React.FC = () => {
   const {
@@ -44,13 +42,17 @@ const EventsSpacesCategory: React.FC = () => {
   const [search, setSearch] = useState('')
 
   const setTitle = useTitle()
+
   const handleSearch = useCallback(
     () => searchSpaces(search),
     [searchSpaces, search],
   )
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
 
   useEffect(() => {
-    setTitle(t('Hotéis e Pousadas'))
+    setTitle(t('Comércio Local'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage])
 
@@ -69,7 +71,7 @@ const EventsSpacesCategory: React.FC = () => {
           <Row className="py-3">
             <Col>
               <div className="d-flex align-items-center">
-                <Link to="/eventos" className="pe-3">
+                <Link to="/espacos-para-eventos" className="pe-3">
                   <BsArrowLeft size={20} color="#333" />
                 </Link>
                 <div className="d-flex flex-column">
@@ -79,17 +81,19 @@ const EventsSpacesCategory: React.FC = () => {
               </div>
             </Col>
             <Col className="d-flex align-items-end justify-content-end pb-3">
-              <SearchDiv className="d-flex  align-items-center px-3">
-                <InputStyled
-                  type="text"
-                  placeholder="Buscar Hotéis e Pousadas"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <ButtonStyled type="button" onClick={handleSearch}>
-                  <BsSearch />
-                </ButtonStyled>
-              </SearchDiv>
+              <LinkStyled to="/espacos-para-eventos/mapa">
+                <MapButton className="d-flex  align-items-center px-3 me-2">
+                  <FaMapMarkedAlt color="white" className="me-2" />
+                  <p>Mapa</p>
+                </MapButton>
+              </LinkStyled>
+              <SearchComponent
+                placeholderText="Buscar Espaços para Eventos"
+                handleSearch={handleSearch}
+                clearSearch={clearSearch}
+                search={search}
+                setSearch={setSearch}
+              />
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-5">

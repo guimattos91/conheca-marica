@@ -86,7 +86,7 @@ export const SpaceProvider: React.FC<ISpacesProviderProps> = ({ children }) => {
     setError(null)
     try {
       const response = await Api.get(`/espacos/categorias/${id}`)
-      setSpace(response.data.item)
+      setSpaces(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Space ou Pousada')
     } finally {

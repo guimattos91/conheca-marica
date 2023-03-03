@@ -21,6 +21,7 @@ interface IMapComponentProps {
   isloading: boolean
   error: string | null
   title: string
+  categoryPage: string
 }
 interface ItemProps {
   id: number
@@ -37,6 +38,7 @@ const PageMapComponent: React.FC<IMapComponentProps> = ({
   isloading,
   error,
   title,
+  categoryPage,
 }) => {
   const defaultProps = {
     center: {
@@ -49,7 +51,7 @@ const PageMapComponent: React.FC<IMapComponentProps> = ({
   return (
     <MainStyled>
       <BackDiv className="p-3">
-        <StyledLink to="/hoteis-e-pousadas">
+        <StyledLink to={categoryPage}>
           <div className="d-flex align-items-center">
             <BsArrowLeft color="#333" />
             <StyledH1 className="ps-2">{title}</StyledH1>

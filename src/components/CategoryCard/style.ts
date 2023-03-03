@@ -1,10 +1,19 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const BackDiv = styled.div`
   background-color: white;
   border-radius: 0.25rem;
 `
-export const LinkStyled = styled.a`
+export const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: #343a40;
+  &:hover {
+    color: #343a40;
+  }
+`
+
+export const LinkOutsideStyled = styled.a`
   text-decoration: none;
   color: #343a40;
   &:hover {

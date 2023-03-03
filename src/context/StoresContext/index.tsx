@@ -60,7 +60,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
       busca: search,
     }
     try {
-      const response = await Api.get('/pontos/busca', { params })
+      const response = await Api.get('/comercios/busca', { params })
       setStores(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Comércio')
@@ -87,7 +87,7 @@ export const StoresProvider: React.FC<IStoresProviderProps> = ({
     setError(null)
     try {
       const response = await Api.get(`/comercios/categorias/${id}`)
-      setStore(response.data.collection)
+      setStores(response.data.collection)
     } catch {
       setError('Erro: Não achamos Nenhum Comércio')
     } finally {

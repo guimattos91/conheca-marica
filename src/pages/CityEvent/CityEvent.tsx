@@ -3,29 +3,24 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Row } from 'react-bootstrap'
 
-import { AiOutlineGlobal } from 'react-icons/ai'
-import {
-  BsArrowLeft,
-  BsCheckCircle,
-  BsClock,
-  BsTelephone,
-  BsWhatsapp,
-} from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 import { FaRegMoneyBillAlt } from 'react-icons/fa'
-import { MdOutlineEmail, MdOutlineLocationOn } from 'react-icons/md'
-import SVG from 'react-inlinesvg'
 import { Link, useParams } from 'react-router-dom'
 import { MainStyled, TextDescription } from 'style/style'
 
 import { useEvents } from 'context/EventsContext'
 
+import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
 import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
 import LoadingComponent from 'components/LoadingComponent'
+import PaymentComponent from 'components/PaymentComponent'
+import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
+import StructureComponent from 'components/StructureComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import { getDay, GetHour, getMonth, NormalizeDate } from 'helpers'
@@ -34,7 +29,6 @@ import useTitle from 'hooks/useTitle'
 
 import {
   DataDiv,
-  DivIcon,
   StyledContainer,
   StyledH1,
   StyledH2,
@@ -104,203 +98,10 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <TextDescription>{event.descricao_t}</TextDescription>
-                  <div>
-                    <TitleH2Intern title="Sobre" />
-                    {event.addresses.map(
-                      (address: { id: number; label: string }) => (
-                        <div
-                          className="d-flex align-items-center pb-4"
-                          key={address.id}
-                        >
-                          <MdOutlineLocationOn
-                            color="#6ebd00"
-                            size={36}
-                            className="pe-2"
-                          />
-                          <p className="m-0">{address.label}</p>
-                        </div>
-                      ),
-                    )}
-                    {event.phones.map(
-                      (phone: {
-                        id: number
-                        number: string
-                        nome: string
-                        whatsapp: boolean
-                      }) => (
-                        <div
-                          className="d-flex align-items-center pb-3"
-                          key={phone.id}
-                        >
-                          {phone.whatsapp && (
-                            <BsWhatsapp
-                              color="#6ebd00"
-                              size={30}
-                              className="pe-2"
-                            />
-                          )}
-                          {!phone.whatsapp && (
-                            <BsTelephone
-                              color="#6ebd00"
-                              size={30}
-                              className="pe-2"
-                            />
-                          )}
-                          <div className="d-flex flex-column">
-                            <StyledSmallText className="m-0 ">
-                              {phone.nome}
-                            </StyledSmallText>
-                            <p className="m-0">{phone.number}</p>
-                          </div>
-                        </div>
-                      ),
-                    )}
-                    {event.email && (
-                      <div className="d-flex align-items-center pb-3">
-                        <MdOutlineEmail
-                          color="#6ebd00"
-                          size={30}
-                          className="pe-2"
-                        />
-                        <a href={`mailto:${event.email}`}>{event.email}</a>
-                      </div>
-                    )}
-                    {event.site && (
-                      <div className="d-flex align-items-center pb-3">
-                        <AiOutlineGlobal
-                          color="#6ebd00"
-                          size={30}
-                          className="pe-2"
-                        />
-                        <a href={event.site}>{event.site}</a>
-                      </div>
-                    )}
-                    {event.redes.map(
-                      (network: {
-                        icone: string
-                        nome: string
-                        user: string
-                        url: string
-                      }) => (
-                        <DivIcon
-                          key={network.nome}
-                          className="d-flex align-items-center pb-3"
-                        >
-                          <i className={network.icone} />
-                          <a href={network.url}>{network.user}</a>
-                        </DivIcon>
-                      ),
-                    )}
-                    {event?.horario_funcionamento?.length >= 1 && (
-                      <div className="d-flex align-items-start">
-                        <BsClock color="#6ebd00" size={20} className="me-4" />
-                        <table>
-                          <tbody>
-                            {event.horario_funcionamento.map(
-                              (workinghours: {
-                                label: string
-                                horario: { abre: string; fecha: string }
-                                is24: boolean
-                              }) => (
-                                <tr>
-                                  <td
-                                    className="fw-bold pe-5"
-                                    key={workinghours.label}
-                                  >
-                                    {workinghours.label}
-                                  </td>
-                                  <td>
-                                    {workinghours.horario.abre} às
-                                    {workinghours.horario.fecha}
-                                  </td>
-                                </tr>
-                              ),
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
-                  {event?.estruturas?.length >= 1 && (
-                    <div>
-                      <TitleH2Intern title="Estruturas" />
-                      <div className="d-flex flex-wrap">
-                        {event.estruturas.map(
-                          (structure: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={structure.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                color="#6ebd00"
-                                height="auto"
-                                title={structure.label}
-                              />
-                              <p
-                                key={structure.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {structure.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  {event?.restricoes?.length >= 1 && (
-                    <div>
-                      <TitleH2Intern title="Restrições" />
-                      <div className="d-flex flex-wrap">
-                        {event.restricoes.map(
-                          (restriction: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={restriction.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                height="auto"
-                                title={restriction.label}
-                              />
-                              <p
-                                key={restriction.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {restriction.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  {event?.estruturas?.length >= 1 && (
-                    <div>
-                      <TitleH2Intern title="Estruturas" />
-                      <div className="d-flex flex-wrap">
-                        {event.estruturas.map(
-                          (structure: { icone: string; label: string }) => (
-                            <div className="d-flex align-items-center pe-4 py-4">
-                              <SVG
-                                src={structure.icone}
-                                width={30}
-                                fill="#6ebd00"
-                                color="#6ebd00"
-                                height="auto"
-                                title={structure.label}
-                              />
-                              <p
-                                key={structure.label}
-                                className="d-inline-flex ps-2 m-0"
-                              >
-                                {structure.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  <AboutComponent category={event} />
+
+                  <StructureComponent category={event} />
+                  <RestrictComponent category={event} />
                   {event?.gratuito === 1 && (
                     <div>
                       <TitleH2Intern title="Valor da Entrada" />
@@ -314,30 +115,7 @@ const EspacoParaEvento: React.FC = () => {
                       </div>
                     </div>
                   )}
-                  {event?.formas_pagamento?.length >= 1 && (
-                    <div>
-                      <TitleH2Intern title="Formas de Pagamento" />
-                      <div className="d-flex flex-wrap">
-                        {event.formas_pagamento.map(
-                          (payment: { icone: string; label: string }) => (
-                            <div
-                              className="d-flex align-items-center pe-4 pb-4"
-                              key={payment.label}
-                            >
-                              <BsCheckCircle
-                                color="#6ebd00"
-                                size={20}
-                                className="me-2"
-                              />
-                              <p className="d-inline-flex ps-2 m-0">
-                                {payment.label}
-                              </p>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  <PaymentComponent category={event} />
                 </Col>
                 <Col xs={12} xl={4}>
                   <StyledH2>Localização</StyledH2>

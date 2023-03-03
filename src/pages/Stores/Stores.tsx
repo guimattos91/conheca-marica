@@ -79,6 +79,7 @@ const Comercios: React.FC = () => {
               <LoadingComponent Loading={isLoading} />
             </Col>
           )}
+
           <Row className="d-flex">
             <Col>
               <CategoryPillsComponent

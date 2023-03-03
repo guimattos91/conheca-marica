@@ -16,27 +16,34 @@ const CategoryPillsComponent: React.FC<ICategoryPillsProps> = ({
   Loading,
   Error,
   Categories,
-}) => (
-  <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3">
-    {!Loading &&
-      !Error &&
-      Categories.map(
-        (category: {
-          id: number
-          label: string
-          count?: number | undefined
-        }) => (
-          <li key={category.id}>
-            <LinkStyled
-              className="button button-md"
-              to={`categorias/${category.id}/${strToSlug(category.label)}`}
-            >
-              {category.label}
-            </LinkStyled>
-          </li>
-        ),
-      )}
-  </ListStyle>
-)
+}) => {
+  const pathArray = window.location.pathname.split('/')
+  const categoryName = pathArray[1]
+
+  return (
+    <ListStyle className="d-flex flex-nowrap flex-md-wrap g-3">
+      {!Loading &&
+        !Error &&
+        Categories.map(
+          (category: {
+            id: number
+            label: string
+            count?: number | undefined
+          }) => (
+            <li key={category.id}>
+              <LinkStyled
+                className="button button-md"
+                to={`/${categoryName}/categorias/${category.id}/${strToSlug(
+                  category.label,
+                )}`}
+              >
+                {category.label}
+              </LinkStyled>
+            </li>
+          ),
+        )}
+    </ListStyle>
+  )
+}
 
 export default memo(CategoryPillsComponent)

@@ -12,6 +12,7 @@ export const DataDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
 
   p {
     padding: 0;
