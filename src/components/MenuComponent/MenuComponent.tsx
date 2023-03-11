@@ -28,7 +28,7 @@ const MenuComponent: React.FC = () => {
     <>
       <ButtonStyled
         variant="link"
-        className="d-flex align-items-center text-white"
+        className="d-flex align-items-center text-white w-100"
         onClick={handleShow}
       >
         <BiMenu size={28} />

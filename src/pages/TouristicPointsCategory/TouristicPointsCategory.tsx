@@ -6,9 +6,10 @@ import { Col, Container, Row } from 'react-bootstrap'
 // import Config from 'Config'
 
 import { useTranslation } from 'react-i18next'
-import { BsArrowLeft, BsSearch } from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
+import { FaMapMarkedAlt } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
-import { MainStyled } from 'style/style'
+import { LinkStyled, MainStyled } from 'style/style'
 
 import { usePoints } from 'context/PointsContext'
 
@@ -16,18 +17,15 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import ItemCard from 'components/ItemCard'
 import LoadingComponent from 'components/LoadingComponent'
+import SearchComponent from 'components/SearchComponent'
 
 import useTitle from 'hooks/useTitle'
 
+import { MapButton } from 'pages/TouristicPoints/style'
+
 import { AddressType, CategoryType } from 'types/CollectionType'
 
-import {
-  ButtonStyled,
-  InputStyled,
-  SearchDiv,
-  StyledH1,
-  StyledSmallText,
-} from './style'
+import { StyledH1, StyledSmallText } from './style'
 
 const TouristicPointsCategory: React.FC = () => {
   const {
@@ -50,7 +48,9 @@ const TouristicPointsCategory: React.FC = () => {
     () => searchPoints(search),
     [searchPoints, search],
   )
-
+  const clearSearch = useCallback(() => {
+    setSearch(' ')
+  }, [])
   useEffect(() => {
     setTitle(t('Hotéis e Pousadas'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,8 +74,8 @@ const TouristicPointsCategory: React.FC = () => {
       <MainStyled>
         <Container>
           <Row className="py-3">
-            <Col>
-              <div className="d-flex align-items-center">
+            <Col xs={12} md={6}>
+              <div className="d-flex align-items-center mb-4 mb-md-0">
                 <Link to="/pontos-turisticos" className="pe-3">
                   <BsArrowLeft size={20} color="#333" />
                 </Link>
@@ -85,18 +85,24 @@ const TouristicPointsCategory: React.FC = () => {
                 </div>
               </div>
             </Col>
-            <Col className="d-flex align-items-end justify-content-end pb-3">
-              <SearchDiv className="d-flex  align-items-center px-3">
-                <InputStyled
-                  type="text"
-                  placeholder="Buscar Hotéis e Pousadas"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <ButtonStyled type="button" onClick={handleSearch}>
-                  <BsSearch />
-                </ButtonStyled>
-              </SearchDiv>
+            <Col
+              xs={12}
+              md={6}
+              className="d-flex align-items-center justify-content-end"
+            >
+              <LinkStyled to="/pontos-turisticos/mapa">
+                <MapButton className="d-flex  align-items-center px-3 me-2">
+                  <FaMapMarkedAlt color="white" className="me-2" />
+                  <p>Mapa</p>
+                </MapButton>
+              </LinkStyled>
+              <SearchComponent
+                placeholderText="Buscar Pontos Turísticos"
+                handleSearch={handleSearch}
+                clearSearch={clearSearch}
+                search={search}
+                setSearch={setSearch}
+              />
             </Col>
           </Row>
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-5">

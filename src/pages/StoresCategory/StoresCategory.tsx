@@ -68,8 +68,8 @@ const StoresCategory: React.FC = () => {
       <MainStyled>
         <Container>
           <Row className="py-3">
-            <Col>
-              <div className="d-flex align-items-center">
+            <Col xs={12} md={6}>
+              <div className="d-flex align-items-center mb-4 mb-md-0">
                 <Link to="/comercios" className="pe-3">
                   <BsArrowLeft size={20} color="#333" />
                 </Link>
@@ -79,7 +79,7 @@ const StoresCategory: React.FC = () => {
                 </div>
               </div>
             </Col>
-            <Col className="d-flex align-items-end justify-content-end pb-3">
+            <Col className="d-flex align-items-center justify-content-end">
               <LinkStyled to="/espacos-para-eventos/mapa">
                 <MapButton className="d-flex  align-items-center px-3 me-2">
                   <FaMapMarkedAlt color="white" className="me-2" />

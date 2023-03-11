@@ -1,4 +1,5 @@
 import { Ratio } from 'react-bootstrap'
+import Slider from 'react-slick'
 import styled from 'styled-components'
 
 interface IImageCarouselBackground {
@@ -10,11 +11,17 @@ export const RatioResponsive = styled(Ratio)`
     width: 50%;
   }
 `
+export const SliderResponsive = styled(Slider)`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
 export const ArrowDivPrevious = styled.button`
   border: none;
   position: absolute;
+  top: 20%;
   left: 0;
-  top: 10em;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
   color: white;
@@ -23,7 +30,7 @@ export const ArrowDiv = styled.button`
   border: none;
   position: absolute;
   right: 0;
-  top: 10em;
+  top: 20%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
   color: white;
@@ -33,6 +40,13 @@ export const DivSmallSlider = styled.div`
   justify-content: center;
   width: 100vw;
   min-height: 10px;
+`
+
+export const DivCenterSlider = styled(Slider)`
+  .slick-track {
+    margin-left: auto;
+    margin-right: auto;
+  }
 `
 
 export const ImageCarouselBackground = styled.div<IImageCarouselBackground>`

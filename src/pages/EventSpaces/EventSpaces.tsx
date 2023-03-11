@@ -57,8 +57,8 @@ const EspacosParaEventos: React.FC = () => {
             <Col>
               <TitleH1 title="Espaços para eventos" />
             </Col>
-            <Col className="d-flex align-items-end justify-content-end">
-              <LinkStyled to="mapa">
+            <Col className="d-flex align-items-center justify-content-end">
+              <LinkStyled to="/espacos-para-eventos/mapa">
                 <MapButton className="d-flex  align-items-center px-3 me-2">
                   <FaMapMarkedAlt color="white" className="me-2" />
                   <p>Mapa</p>
@@ -87,7 +87,7 @@ const EspacosParaEventos: React.FC = () => {
               />
             </Col>
           </Row>
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+          <Row className="row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 pb-5">
             {!isLoading &&
               !error &&
               spaces.map(

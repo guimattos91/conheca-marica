@@ -11,7 +11,6 @@ import { useSpace } from 'context/SpacesContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -20,6 +19,7 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
@@ -33,13 +33,15 @@ import {
 } from './style'
 
 const EspacoParaEvento: React.FC = () => {
-  const { space, categories, isLoading, error, fetchSpace } = useSpace()
+  const { space, isLoading, error, fetchSpace } = useSpace()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${space?.nome} | Espaços para Eventos`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     if (id) fetchSpace(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchSpace, id])
@@ -70,10 +72,11 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={space}
+                      categoryName="espacos-para-eventos"
                     />
                     <TextDescription>{space.descricao_t}</TextDescription>
                   </div>

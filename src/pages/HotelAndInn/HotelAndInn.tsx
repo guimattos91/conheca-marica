@@ -13,7 +13,6 @@ import { useHotels } from 'context/HotelsContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -22,6 +21,7 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
@@ -29,13 +29,15 @@ import useTitle from 'hooks/useTitle'
 import { StyledContainer, StyledH1, StyledH2, StyledSmallText } from './style'
 
 const HotelePousada: React.FC = () => {
-  const { hotel, categories, isLoading, error, fetchHotel } = useHotels()
+  const { hotel, isLoading, error, fetchHotel } = useHotels()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${hotel?.nome} | Hotéis e Pousadas`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     if (id) fetchHotel(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchHotel, id])
@@ -44,17 +46,16 @@ const HotelePousada: React.FC = () => {
     <>
       <Header />
       <MainStyled className="pb-5">
-        <Col className="d-flex justify-content-center">
-          <LoadingComponent Loading={isLoading} />
-        </Col>
+        {isLoading && (
+          <Col className="d-flex justify-content-center">
+            <LoadingComponent Loading={isLoading} />
+          </Col>
+        )}
 
         {!isLoading && !error && hotel && (
           <>
-            <Row className="g-0">
-              <Col>
-                <SliderCarouselComponent itemCategory={hotel} />
-              </Col>
-            </Row>
+            <SliderCarouselComponent itemCategory={hotel} />
+
             <StyledContainer>
               <Row className="pt-5">
                 <Col key={hotel.id}>
@@ -68,10 +69,11 @@ const HotelePousada: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={hotel}
+                      categoryName="hoteis-e-pousadas"
                     />
                     <p>{hotel.descricao_t}</p>
                   </div>

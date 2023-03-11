@@ -12,7 +12,6 @@ import { useEvents } from 'context/EventsContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -21,6 +20,7 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import { getDay, GetHour, getMonth, NormalizeDate } from 'helpers'
@@ -36,13 +36,15 @@ import {
 } from './style'
 
 const EspacoParaEvento: React.FC = () => {
-  const { event, categories, isLoading, error, fetchEvent } = useEvents()
+  const { event, isLoading, error, fetchEvent } = useEvents()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${event?.nome} | Eventos`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     if (id) fetchEvent(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchEvent, id])
@@ -73,10 +75,11 @@ const EspacoParaEvento: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={event}
+                      categoryName="eventos"
                     />
                   </div>
                   <div className="d-flex">
@@ -103,7 +106,7 @@ const EspacoParaEvento: React.FC = () => {
                   <StructureComponent category={event} />
                   <RestrictComponent category={event} />
                   {event?.gratuito === 1 && (
-                    <div>
+                    <div className="mb-3">
                       <TitleH2Intern title="Valor da Entrada" />
                       <div className="d-flex align-items-center">
                         <FaRegMoneyBillAlt

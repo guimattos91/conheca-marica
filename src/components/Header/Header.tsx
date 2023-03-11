@@ -18,19 +18,23 @@ const Header: React.FC = () => (
         <Col className="d-flex align-items-center ">
           <MenuComponent />
         </Col>
-        <Col>
+        <Col className="d-none d-md-flex">
           <Link to="/">
             <img
               src={Logo}
               alt="Logo - Conheça Maricá"
               width="auto"
-              className="d-none d-md-flex align-items-center justify-content-center img-fluid"
+              className="align-items-center justify-content-center img-fluid"
             />
+          </Link>
+        </Col>
+        <Col className="d-flex d-md-none">
+          <Link to="/">
             <img
               src={LogoMobile}
               alt="Logo Mobile- Conheça Maricá"
               width="auto"
-              className="d-flex text-center justify-content-center d-md-none img-fluid"
+              className="d-flex text-center  d-md-none img-fluid"
             />
           </Link>
         </Col>

@@ -3,7 +3,7 @@ import { memo, useEffect } from 'react'
 // eslint-disable-next-line import-helpers/order-imports
 import { Col, Row } from 'react-bootstrap'
 
-import { BsArrowLeft, BsCheckCircle } from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 import { Link, useParams } from 'react-router-dom'
 import { MainStyled, TextDescription } from 'style/style'
 
@@ -11,7 +11,6 @@ import { usePoints } from 'context/PointsContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -20,20 +19,23 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
+import TouristTypeComponent from 'components/TouristTypeComponent'
 
 import useTitle from 'hooks/useTitle'
 
 import { StyledContainer, StyledH1, StyledH2, StyledSmallText } from './style'
 
 const PontoTuristico: React.FC = () => {
-  const { point, categories, isLoading, error, fetchPoint } = usePoints()
+  const { point, isLoading, error, fetchPoint } = usePoints()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${point?.nome} | Pontos Turísticos`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (id) fetchPoint(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchPoint, id])
@@ -42,9 +44,11 @@ const PontoTuristico: React.FC = () => {
     <>
       <Header />
       <MainStyled className="pb-5">
-        <Col className="d-flex justify-content-center">
-          <LoadingComponent Loading={isLoading} />
-        </Col>
+        {isLoading && (
+          <Col className="d-flex justify-content-center">
+            <LoadingComponent Loading={isLoading} />
+          </Col>
+        )}
         {!isLoading && !error && point && (
           <>
             <SliderCarouselComponent itemCategory={point} />
@@ -61,10 +65,11 @@ const PontoTuristico: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={point}
+                      categoryName="pontos-turisticos"
                     />
                     <TextDescription>{point.descricao_t}</TextDescription>
                   </div>
@@ -78,32 +83,8 @@ const PontoTuristico: React.FC = () => {
                       </div>
                     </>
                   )}
-                  {point?.viajantes?.length >= 1 && (
-                    <>
-                      <TitleH2Intern title="Tipos de Viajantes" />
-                      <div className="d-flex flex-wrap">
-                        {!isLoading &&
-                          !error &&
-                          point.viajantes.map(
-                            (traveller: { label: string }) => (
-                              <div className="d-flex align-items-center pe-4 pb-4">
-                                <BsCheckCircle
-                                  color="#6ebd00"
-                                  size={20}
-                                  className="me-2"
-                                />
-                                <p
-                                  key={traveller.label}
-                                  className="d-inline-flex m-0"
-                                >
-                                  {traveller.label}
-                                </p>
-                              </div>
-                            ),
-                          )}
-                      </div>
-                    </>
-                  )}
+
+                  <TouristTypeComponent category={point} />
                   <StructureComponent category={point} />
                   <RestrictComponent category={point} />
                   <PaymentComponent category={point} />

@@ -1,8 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react'
 
 import { Ratio } from 'react-bootstrap'
-// import { MdArrowForwardIos } from 'react-icons/md'
-// import { MdArrowForwardIos } from 'react-icons/md'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import Slider, { Settings } from 'react-slick'
 
@@ -11,9 +9,8 @@ import { ItemType } from 'types/ItemType'
 import {
   ArrowDiv,
   ArrowDivPrevious,
-  DivSmallSlider,
+  DivCenterSlider,
   ImageCarouselBackground,
-  RatioResponsive,
 } from './style'
 
 interface ISlideProps {
@@ -39,7 +36,7 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
         },
       },
       {
-        breakpoint: 576,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -66,7 +63,7 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
           },
         },
         {
-          breakpoint: 576,
+          breakpoint: 768,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -92,24 +89,17 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
   const settingsSmall = {
     dots: false,
     infinite: false,
-    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 0,
     arrows: false,
+    slide: 'span',
     responsive: [
       {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 576,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots: false,
+          dots: true,
         },
       },
     ],
@@ -156,11 +146,11 @@ const SliderCarouselComponent: React.FC<ISlideProps> = ({ itemCategory }) => {
       {itemCategory.images.length < 4 && (
         <>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Slider {...settingsSmall}>
+          <DivCenterSlider {...settingsSmall}>
             {itemCategory.images.map((imagem) => (
               <ImageCarouselBackground key={imagem.id} image={imagem.src} />
             ))}
-          </Slider>
+          </DivCenterSlider>
         </>
       )}
     </>

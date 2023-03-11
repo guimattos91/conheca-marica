@@ -12,7 +12,6 @@ import { useRestaurants } from 'context/RestaurantsContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -21,6 +20,7 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 import TitleH2Intern from 'components/TitleH2Intern'
 
 import useTitle from 'hooks/useTitle'
@@ -34,14 +34,15 @@ import {
 } from './style'
 
 const BareRestaurante: React.FC = () => {
-  const { restaurant, categories, isLoading, error, fetchRestaurant } =
-    useRestaurants()
+  const { restaurant, isLoading, error, fetchRestaurant } = useRestaurants()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${restaurant?.nome} | Bares e Restaurantes`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     if (id) fetchRestaurant(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchRestaurant, id])
@@ -71,10 +72,11 @@ const BareRestaurante: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={restaurant}
+                      categoryName="bares-e-restaurantes"
                     />
                     {restaurant?.is_delivery === 1 && (
                       <DeliverySpan>

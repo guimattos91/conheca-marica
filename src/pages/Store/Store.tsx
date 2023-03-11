@@ -11,7 +11,6 @@ import { useStores } from 'context/StoresContext'
 
 import AboutComponent from 'components/AboutComponent'
 import AppsSmartphoneInternalPage from 'components/AppsSmartphoneInternalPage'
-import CategoryPillsComponent from 'components/CategoryPillsComponent'
 import Footer from 'components/Footer'
 import GoogleMapComponent from 'components/GoogleMapComponent'
 import Header from 'components/Header'
@@ -20,19 +19,22 @@ import PaymentComponent from 'components/PaymentComponent'
 import RestrictComponent from 'components/RestrictComponent'
 import SliderCarouselComponent from 'components/SliderCarouselComponent'
 import StructureComponent from 'components/StructureComponent'
+import SubCategoryComponent from 'components/SubCategoryComponent'
 
 import useTitle from 'hooks/useTitle'
 
 import { StyledContainer, StyledH1, StyledH2, StyledSmallText } from './style'
 
 const Comercio: React.FC = () => {
-  const { store, categories, isLoading, error, fetchStore } = useStores()
+  const { store, isLoading, error, fetchStore } = useStores()
   const { id } = useParams()
 
   const setTitle = useTitle()
   useEffect(() => setTitle(`${store?.nome} | Comércio Local`))
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     if (id) fetchStore(Number(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchStore, id])
@@ -62,10 +64,11 @@ const Comercio: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-3">
-                    <CategoryPillsComponent
-                      Loading={isLoading}
-                      Error={error}
-                      Categories={categories}
+                    <SubCategoryComponent
+                      loading={isLoading}
+                      error={error}
+                      categories={store}
+                      categoryName="comercios"
                     />
                     <TextDescription>{store.descricao_t}</TextDescription>
                   </div>
