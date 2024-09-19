@@ -1,16 +1,35 @@
-# Vite + React + Typescript + Vitest + Eslint + Prettier + EditorConfig
+# Conheça Maricá
 
-A starter for React with Typescript with the blazing fast Vite, strong Vitest framework and all static code testing with Eslint and formatting with Prettier and EditorConfig.
+Conheça Maricá é um site dedicado ao turismo na cidade de Maricá. O projeto serve como um guia completo para turistas, oferecendo informações detalhadas sobre pontos turísticos, restaurantes, hotéis, comércios e eventos locais. Além disso, o site inclui mapas que ajudam a localizar esses lugares dentro da região, facilitando a experiência de quem visita a cidade.
 
-## Installation & run
+# Veja o Projeto Rodando:
+[Conheça Maricá](https://bit.ly/conhecamaricaproject)
 
-1. Install [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) extensions for VS Code. **Do not install the Prettier extension**
 
-2. Add these configs to VS Code settings:
+## Objetivo do Projeto
 
-```
+O principal objetivo deste projeto é ajudar os turistas que visitam Maricá a conhecerem mais sobre os diversos locais que a cidade oferece. O site funciona como um guia, fornecendo informações valiosas para que os visitantes possam aproveitar ao máximo a sua estadia.
+
+## Funcionalidades
+
+- Listagem de pontos turísticos e eventos.
+- Sugestões de restaurantes, hotéis e comércios.
+- Mapas interativos indicando os locais dentro da região.
+- Informações detalhadas sobre cada local, incluindo horários de funcionamento, endereço, e avaliações.
+
+## Pré-requisitos
+
+Para executar este projeto, você precisará ter os seguintes itens configurados:
+
+- **Use o arquivo `.env` da API Conheça Maricá**
+- Instale as extensões ESLint e EditorConfig para o VS Code.
+- **Não instale a extensão Prettier.**
+
+Adicione as seguintes configurações ao arquivo de configurações do VS Code:
+
+```json
 "[javascript]": {
-    "editor.defaultFormatter": null,
+    "editor.defaultFormatter": null
 },
 "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
@@ -22,71 +41,45 @@ A starter for React with Typescript with the blazing fast Vite, strong Vitest fr
 "eslint.validate": [
     "javascript",
     "javascriptreact"
-],
+]
 ```
 
-3. Clone the repo and run:
+## Instalação e Configuração
+Para configurar o projeto em seu ambiente local, siga estas etapas:
 
+Clone o repositório:
+```
+git clone <URL_DO_REPOSITORIO>
+```
+
+Copie o arquivo de exemplo .env e configure suas variáveis de ambiente:
 ```
 cp .env.example .env
 ```
+
+Instale as dependências:
 
 ```
 yarn
 ```
 
+Execute o projeto em modo de desenvolvimento:
+
 ```
 yarn dev
 ```
 
-## Test
+## Como Usar
+Após a instalação e configuração, você pode acessar o site localmente para explorar suas funcionalidades. O site fornecerá informações detalhadas sobre os pontos turísticos, restaurantes, hotéis e outros locais de interesse na cidade de Maricá.
 
+## Testes
+Para executar os testes, utilize o seguinte comando:
 ```
 yarn test
 ```
 
-## Troubleshooting
 
-### Error: Cannot find module 'node:path'
 
-Solution: Use Node.js v16
-
----
-
-### Error: Command failed: node /path/to/project/node_modules/esbuild/bin/esbuild --version dyld: Symbol not found: \_SecTrustEvaluateWithError
-
-Solution:
-
-- Stop using `npm` or `yarn` for this project
-- Install [pnpm](https://pnpm.io)
-- Remove `node_modules`
-- Remove `yarn.lock` (if exists)
-- Remove `package-lock.json` (if exists)
-- Add the following to `package.json`
-
-```
-"devDependencies":
-    "esbuild-wasm":"latest",
-},
-"pnpm":{
-    "overrides":{
-        "esbuild":"npm:esbuild-wasm@latest"
-    }
-},
-```
-
-Download the dependencies:
-
-```
-pnpm i
-```
-
-Run the project:
-
-```
-pnpm run dev
-```
 
 ## Credits
-
-This is a fork of [https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier](https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier)
+Este projeto foi feito a partir do template de: [https://github.com/fredsvanelli/vite-react-ts-eslint-prettier-editorconfig](https://github.com/fredsvanelli/vite-react-ts-eslint-prettier-editorconfig)
